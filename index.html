@@ -13,90 +13,141 @@
             --text-muted: #9a8c8c;
             --accent: #c97d7d;
             --accent-soft: #e8c4c4;
-            --shadow-sm: 0 2px 8px rgba(60,40,30,0.06);
-            --shadow-md: 0 4px 16px rgba(60,40,30,0.1);
-            --shadow-lg: 0 8px 32px rgba(60,40,30,0.14);
+            --glass: rgba(255, 255, 255, 0.55);
+            --shadow-sm: 0 2px 8px rgba(60, 40, 30, 0.06);
+            --shadow-md: 0 4px 16px rgba(60, 40, 30, 0.1);
+            --shadow-lg: 0 8px 32px rgba(60, 40, 30, 0.14);
+            --radius-sm: 10px;
             --radius: 16px;
-            --transition: 0.3s ease;
+            --radius-lg: 24px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; line-height:1.6; background-image:radial-gradient(ellipse at 50% 0%, rgba(210,170,150,0.12), transparent 60%); }
-        .app-container { max-width:680px; margin:0 auto; padding:16px 18px 40px; }
-        .header { text-align:center; padding:20px 0 10px; }
-        .bottle-wrapper { display:inline-block; cursor:pointer; transition:transform var(--transition); }
+        body {
+            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            background-image:
+                radial-gradient(ellipse at 50% 0%, rgba(210,170,150,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 85% 20%, rgba(200,160,140,0.08) 0%, transparent 50%);
+        }
+        .app-container { max-width: 680px; margin:0 auto; padding:16px 18px 40px; }
+        .header { text-align:center; padding:20px 0 10px; position:relative; }
+        .bottle-wrapper { position:relative; display:inline-block; cursor:pointer; user-select:none; transition:transform var(--transition); }
         .bottle-wrapper:hover { transform:translateY(-3px); }
         .bottle-svg { width:100px; height:140px; filter:drop-shadow(0 8px 20px rgba(140,100,80,0.18)); }
         .sparkles { position:absolute; top:28px; left:50%; transform:translateX(-50%); width:36px; height:55px; pointer-events:none; }
-        .sparkle { position:absolute; width:3px; height:3px; border-radius:50%; background:#e8c8a0; animation:sparkleFloat 3s infinite; }
-        @keyframes sparkleFloat { 0%,100%{opacity:0.25;transform:translateY(0)} 30%{opacity:0.9;transform:translateY(-8px)} 60%{opacity:0.35;transform:translateY(-3px)} }
+        .sparkle { position:absolute; width:3px; height:3px; border-radius:50%; background:#e8c8a0; animation:sparkleFloat 3s ease-in-out infinite; }
+        .sparkle:nth-child(1){ left:8px; top:10px; animation-delay:0s; width:2.5px; height:2.5px; }
+        .sparkle:nth-child(2){ left:20px; top:6px; animation-delay:0.7s; width:2px; height:2px; }
+        .sparkle:nth-child(3){ left:12px; top:22px; animation-delay:1.4s; width:3px; height:3px; background:#f0d4b0; }
+        .sparkle:nth-child(4){ left:22px; top:18px; animation-delay:2.1s; width:2px; height:2px; background:#eed8b8; }
+        .sparkle:nth-child(5){ left:15px; top:32px; animation-delay:0.5s; width:2.5px; height:2.5px; }
+        .sparkle:nth-child(6){ left:6px; top:16px; animation-delay:1.8s; width:1.5px; height:1.5px; background:#f5e0c0; }
+        @keyframes sparkleFloat { 0%,100%{ opacity:0.25; transform:translateY(0); } 30%{ opacity:0.9; transform:translateY(-8px); } 60%{ opacity:0.35; transform:translateY(-3px); } }
         .header-title { font-size:22px; font-weight:500; letter-spacing:1.5px; color:#4a3c3c; margin-top:6px; }
-        .user-switch { display:flex; justify-content:center; gap:8px; margin:18px 0 14px; background:var(--card-bg); border-radius:30px; padding:5px; box-shadow:var(--shadow-sm); }
-        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; background:transparent; color:var(--text-light); transition:all var(--transition); }
+        .header-subtitle { font-size:13px; color:var(--text-muted); letter-spacing:0.8px; margin-top:2px; font-weight:300; }
+
+        .user-switch { display:flex; justify-content:center; gap:8px; margin:18px 0 14px; background:var(--card-bg); border-radius:30px; padding:5px; box-shadow:var(--shadow-sm); border:1px solid var(--glass); }
+        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; letter-spacing:0.6px; background:transparent; color:var(--text-light); transition:all var(--transition); }
         .user-switch-btn.active { background:#fff; color:#3d3030; font-weight:500; box-shadow:var(--shadow-sm); }
+        .user-badge { display:inline-block; font-size:10px; padding:2px 7px; border-radius:10px; margin-left:3px; }
+        .badge-me { background:#f5e0d8; color:#b87060; }
+        .badge-partner { background:#dde5f0; color:#5a7a9a; }
+
         .category-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 8px; justify-content:center; }
         .cat-tab { padding:7px 12px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); transition:all var(--transition); }
         .cat-tab.active { background:#fff; border-color:var(--accent-soft); color:#4a3030; font-weight:500; }
         .filter-tabs { display:flex; gap:6px; justify-content:center; margin-bottom:12px; }
         .filter-tab { padding:6px 14px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); }
         .filter-tab.active { background:#f5e6e6; border-color:#d4857b; color:#b8554a; }
+        .stats-bar { text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:8px; }
+
         .cards-list { display:flex; flex-direction:column; gap:10px; }
-        .kink-card { background:var(--card-bg); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm); border:1px solid transparent; animation:cardFadeIn 0.4s ease; }
-        @keyframes cardFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+        .kink-card { background:var(--card-bg); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm); border:1px solid transparent; transition:all var(--transition); animation:cardFadeIn 0.4s ease; }
+        @keyframes cardFadeIn { from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
         .kink-card.matched-highlight { border-color:#c9d8c0; background:#fafff7; }
-        .card-title { font-size:15px; font-weight:500; }
+        .card-title { font-size:15px; font-weight:500; display:flex; align-items:center; gap:6px; }
         .card-desc { font-size:12.5px; color:var(--text-muted); margin-top:4px; }
         .interest-selector { display:flex; gap:6px; margin-top:12px; flex-wrap:wrap; }
-        .interest-btn { padding:7px 13px; border-radius:18px; border:1.5px solid #e5ddd5; background:#fefdfa; cursor:pointer; font-size:12px; color:var(--text-light); }
+        .interest-btn { padding:7px 13px; border-radius:18px; border:1.5px solid #e5ddd5; background:#fefdfa; cursor:pointer; font-size:12px; color:var(--text-light); transition:all var(--transition); }
         .interest-btn.selected { font-weight:500; }
         .interest-btn.level-love.selected { background:#fdf0ed; border-color:#d4857b; color:#b8554a; }
         .interest-btn.level-interest.selected { background:#fdf6f0; border-color:#d4a080; color:#b87850; }
         .interest-btn.level-curious.selected { background:#fdfaf4; border-color:#c9b896; color:#9a8058; }
         .interest-btn.level-meh.selected { background:#f9f8f6; border-color:#bfb5aa; color:#8a7d72; }
         .interest-btn.level-no.selected { background:#f8f7f6; border-color:#d0cbc6; color:#9a9088; }
+
         .bottom-actions { display:flex; gap:8px; margin-top:22px; justify-content:center; flex-wrap:wrap; }
-        .action-btn { padding:10px 18px; border-radius:28px; border:1.5px solid #e0d8cc; background:var(--card-bg); cursor:pointer; font-size:13px; color:var(--text); box-shadow:var(--shadow-sm); }
-        .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; }
+        .action-btn { padding:10px 18px; border-radius:28px; border:1.5px solid #e0d8cc; background:var(--card-bg); cursor:pointer; font-size:13px; color:var(--text); transition:all var(--transition); box-shadow:var(--shadow-sm); }
+        .action-btn:hover { box-shadow:var(--shadow-md); border-color:#c8b8a5; }
+        .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; font-weight:500; }
+
+        .floating-help-btn { position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:#fffdf9; border:1.5px solid #d4c0b0; box-shadow:0 4px 16px rgba(100,70,50,0.2); cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; z-index:90; }
+
         .modal-overlay { position:fixed; inset:0; background:rgba(40,30,25,0.55); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; animation:fadeIn 0.3s; }
-        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-        .modal { background:#fffdf9; border-radius:var(--radius); padding:28px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; }
+        @keyframes fadeIn { from{ opacity:0; } to{ opacity:1; } }
+        .modal { background:#fffdf9; border-radius:var(--radius-lg); padding:28px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; }
         .modal-close { position:absolute; top:14px; right:16px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; }
-        .random-card-popup { background:#fffdf9; border-radius:var(--radius); padding:28px 22px; box-shadow:var(--shadow-lg); text-align:center; border:2px solid #f0e8d8; }
-        .random-mode-select { display:flex; gap:8px; justify-content:center; margin-top:12px; }
+        .modal h3 { text-align:center; margin-bottom:12px; }
+
         .radar-user-toggle { display:flex; justify-content:center; gap:8px; margin-bottom:12px; }
         .radar-user-toggle button { padding:6px 16px; border-radius:20px; border:1px solid #d4c0b0; background:#fff; cursor:pointer; }
-        .radar-user-toggle button.active { background:#f5e8e0; color:#b85a5a; }
+        .radar-user-toggle button.active { background:#f5e8e0; color:#b85a5a; font-weight:500; }
         canvas { display:block; margin:0 auto; max-width:100%; }
         .detail-list { max-height:200px; overflow-y:auto; margin-top:12px; font-size:13px; }
+        .detail-list .item { padding:6px 0; border-bottom:1px solid #f0e8e0; }
+        .tag-like { background:#fdf0ed; color:#b8554a; padding:2px 8px; border-radius:10px; margin-left:6px; font-size:10px; }
+        .tag-avoid { background:#f0f0f0; color:#8a7d72; padding:2px 8px; border-radius:10px; margin-left:6px; font-size:10px; }
+
         .match-item { padding:12px 14px; border-radius:10px; margin-bottom:8px; background:#fffefb; border:1px solid #e8e0d5; }
         .match-item.both-love { border-color:#c9d8c0; background:#f9fcf6; }
         .match-item.both-avoid { border-color:#e0c8c8; background:#fdf6f6; }
-        .floating-help-btn { position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:#fffdf9; border:1.5px solid #d4c0b0; box-shadow:0 4px 16px rgba(100,70,50,0.2); cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; z-index:90; }
+        .match-badge { display:inline-block; font-size:10px; padding:3px 8px; border-radius:10px; margin-left:6px; }
+        .match-badge.perfect { background:#e8f0dc; color:#6a8a4a; }
+        .match-badge.avoid { background:#f5e0e0; color:#b85a5a; }
+
+        .random-card-popup { background:#fffdf9; border-radius:var(--radius-lg); padding:28px 22px; box-shadow:var(--shadow-lg); text-align:center; border:2px solid #f0e8d8; max-width:400px; width:90%; }
+        .random-mode-select { display:flex; gap:8px; justify-content:center; margin-top:12px; flex-direction:column; }
+        .random-mode-select button { width:100%; }
+
+        .glossary-table { width:100%; border-collapse:collapse; font-size:13px; }
+        .glossary-table td { padding:8px 6px; border-bottom:1px solid #e8ddd2; }
+        .glossary-table td:first-child { font-weight:500; color:#5a3a35; width:25%; }
+
         @media (max-width:480px) {
             .app-container { padding:10px 10px 30px; }
             .header-title { font-size:19px; }
             .bottle-svg { width:80px; height:115px; }
+            .sparkles { top:22px; width:28px; height:44px; }
+            .kink-card { padding:14px; }
+            .interest-btn { padding:6px 10px; font-size:11px; }
         }
     </style>
 </head>
 <body>
 <div class="app-container">
     <div class="header">
-        <div class="bottle-wrapper" id="bottleTrigger">
+        <div class="bottle-wrapper" id="bottleTrigger" title="点击瓶子随机抽取">
             <svg class="bottle-svg" viewBox="0 0 100 140">
-                <defs><linearGradient id="glassGrad"><stop offset="0%" stop-color="#fff" stop-opacity="0.7"/><stop offset="30%" stop-color="#fdfaf6" stop-opacity="0.55"/><stop offset="100%" stop-color="#ede4d8" stop-opacity="0.35"/></linearGradient></defs>
+                <defs><linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.7"/><stop offset="30%" stop-color="#fdfaf6" stop-opacity="0.55"/><stop offset="70%" stop-color="#f5efe6" stop-opacity="0.4"/><stop offset="100%" stop-color="#ede4d8" stop-opacity="0.35"/></linearGradient></defs>
                 <path d="M28 55 C28 52 32 48 36 48 L40 48 L40 30 C40 22 44 16 50 14 C56 16 60 22 60 30 L60 48 L64 48 C68 48 72 52 72 55 L72 105 C72 118 62 128 50 128 C38 128 28 118 28 105 Z" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.35)" stroke-width="2"/>
-                <rect x="40" y="14" width="20" height="18" rx="3" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.3)"/>
-                <rect x="37" y="8" width="26" height="8" rx="4" fill="rgba(250,245,238,0.6)" stroke="rgba(180,160,145,0.3)"/>
-                <path d="M34 60 L38 100" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
-                <ellipse cx="50" cy="9" rx="11" ry="5" fill="#e8d5c0"/>
+                <rect x="40" y="14" width="20" height="18" rx="3" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.3)" stroke-width="1.5"/>
+                <rect x="37" y="8" width="26" height="8" rx="4" fill="rgba(250,245,238,0.6)" stroke="rgba(180,160,145,0.3)" stroke-width="1.5"/>
+                <path d="M34 60 C34 56 36 54 38 52 L38 100 C36 102 34 106 34 110" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" stroke-linecap="round"/>
+                <ellipse cx="50" cy="9" rx="11" ry="5" fill="#e8d5c0" stroke="rgba(180,155,135,0.4)" stroke-width="1"/>
             </svg>
+            <div class="sparkles"><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div></div>
         </div>
         <h1 class="header-title">性癖之瓶</h1>
+        <p class="header-subtitle">探索彼此 · 温柔靠近</p>
     </div>
 
     <div class="user-switch">
-        <button class="user-switch-btn active" id="btnUserA">💛 我</button>
-        <button class="user-switch-btn" id="btnUserB">💙 伴侣</button>
+        <button class="user-switch-btn active" id="btnUserA">💛 我的选择<span class="user-badge badge-me">我</span></button>
+        <button class="user-switch-btn" id="btnUserB">💙 伴侣的选择<span class="user-badge badge-partner">TA</span></button>
     </div>
 
     <div class="category-tabs" id="categoryTabs">
@@ -114,14 +165,17 @@
     </div>
 
     <div class="filter-tabs" id="filterTabs">
-        <button class="filter-tab active" data-filter="all">全部标记</button>
+        <button class="filter-tab active" data-filter="all">全部</button>
         <button class="filter-tab" data-filter="love-interest">❤️ 喜欢/兴趣</button>
         <button class="filter-tab" data-filter="curious">🤔 好奇</button>
         <button class="filter-tab" data-filter="meh-no">🛑 不想/拒绝</button>
         <button class="filter-tab" data-filter="none">❓ 未标记</button>
     </div>
 
-    <div class="stats-bar"><span id="markedCount">0</span> 个偏好已标记</div>
+    <div class="stats-bar">
+        已标记 <span id="markedCount">0</span> 个偏好
+    </div>
+
     <div class="cards-list" id="cardsList"></div>
 
     <div class="bottom-actions">
@@ -138,7 +192,13 @@
 <button class="floating-help-btn" id="floatingHelpBtn">📖</button>
 
 <!-- 匹配弹窗 -->
-<div class="modal-overlay" id="matchModal" style="display:none;"><div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><div id="matchResults"></div></div></div>
+<div class="modal-overlay" id="matchModal" style="display:none;">
+    <div class="modal">
+        <button class="modal-close" id="matchModalClose">✕</button>
+        <h3>💞 匹配结果</h3>
+        <div id="matchResults"></div>
+    </div>
+</div>
 
 <!-- 雷达弹窗 -->
 <div class="modal-overlay" id="radarModal" style="display:none;">
@@ -151,7 +211,7 @@
             <button data-radar-user="compare">💞 对比</button>
         </div>
         <canvas id="radarCanvas" width="400" height="400"></canvas>
-        <div class="detail-list" id="radarDetail"><p>点击雷达轴查看明细</p></div>
+        <div class="detail-list" id="radarDetail"><p style="text-align:center;color:var(--text-muted);">点击雷达图的分类轴查看明细</p></div>
     </div>
 </div>
 
@@ -168,27 +228,239 @@
 </div>
 
 <!-- 随机结果弹窗 -->
-<div class="modal-overlay" id="randomResultModal" style="display:none;"><div class="random-card-popup" id="randomCardContent"></div></div>
+<div class="modal-overlay" id="randomResultModal" style="display:none;">
+    <div class="random-card-popup" id="randomCardContent"></div>
+</div>
 
-<!-- 其他弹窗 -->
-<div class="modal-overlay" id="welcomeModal" style="display:none;"><div class="modal"><button class="modal-close" id="welcomeModalClose">✕</button><p>欢迎！150项探索</p><button id="welcomeModalOk">开始</button></div></div>
-<div class="modal-overlay" id="glossaryModal" style="display:none;"><div class="modal"><button class="modal-close" id="glossaryModalClose">✕</button><table class="glossary-table"><tr><td>RT</td><td>乳头</td></tr><tr><td>HD</td><td>高潮</td></tr></table></div></div>
-<div class="modal-overlay" id="importModal" style="display:none;"><div class="modal"><button class="modal-close" id="importModalClose">✕</button><textarea id="importTextarea"></textarea><input type="file" id="importFileInput" accept=".json"><button id="btnUploadFile">选择文件</button><label><input type="radio" name="importTarget" value="A" checked> 我</label><label><input type="radio" name="importTarget" value="B"> 伴侣</label><button id="btnConfirmImport">导入</button></div></div>
+<!-- 欢迎弹窗 -->
+<div class="modal-overlay" id="welcomeModal" style="display:none;">
+    <div class="modal">
+        <button class="modal-close" id="welcomeModalClose">✕</button>
+        <h3>💌 欢迎</h3>
+        <p style="text-align:center;">150 项探索 · 术语表查看 · 雷达图分析</p>
+        <button class="action-btn primary" id="welcomeModalOk" style="display:block; margin:12px auto 0;">开始探索</button>
+    </div>
+</div>
+
+<!-- 术语表弹窗 -->
+<div class="modal-overlay" id="glossaryModal" style="display:none;">
+    <div class="modal">
+        <button class="modal-close" id="glossaryModalClose">✕</button>
+        <h3>📖 术语表</h3>
+        <table class="glossary-table">
+            <tr><td>RT</td><td>乳头</td></tr>
+            <tr><td>HD</td><td>高潮</td></tr>
+            <tr><td>P-Spot</td><td>前列腺（男性G点）</td></tr>
+            <tr><td>G点</td><td>阴道前壁敏感点</td></tr>
+            <tr><td>C-Spot</td><td>会阴部敏感点</td></tr>
+            <tr><td>PC肌</td><td>盆底肌，控制阴道/肛门收缩</td></tr>
+            <tr><td>BJ</td><td>口交</td></tr>
+            <tr><td>HJ</td><td>手交（手淫）</td></tr>
+            <tr><td>Pegging</td><td>女性佩戴假阳具进行肛交</td></tr>
+            <tr><td>HD控制</td><td>有意识地延迟或控制高潮</td></tr>
+            <tr><td>凯格尔运动</td><td>锻炼盆底肌的运动</td></tr>
+            <tr><td>潮吹</td><td>女性高潮时喷射液体</td></tr>
+            <tr><td>混合HD</td><td>同时刺激多个敏感点达到高潮</td></tr>
+            <tr><td>肛塞</td><td>插入肛门的情趣用品，常用于刺激</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- 导入弹窗 -->
+<div class="modal-overlay" id="importModal" style="display:none;">
+    <div class="modal">
+        <button class="modal-close" id="importModalClose">✕</button>
+        <h3>📥 导入数据</h3>
+        <textarea id="importTextarea" style="width:100%; height:120px; border:1px solid #ddd; border-radius:10px; padding:10px;" placeholder='{"f01":"love"}'></textarea>
+        <input type="file" id="importFileInput" accept=".json" style="display:none;">
+        <button class="action-btn" id="btnUploadFile">📁 选择文件</button>
+        <div style="margin:10px 0;">
+            <label><input type="radio" name="importTarget" value="A" checked> 导入为「我」</label>
+            <label><input type="radio" name="importTarget" value="B"> 导入为「伴侣」</label>
+        </div>
+        <button class="action-btn primary" id="btnConfirmImport">导入</button>
+    </div>
+</div>
+
 <div id="toastContainer"></div>
 
 <script>
 (function() {
-    const kinkData = [/* ... 保留全部150项数据，此处省略以节省篇幅，实际部署时需包含完整数组 ... */];
-    // 请将之前对话中的150项完整数据粘贴在此处
-    const STORAGE_KEY_A = "kink_bottle_userA", STORAGE_KEY_B = "kink_bottle_userB";
+    // 完整的 150 项数据
+    const kinkData = [
+        { id:"f01", cat:"foreplay", name:"长时间舌吻", desc:"专注地深吻10分钟以上", tag:"popular", emoji:"💋" },
+        { id:"f02", cat:"foreplay", name:"全身精油按摩", desc:"用温热精油按摩全身，过渡到情欲抚摸", tag:"gentle", emoji:"🧴" },
+        { id:"f03", cat:"foreplay", name:"互相手淫", desc:"面对面或依偎用手帮对方达到HD", tag:"popular", emoji:"🤲" },
+        { id:"f04", cat:"foreplay", name:"口交（给予方）", desc:"为伴侣进行BJ，专注对方反应", tag:"popular", emoji:"👅" },
+        { id:"f05", cat:"foreplay", name:"口交（接受方）", desc:"享受伴侣的BJ", tag:"popular", emoji:"😌" },
+        { id:"f06", cat:"foreplay", name:"69式互舔", desc:"双方同时BJ", tag:"popular", emoji:"🔯" },
+        { id:"f07", cat:"foreplay", name:"乳交", desc:"用乳房夹住阴茎摩擦", tag:"", emoji:"🍈" },
+        { id:"f08", cat:"foreplay", name:"股间摩擦（素股）", desc:"阴茎在腿间或臀缝摩擦，不进入", tag:"", emoji:"🦵" },
+        { id:"f09", cat:"foreplay", name:"淋浴共浴", desc:"一起淋浴泡澡，水中抚摸", tag:"gentle", emoji:"🚿" },
+        { id:"f10", cat:"foreplay", name:"耳语情话与喘息", desc:"耳边轻声情色话语，配合温热呼吸", tag:"gentle", emoji:"🫦" },
+        { id:"f11", cat:"foreplay", name:"互相刮毛/护理私处", desc:"互相帮助打理私密毛发", tag:"niche", emoji:"✂️" },
+        { id:"f12", cat:"foreplay", name:"全身手指轻划", desc:"用指尖极轻划过全身，描绘身体线条", tag:"gentle", emoji:"🖐️" },
+        { id:"f13", cat:"foreplay", name:"同步呼吸拥抱", desc:"裸身紧贴，同步呼吸进入放松状态", tag:"gentle", emoji:"💨" },
+        { id:"f14", cat:"foreplay", name:"枕边秘密分享", desc:"相拥分享一个从未说过的性幻想", tag:"gentle", emoji:"🤫" },
+        { id:"f15", cat:"foreplay", name:"互相擦干身体", desc:"沐浴后温柔为对方擦干每一寸肌肤", tag:"gentle", emoji:"🛁" },
+        { id:"f16", cat:"foreplay", name:"掌心温度传递", desc:"双手相扣传递亲密和安全感", tag:"gentle", emoji:"🤝" },
+        { id:"f17", cat:"foreplay", name:"身体赞美仪式", desc:"轮流说出对方身体最喜欢的部位并亲吻", tag:"gentle", emoji:"🗣️" },
+        { id:"p01", cat:"position", name:"传教士式", desc:"经典面对面体位", tag:"popular", emoji:"🤱" },
+        { id:"p02", cat:"position", name:"后入式", desc:"从背后进入", tag:"popular", emoji:"🐕" },
+        { id:"p03", cat:"position", name:"女上位（正对）", desc:"女性在上方面对面", tag:"popular", emoji:"👸" },
+        { id:"p04", cat:"position", name:"女上位（背对）", desc:"女性在上方背对伴侣", tag:"", emoji:"🪞" },
+        { id:"p05", cat:"position", name:"侧入式（勺子式）", desc:"侧躺从背后进入，温柔亲密", tag:"gentle", emoji:"🥄" },
+        { id:"p06", cat:"position", name:"站立式/靠墙式", desc:"站立或倚靠墙壁进入", tag:"", emoji:"🧱" },
+        { id:"p07", cat:"position", name:"坐式（椅子上）", desc:"一方坐椅子，另一方跨坐或跪姿", tag:"", emoji:"🪑" },
+        { id:"p08", cat:"position", name:"莲花式", desc:"面对面盘腿相拥缓慢律动", tag:"gentle", emoji:"🪷" },
+        { id:"p09", cat:"position", name:"桥式/抬臀式", desc:"仰卧抬高臀部增加角度", tag:"", emoji:"🌉" },
+        { id:"p10", cat:"position", name:"俯卧平趴式", desc:"一方平趴，另一方从上方进入", tag:"", emoji:"🛏️" },
+        { id:"p11", cat:"position", name:"侧入面对面", desc:"侧躺面对面，双腿交错进入", tag:"gentle", emoji:"💞" },
+        { id:"p12", cat:"position", name:"跪坐拥抱式", desc:"一方跪坐，另一方跨坐面对面", tag:"gentle", emoji:"🧘" },
+        { id:"p13", cat:"position", name:"桌面边沿式", desc:"一方坐桌边，高度灵活", tag:"", emoji:"🪑" },
+        { id:"p14", cat:"position", name:"斜靠沙发式", desc:"半躺半坐沙发转角", tag:"", emoji:"🛋️" },
+        { id:"p15", cat:"position", name:"情趣秋千辅助", desc:"悬挂秋千体验失重晃动", tag:"niche", emoji:"🎠" },
+        { id:"r01", cat:"roleplay", name:"医生与病人", desc:"模拟医疗检查", tag:"", emoji:"🩺" },
+        { id:"r02", cat:"roleplay", name:"老师与学生", desc:"课后辅导场景", tag:"", emoji:"📚" },
+        { id:"r03", cat:"roleplay", name:"陌生人邂逅", desc:"假装初次相遇", tag:"", emoji:"🍸" },
+        { id:"r04", cat:"roleplay", name:"按摩师与客人", desc:"从正规按摩滑向情欲", tag:"gentle", emoji:"💆" },
+        { id:"r05", cat:"roleplay", name:"上司与下属", desc:"办公室权力游戏", tag:"", emoji:"💼" },
+        { id:"r06", cat:"roleplay", name:"古代宫廷/武侠", desc:"古风角色扮演", tag:"niche", emoji:"🏮" },
+        { id:"r07", cat:"roleplay", name:"科幻/外星人", desc:"科幻想象场景", tag:"niche", emoji:"👽" },
+        { id:"r08", cat:"roleplay", name:"摄影师与模特", desc:"私房写真拍摄", tag:"", emoji:"📸" },
+        { id:"r09", cat:"roleplay", name:"调酒师与客人", desc:"吧台调情升温", tag:"", emoji:"🍹" },
+        { id:"r10", cat:"roleplay", name:"健身教练与学员", desc:"健身后拉伸延伸", tag:"", emoji:"🏋️" },
+        { id:"r11", cat:"roleplay", name:"旅店陌生人", desc:"异国酒店偶遇", tag:"", emoji:"🏩" },
+        { id:"r12", cat:"roleplay", name:"双人密室逃脱", desc:"关在房间寻找线索触碰", tag:"", emoji:"🔐" },
+        { id:"s01", cat:"sensory", name:"蒙眼性爱", desc:"丝巾蒙眼放大触觉", tag:"gentle", emoji:"🕶️" },
+        { id:"s02", cat:"sensory", name:"冰块刺激", desc:"冰块轻滑敏感区", tag:"", emoji:"🧊" },
+        { id:"s03", cat:"sensory", name:"温水/温热感", desc:"温热毛巾刺激皮肤", tag:"gentle", emoji:"♨️" },
+        { id:"s04", cat:"sensory", name:"羽毛挑逗", desc:"羽毛轻扫全身", tag:"gentle", emoji:"🪶" },
+        { id:"s05", cat:"sensory", name:"丝巾束缚手腕", desc:"柔软丝巾轻绕", tag:"gentle", emoji:"🧣" },
+        { id:"s06", cat:"sensory", name:"音乐与性爱", desc:"配合音乐节奏", tag:"gentle", emoji:"🎵" },
+        { id:"s07", cat:"sensory", name:"食物与性", desc:"蜂蜜/奶油涂抹身体", tag:"", emoji:"🍯" },
+        { id:"s08", cat:"sensory", name:"低温蜡烛", desc:"情趣低温蜡油", tag:"niche", emoji:"🕯️" },
+        { id:"s09", cat:"sensory", name:"感官剥夺", desc:"耳塞+蒙眼，纯触觉", tag:"niche", emoji:"🔇" },
+        { id:"s10", cat:"sensory", name:"温油缓慢滴落", desc:"体温微温的按摩油滴落背部", tag:"gentle", emoji:"💧" },
+        { id:"s11", cat:"sensory", name:"指尖震动器", desc:"指套式小震动器抚摸", tag:"", emoji:"🪀" },
+        { id:"s12", cat:"sensory", name:"冷热交替毛巾", desc:"温毛巾和冰毛巾交替敷", tag:"", emoji:"♨️" },
+        { id:"s13", cat:"sensory", name:"细小喷雾", desc:"小喷雾瓶装温水轻喷敏感区", tag:"gentle", emoji:"💦" },
+        { id:"s14", cat:"sensory", name:"音叉震动", desc:"轻敲音叉接触锁骨脚踝", tag:"niche", emoji:"🎶" },
+        { id:"l01", cat:"location", name:"户外私密自然", desc:"人迹罕至的自然中", tag:"", emoji:"🌿" },
+        { id:"l02", cat:"location", name:"车内性爱", desc:"停靠车内紧凑空间", tag:"", emoji:"🚗" },
+        { id:"l03", cat:"location", name:"阳台/窗边", desc:"有被看见的刺激", tag:"", emoji:"🪟" },
+        { id:"l04", cat:"location", name:"酒店房间", desc:"脱离日常放松", tag:"popular", emoji:"🏨" },
+        { id:"l05", cat:"location", name:"野外帐篷中", desc:"伴随大自然声音", tag:"", emoji:"⛺" },
+        { id:"l06", cat:"location", name:"镜子前", desc:"观看彼此表情身体", tag:"", emoji:"🪞" },
+        { id:"l07", cat:"location", name:"沙发/客厅", desc:"非卧室的家中其他地方", tag:"", emoji:"🛋️" },
+        { id:"l08", cat:"location", name:"楼梯台阶上", desc:"利用楼梯高度差", tag:"", emoji:"🪜" },
+        { id:"l09", cat:"location", name:"步入式衣柜", desc:"狭小私密紧贴", tag:"", emoji:"🚪" },
+        { id:"l10", cat:"location", name:"书桌下方", desc:"一方坐桌前，桌下隐秘", tag:"", emoji:"📚" },
+        { id:"l11", cat:"location", name:"夜间露台", desc:"星空夜风半户外", tag:"", emoji:"🌌" },
+        { id:"l12", cat:"location", name:"温泉/浴缸中", desc:"温热水中漂浮感", tag:"gentle", emoji:"♨️" },
+        { id:"t01", cat:"toys", name:"振动棒", desc:"刺激阴蒂等敏感区", tag:"popular", emoji:"🔮" },
+        { id:"t02", cat:"toys", name:"跳蛋/遥控玩具", desc:"小型震动，可远程", tag:"popular", emoji:"🥚" },
+        { id:"t03", cat:"toys", name:"情侣共用振动器", desc:"U型同时刺激双方", tag:"", emoji:"💑" },
+        { id:"t04", cat:"toys", name:"穿戴式假阳具", desc:"女性佩戴用于pegging", tag:"niche", emoji:"🎗️" },
+        { id:"t05", cat:"toys", name:"前列腺按摩器", desc:"体内刺激前列腺", tag:"niche", emoji:"🔘" },
+        { id:"t06", cat:"toys", name:"情趣润滑液", desc:"各种口味功能", tag:"", emoji:"💧" },
+        { id:"t07", cat:"toys", name:"柔软束缚带", desc:"轻微被控制感", tag:"", emoji:"🔗" },
+        { id:"t08", cat:"toys", name:"乳夹/乳头吸吮器", desc:"温和刺激RT", tag:"niche", emoji:"📎" },
+        { id:"t09", cat:"toys", name:"双头共享振动棒", desc:"两端同时使用", tag:"", emoji:"🔀" },
+        { id:"t10", cat:"toys", name:"吮吸式阴蒂刺激器", desc:"气流脉冲非接触", tag:"", emoji:"🌪️" },
+        { id:"t11", cat:"toys", name:"电动伸缩假阳具", desc:"模拟自动动作", tag:"niche", emoji:"🤖" },
+        { id:"t12", cat:"toys", name:"情趣骰子/卡牌", desc:"随机决定下一步", tag:"", emoji:"🎲" },
+        { id:"t13", cat:"toys", name:"人体工学体位垫", desc:"辅助抬高臀部支撑腰部", tag:"", emoji:"🛏️" },
+        { id:"t14", cat:"toys", name:"小型肛塞", desc:"适合初次尝试的柔软硅胶肛塞", tag:"niche", emoji:"🔹" },
+        { id:"t15", cat:"toys", name:"电动肛塞", desc:"带震动的肛塞，可刺激肛门与周围", tag:"niche", emoji:"⚡" },
+        { id:"t16", cat:"toys", name:"阴蒂吸吸乐", desc:"脉冲气流吮吸阴蒂，非接触式快感", tag:"", emoji:"🌀" },
+        { id:"t17", cat:"toys", name:"无线远程跳蛋", desc:"手机控制，适合远程调情", tag:"", emoji:"📱" },
+        { id:"t18", cat:"toys", name:"情侣震动环", desc:"套在阴茎根部，同时刺激双方", tag:"", emoji:"💍" },
+        { id:"t19", cat:"toys", name:"硅胶仿真局部倒模", desc:"仿真实体部分，用于单人探索", tag:"niche", emoji:"🍑" },
+        { id:"t20", cat:"toys", name:"手链式束缚带", desc:"柔软皮革或绒布手链，可连接固定", tag:"", emoji:"⛓️" },
+        { id:"t21", cat:"toys", name:"情趣眼罩/头枕", desc:"兼具蒙眼与舒适头部支撑", tag:"gentle", emoji:"😴" },
+        { id:"e01", cat:"edge", name:"边缘高潮控制", desc:"反复接近HD后停止", tag:"", emoji:"🌊" },
+        { id:"e02", cat:"edge", name:"延迟高潮", desc:"延长性爱享受过程", tag:"gentle", emoji:"⏳" },
+        { id:"e03", cat:"edge", name:"指令式性爱", desc:"一方用语言引导动作", tag:"", emoji:"🗣️" },
+        { id:"e04", cat:"edge", name:"定时\"服务\"", desc:"设定时段专注取悦对方", tag:"", emoji:"⏰" },
+        { id:"e05", cat:"edge", name:"高潮后继续刺激", desc:"HD后继续轻柔刺激", tag:"niche", emoji:"⚡" },
+        { id:"e06", cat:"edge", name:"禁欲后爆发", desc:"短暂禁欲后尽情释放", tag:"", emoji:"💥" },
+        { id:"e07", cat:"edge", name:"倒数计时释放", desc:"从10倒数归零才可HD", tag:"", emoji:"🔟" },
+        { id:"e08", cat:"edge", name:"触碰禁区游戏", desc:"约定只能触碰安全区以外", tag:"", emoji:"🚫" },
+        { id:"e09", cat:"edge", name:"快感积分制", desc:"积累积分到约定值才释放", tag:"", emoji:"📊" },
+        { id:"e10", cat:"edge", name:"静止挑战", desc:"一方不动，另一方尽力挑逗", tag:"", emoji:"🧍" },
+        { id:"e11", cat:"edge", name:"呼吸节拍配合", desc:"用呼吸节奏控制抽送", tag:"gentle", emoji:"🫁" },
+        { id:"n01", cat:"niche", name:"第四爱/Pegging", desc:"女性使用假阳具对男性肛交", tag:"niche", emoji:"🌈" },
+        { id:"n02", cat:"niche", name:"女性主导的性爱", desc:"女性全程掌控节奏", tag:"niche", emoji:"👑" },
+        { id:"n03", cat:"niche", name:"前列腺刺激", desc:"内外按摩前列腺", tag:"niche", emoji:"🎯" },
+        { id:"n04", cat:"niche", name:"足交", desc:"用脚挑逗摩擦", tag:"niche", emoji:"🦶" },
+        { id:"n05", cat:"niche", name:"拍摄私密影像", desc:"同意下拍摄仅供两人", tag:"", emoji:"📷" },
+        { id:"n06", cat:"niche", name:"窥视/被窥视幻想", desc:"幻想被偷看或安排私密", tag:"niche", emoji:"👁️" },
+        { id:"n07", cat:"niche", name:"情趣内衣/角色服装", desc:"穿着情趣内衣进行", tag:"", emoji:"👗" },
+        { id:"n08", cat:"niche", name:"颜射", desc:"面部射精视觉刺激", tag:"niche", emoji:"💦" },
+        { id:"n09", cat:"niche", name:"深喉探索", desc:"BJ深度喉咙接触", tag:"niche", emoji:"🗼" },
+        { id:"n10", cat:"niche", name:"经期性爱", desc:"月经期间进行", tag:"niche", emoji:"🌹" },
+        { id:"n11", cat:"niche", name:"互相自慰观看", desc:"面对面各自自慰", tag:"", emoji:"👀" },
+        { id:"n12", cat:"niche", name:"催眠/引导式幻想", desc:"一方声音引导情色旅程", tag:"niche", emoji:"🌀" },
+        { id:"n13", cat:"niche", name:"温柔女性支配", desc:"女性主导但温柔鼓励", tag:"niche", emoji:"🤲" },
+        { id:"n14", cat:"niche", name:"腋下欣赏", desc:"欣赏伴侣腋下气味触感", tag:"niche", emoji:"🙋" },
+        { id:"n15", cat:"niche", name:"肚脐与腰窝刺激", desc:"关注常被忽略的凹陷处", tag:"niche", emoji:"🌀" },
+        { id:"n16", cat:"niche", name:"头发梳理与轻拉", desc:"梳理头发适度轻拉增加快感", tag:"niche", emoji:"💇" },
+        { id:"n17", cat:"niche", name:"坐脸/Queen座位", desc:"一方坐在另一方面部接受BJ", tag:"niche", emoji:"👸" },
+        { id:"n18", cat:"niche", name:"互换传统角色", desc:"交换平时主动/被动角色", tag:"", emoji:"🔄" },
+        { id:"n19", cat:"niche", name:"制服/特定职业装", desc:"空姐护士等职业服装", tag:"niche", emoji:"👔" },
+        { id:"n20", cat:"niche", name:"双人幻想讨论", desc:"讨论多人幻想不实际进行", tag:"", emoji:"💭" },
+        { id:"n21", cat:"niche", name:"私密剃毛/造型", desc:"互相为对方修剪私处造型", tag:"niche", emoji:"✂️" },
+        { id:"n22", cat:"niche", name:"肛部外部抚摸与按摩", desc:"轻柔按摩肛门周围，放松并探索感受", tag:"niche", emoji:"🍑" },
+        { id:"n23", cat:"niche", name:"肛部手指轻度探索", desc:"使用润滑液后，手指轻轻进入，注意呼吸放松", tag:"niche", emoji:"☝️" },
+        { id:"a01", cat:"aftercare", name:"事后长时拥抱", desc:"HD后紧拥至少10分钟不说话", tag:"gentle", emoji:"🤗" },
+        { id:"a02", cat:"aftercare", name:"温柔反馈交流", desc:"分享刚才最喜欢的瞬间感受", tag:"gentle", emoji:"💬" },
+        { id:"a03", cat:"aftercare", name:"互相清洁护理", desc:"温毛巾为对方擦拭身体", tag:"gentle", emoji:"🧻" },
+        { id:"a04", cat:"aftercare", name:"事后小食分享", desc:"一起喝水吃水果巧克力", tag:"gentle", emoji:"🍫" },
+        { id:"a05", cat:"aftercare", name:"事后日记记录", desc:"一起写下或画出刚才的感受", tag:"gentle", emoji:"📝" },
+        { id:"b01", cat:"body", name:"RT敏感度开发（女）", desc:"探索女方RT与生殖器快感连接", tag:"", emoji:"🔘" },
+        { id:"b02", cat:"body", name:"RT敏感度探索（男）", desc:"探索男方RT的敏感潜力", tag:"", emoji:"🔘" },
+        { id:"b03", cat:"body", name:"RT-HD追求", desc:"尝试仅通过RT刺激达到HD", tag:"niche", emoji:"💥" },
+        { id:"b04", cat:"body", name:"同步RT刺激", desc:"双方同时进行RT刺激", tag:"", emoji:"🤝" },
+        { id:"b05", cat:"body", name:"C-Spot（会阴）按压", desc:"在性爱中按压会阴部", tag:"", emoji:"📍" },
+        { id:"b06", cat:"body", name:"P-Spot外部按摩", desc:"体外间接按摩前列腺", tag:"", emoji:"🤚" },
+        { id:"b07", cat:"body", name:"P-Spot内部探索", desc:"手指或专用工具直接刺激", tag:"niche", emoji:"🔍" },
+        { id:"b08", cat:"body", name:"P-Spot与BJ结合", desc:"BJ同时刺激前列腺", tag:"niche", emoji:"🎯" },
+        { id:"b09", cat:"body", name:"G点探索与HD", desc:"专注寻找刺激G点以HD为目标", tag:"", emoji:"🎯" },
+        { id:"b10", cat:"body", name:"子宫颈敏感探索", desc:"深度进入感受宫颈周围", tag:"niche", emoji:"🌐" },
+        { id:"b11", cat:"body", name:"混合HD探索", desc:"同时刺激阴蒂和G/P点", tag:"", emoji:"🌪️" },
+        { id:"b12", cat:"body", name:"盆底肌同步训练", desc:"一起做凯格尔运动", tag:"", emoji:"💪" },
+        { id:"b13", cat:"body", name:"阴道握紧游戏", desc:"女方用PC肌夹紧放松", tag:"", emoji:"✊" },
+        { id:"b14", cat:"body", name:"射精控制（男）", desc:"学习分辨HD和射精", tag:"", emoji:"💧" },
+        { id:"b15", cat:"body", name:"多次HD尝试（女）", desc:"探索一次session多次HD", tag:"", emoji:"🌊" },
+        { id:"b16", cat:"body", name:"精液观察/品尝", desc:"安全前提下观察品尝", tag:"niche", emoji:"🧪" },
+        { id:"b17", cat:"body", name:"潮吹探索", desc:"开放尝试不强求", tag:"niche", emoji:"💦" },
+        { id:"b18", cat:"body", name:"月经周期情欲变化", desc:"追踪利用周期欲望", tag:"niche", emoji:"📅" },
+        { id:"b19", cat:"body", name:"身体地图绘制", desc:"轮流为对方标注敏感度", tag:"", emoji:"🗺️" },
+        { id:"b20", cat:"body", name:"冷热敏感度测试", desc:"不同温度物体测试敏感反应", tag:"", emoji:"🌡️" }
+    ];
+
+    const STORAGE_KEY_A = "kink_bottle_userA", STORAGE_KEY_B = "kink_bottle_userB", WELCOME_KEY = "kink_bottle_welcomed";
     let currentUser = "A", currentCategory = "all", currentFilter = "all";
     let userChoices = { A:{}, B:{} };
 
-    function loadChoices() { /* 加载逻辑 */ }
-    function saveChoices() { /* 保存逻辑 */ }
-    function setChoice(id, level) { /* 设置选择 */ }
+    function loadChoices() {
+        try {
+            const a=localStorage.getItem(STORAGE_KEY_A), b=localStorage.getItem(STORAGE_KEY_B);
+            if(a) userChoices.A=JSON.parse(a);
+            if(b) userChoices.B=JSON.parse(b);
+        } catch(e) { userChoices.A={}; userChoices.B={}; }
+    }
+    function saveChoices() {
+        localStorage.setItem(STORAGE_KEY_A, JSON.stringify(userChoices.A));
+        localStorage.setItem(STORAGE_KEY_B, JSON.stringify(userChoices.B));
+    }
+    function setChoice(id, level) {
+        if(userChoices[currentUser][id] === level) delete userChoices[currentUser][id];
+        else userChoices[currentUser][id] = level;
+        saveChoices(); updateMarkedCount(); renderCards();
+    }
     function getChoiceLabel(l) { return {love:"喜欢",interest:"兴趣",curious:"好奇",meh:"不想",no:"拒绝"}[l]||""; }
-
     function getFilteredData() {
         let data = kinkData;
         if (currentCategory !== "all") data = data.filter(i=>i.cat===currentCategory);
@@ -199,26 +471,151 @@
         else if (currentFilter === "none") data = data.filter(i=> !choices[i.id]);
         return data;
     }
-
     function renderCards() {
         const data = getFilteredData();
         let html = "";
         data.forEach((item,idx)=>{
             const choice = userChoices[currentUser][item.id];
-            html += `<div class="kink-card"><div class="card-title">${item.emoji||""} ${item.name}</div>
-            <div class="card-desc">${item.desc}</div>
-            <div class="interest-selector">
-                <button class="interest-btn level-love ${choice==='love'?'selected':''}" onclick="window.setKinkChoice('${item.id}','love')">喜欢</button>
-                <button class="interest-btn level-interest ${choice==='interest'?'selected':''}" onclick="window.setKinkChoice('${item.id}','interest')">兴趣</button>
-                <button class="interest-btn level-curious ${choice==='curious'?'selected':''}" onclick="window.setKinkChoice('${item.id}','curious')">好奇</button>
-                <button class="interest-btn level-meh ${choice==='meh'?'selected':''}" onclick="window.setKinkChoice('${item.id}','meh')">不想</button>
-                <button class="interest-btn level-no ${choice==='no'?'selected':''}" onclick="window.setKinkChoice('${item.id}','no')">拒绝</button>
-            </div></div>`;
+            html += `<div class="kink-card">
+                <div class="card-title">${item.emoji||""} ${item.name}</div>
+                <div class="card-desc">${item.desc}</div>
+                <div class="interest-selector">
+                    <button class="interest-btn level-love ${choice==="love"?"selected":""}" onclick="window.setKinkChoice('${item.id}','love')">喜欢</button>
+                    <button class="interest-btn level-interest ${choice==="interest"?"selected":""}" onclick="window.setKinkChoice('${item.id}','interest')">兴趣</button>
+                    <button class="interest-btn level-curious ${choice==="curious"?"selected":""}" onclick="window.setKinkChoice('${item.id}','curious')">好奇</button>
+                    <button class="interest-btn level-meh ${choice==="meh"?"selected":""}" onclick="window.setKinkChoice('${item.id}','meh')">不想</button>
+                    <button class="interest-btn level-no ${choice==="no"?"selected":""}" onclick="window.setKinkChoice('${item.id}','no')">拒绝</button>
+                </div>
+            </div>`;
         });
         document.getElementById("cardsList").innerHTML = html || '<div style="text-align:center;padding:20px;">📭 无匹配项</div>';
     }
+    function updateMarkedCount() {
+        document.getElementById("markedCount").textContent = Object.keys(userChoices[currentUser]).length;
+    }
+    function refreshAll() {
+        document.getElementById("btnUserA").classList.toggle("active", currentUser==="A");
+        document.getElementById("btnUserB").classList.toggle("active", currentUser==="B");
+        document.querySelectorAll(".cat-tab").forEach(t=>t.classList.toggle("active", t.dataset.cat===currentCategory));
+        document.querySelectorAll(".filter-tab").forEach(t=>t.classList.toggle("active", t.dataset.filter===currentFilter));
+        updateMarkedCount(); renderCards();
+    }
+    window.setKinkChoice = (id, level) => { setChoice(id, level); };
 
-    // 随机（加权与完全随机）
+    // 匹配结果（含避雷）
+    function showMatchModal() {
+        const bothLove=[], bothInterest=[], oneLove=[], bothAvoid=[];
+        kinkData.forEach(item=>{
+            const a=userChoices.A[item.id], b=userChoices.B[item.id];
+            if(!a||!b) return;
+            if(a==="love"&&b==="love") bothLove.push(item);
+            else if((a==="interest"||a==="love")&&(b==="interest"||b==="love")) bothInterest.push(item);
+            else if((a==="love"&&b==="interest")||(a==="interest"&&b==="love")) oneLove.push(item);
+            if((a==="meh"||a==="no")&&(b==="meh"||b==="no")) bothAvoid.push(item);
+        });
+        let html="";
+        if(bothLove.length) { html+="<h4>🌟 双方非常喜欢</h4>"; bothLove.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name} <span class="match-badge perfect">完美</span></div>`); }
+        if(bothInterest.length) { html+="<h4>🌿 双方感兴趣</h4>"; bothInterest.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name}</div>`); }
+        if(oneLove.length) { html+="<h4>🔥 一方喜欢一方兴趣</h4>"; oneLove.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name}</div>`); }
+        if(bothAvoid.length) { html+="<h4>🛑 双方都避雷</h4>"; bothAvoid.forEach(i=>html+=`<div class="match-item both-avoid">${i.emoji} ${i.name} <span class="match-badge avoid">避雷</span></div>`); }
+        document.getElementById("matchResults").innerHTML = html || "暂无足够标记";
+        document.getElementById("matchModal").style.display="flex";
+    }
+
+    // 雷达图
+    const categories = ["foreplay","position","roleplay","sensory","location","toys","edge","niche","aftercare","body"];
+    const catNames = { foreplay:"前戏", position:"体位", roleplay:"角色", sensory:"感官", location:"场所", toys:"玩具", edge:"克制", niche:"小众", aftercare:"事后", body:"身体" };
+    let radarUser = "A";
+    function drawRadar() {
+        const canvas = document.getElementById("radarCanvas");
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const center = { x:200, y:200 }, radius = 130;
+        // 网格
+        ctx.strokeStyle = "#e0d8cc"; ctx.lineWidth = 0.5;
+        for(let i=1;i<=5;i++) {
+            ctx.beginPath();
+            const r = radius * i/5;
+            for(let j=0;j<categories.length;j++) {
+                const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+                const x = center.x + r*Math.cos(angle), y = center.y + r*Math.sin(angle);
+                j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+            }
+            ctx.closePath(); ctx.stroke();
+        }
+        // 轴线
+        ctx.strokeStyle = "#ccc";
+        for(let j=0;j<categories.length;j++) {
+            const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+            ctx.beginPath(); ctx.moveTo(center.x, center.y);
+            ctx.lineTo(center.x+radius*Math.cos(angle), center.y+radius*Math.sin(angle));
+            ctx.stroke();
+        }
+        // 标签
+        ctx.fillStyle = "#4a3c3c"; ctx.font = "12px 'PingFang SC'";
+        categories.forEach((cat,j)=>{
+            const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+            const x = center.x + (radius+20)*Math.cos(angle);
+            const y = center.y + (radius+20)*Math.sin(angle);
+            ctx.fillText(catNames[cat], x-12, y+4);
+        });
+
+        function getValues(user, type) {
+            return categories.map(cat => {
+                const items = kinkData.filter(i=>i.cat===cat);
+                const choices = userChoices[user];
+                let count = 0;
+                items.forEach(item => {
+                    const val = choices[item.id];
+                    if(type==="like" && (val==="love"||val==="interest")) count++;
+                    if(type==="avoid" && (val==="meh"||val==="no")) count++;
+                });
+                return items.length ? Math.round(count/items.length*100) : 0;
+            });
+        }
+
+        function drawPolygon(values, color, fillColor) {
+            ctx.beginPath();
+            ctx.strokeStyle = color; ctx.fillStyle = fillColor; ctx.lineWidth = 2;
+            for(let j=0;j<categories.length;j++) {
+                const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+                const r = radius * (values[j]/100);
+                const x = center.x + r*Math.cos(angle), y = center.y + r*Math.sin(angle);
+                j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+            }
+            ctx.closePath(); ctx.fill(); ctx.stroke();
+        }
+
+        if (radarUser === "compare") {
+            drawPolygon(getValues("A","like"), "#d4857b", "rgba(212,133,123,0.15)");
+            drawPolygon(getValues("B","like"), "#5a7a9a", "rgba(90,122,154,0.15)");
+            drawPolygon(getValues("A","avoid"), "#c9b896", "rgba(201,184,150,0.1)");
+            drawPolygon(getValues("B","avoid"), "#7a8a9a", "rgba(122,138,154,0.1)");
+        } else {
+            drawPolygon(getValues(radarUser,"like"), "#d4857b", "rgba(212,133,123,0.15)");
+            drawPolygon(getValues(radarUser,"avoid"), "#9a8c8c", "rgba(150,130,130,0.1)");
+        }
+    }
+
+    function showRadarDetail(cat) {
+        const choices = userChoices[radarUser==="compare"? "A" : radarUser];
+        const items = kinkData.filter(i=>i.cat===cat);
+        let html = `<h4>${catNames[cat]} 明细</h4>`;
+        const likes = items.filter(i=> choices[i.id]==="love"||choices[i.id]==="interest");
+        const avoids = items.filter(i=> choices[i.id]==="meh"||choices[i.id]==="no");
+        if(likes.length) {
+            html += "<p style=\"color:#b8554a;\">❤️ 喜欢/兴趣：</p>";
+            likes.forEach(i=> html += `<div class="item">${i.emoji} ${i.name} <span class="tag-like">${getChoiceLabel(choices[i.id])}</span></div>`);
+        }
+        if(avoids.length) {
+            html += "<p style=\"color:#8a7d72;\">🛑 不想/拒绝：</p>";
+            avoids.forEach(i=> html += `<div class="item">${i.emoji} ${i.name} <span class="tag-avoid">${getChoiceLabel(choices[i.id])}</span></div>`);
+        }
+        if(!likes.length&&!avoids.length) html += "<p>暂无标记</p>";
+        document.getElementById("radarDetail").innerHTML = html;
+    }
+
+    // 随机
     function showRandomResult(item) {
         const c = userChoices[currentUser][item.id];
         const label = c ? ` (你已标记：${getChoiceLabel(c)})` : "";
@@ -229,7 +626,6 @@
             <button class="action-btn" onclick="document.getElementById('randomResultModal').style.display='none'">知道了</button>`;
         document.getElementById("randomResultModal").style.display = "flex";
     }
-
     function randomCard(weighted = false) {
         const data = getFilteredData();
         if (!data.length) return;
@@ -237,7 +633,6 @@
             showRandomResult(data[Math.floor(Math.random()*data.length)]);
             return;
         }
-        // 加权计算双人匹配分
         const scores = data.map(item => {
             const a = userChoices.A[item.id] || "", b = userChoices.B[item.id] || "";
             if (a==="love" && b==="love") return 10;
@@ -255,47 +650,116 @@
         showRandomResult(data[data.length-1]);
     }
 
-    document.getElementById("btnRandom").addEventListener("click", ()=>{
-        document.getElementById("randomModeModal").style.display = "flex";
+    // 事件绑定
+    document.getElementById("btnUserA").addEventListener("click", ()=>{ currentUser="A"; refreshAll(); });
+    document.getElementById("btnUserB").addEventListener("click", ()=>{ currentUser="B"; refreshAll(); });
+    document.getElementById("categoryTabs").addEventListener("click", e=>{
+        const tab = e.target.closest(".cat-tab");
+        if(!tab) return;
+        currentCategory = tab.dataset.cat;
+        refreshAll();
     });
-    document.getElementById("randomPure").addEventListener("click", ()=>{
-        document.getElementById("randomModeModal").style.display = "none";
-        randomCard(false);
+    document.getElementById("filterTabs").addEventListener("click", e=>{
+        const tab = e.target.closest(".filter-tab");
+        if(!tab) return;
+        currentFilter = tab.dataset.filter;
+        refreshAll();
     });
-    document.getElementById("randomWeighted").addEventListener("click", ()=>{
-        document.getElementById("randomModeModal").style.display = "none";
-        randomCard(true);
+    document.getElementById("btnMatch").addEventListener("click", showMatchModal);
+    document.getElementById("matchModalClose").addEventListener("click", ()=>document.getElementById("matchModal").style.display="none");
+    document.getElementById("matchModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+
+    document.getElementById("btnRadar").addEventListener("click", ()=>{
+        radarUser = currentUser;
+        document.getElementById("radarModal").style.display = "flex";
+        updateRadarUserToggle();
+        drawRadar();
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;color:var(--text-muted);\">点击雷达轴查看明细</p>";
     });
+    document.getElementById("radarModalClose").addEventListener("click", ()=>document.getElementById("radarModal").style.display="none");
+    document.getElementById("radarModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+    document.getElementById("radarUserToggle").addEventListener("click", e=>{
+        const btn = e.target.closest("button");
+        if(!btn) return;
+        radarUser = btn.dataset.radarUser;
+        updateRadarUserToggle();
+        drawRadar();
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;color:var(--text-muted);\">点击雷达轴查看明细</p>";
+    });
+    function updateRadarUserToggle() {
+        document.querySelectorAll("#radarUserToggle button").forEach(b=> b.classList.toggle("active", b.dataset.radarUser===radarUser));
+    }
+    document.getElementById("radarCanvas").addEventListener("click", function(e){
+        const canvas = document.getElementById("radarCanvas");
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width/rect.width, scaleY = canvas.height/rect.height;
+        const mx = (e.clientX - rect.left)*scaleX, my = (e.clientY - rect.top)*scaleY;
+        const center = { x:200, y:200 }, radius = 130;
+        const dist = Math.hypot(mx-center.x, my-center.y);
+        if(dist > radius+30 || dist < 10) return;
+        let angle = Math.atan2(my-center.y, mx-center.x) + Math.PI/2;
+        if(angle < 0) angle += Math.PI*2;
+        const index = Math.round(angle / (Math.PI*2/categories.length)) % categories.length;
+        showRadarDetail(categories[index]);
+    });
+
+    document.getElementById("btnRandom").addEventListener("click", ()=> document.getElementById("randomModeModal").style.display = "flex");
+    document.getElementById("randomPure").addEventListener("click", ()=>{ document.getElementById("randomModeModal").style.display = "none"; randomCard(false); });
+    document.getElementById("randomWeighted").addEventListener("click", ()=>{ document.getElementById("randomModeModal").style.display = "none"; randomCard(true); });
     document.getElementById("randomCancel").addEventListener("click", ()=> document.getElementById("randomModeModal").style.display="none");
     document.getElementById("bottleTrigger").addEventListener("click", ()=> randomCard(true));
     document.getElementById("randomResultModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
 
-    // 雷达图逻辑（支持对比）
-    const categories = ["foreplay","position","roleplay","sensory","location","toys","edge","niche","aftercare","body"];
-    const catNames = { foreplay:"前戏", position:"体位", roleplay:"角色", sensory:"感官", location:"场所", toys:"玩具", edge:"克制", niche:"小众", aftercare:"事后", body:"身体" };
-    let radarUser = "A";
-    function drawRadar() {
-        const canvas = document.getElementById("radarCanvas");
-        const ctx = canvas.getContext("2d");
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        const center = { x:200, y:200 }, radius = 140;
-        // 绘制网格和标签略
-        // 根据radarUser绘制多边形
-        if (radarUser === "compare") {
-            // 绘制两人对比
-            drawUserPolygon("A", "#d4857b", "rgba(212,133,123,0.15)", true);
-            drawUserPolygon("B", "#5a7a9a", "rgba(90,122,154,0.15)", false);
-        } else {
-            drawUserPolygon(radarUser, "#d4857b", "rgba(212,133,123,0.15)", true);
-            drawUserPolygon(radarUser, "#9a8c8c", "rgba(150,130,130,0.1)", false);
+    document.getElementById("btnExport").addEventListener("click", ()=>{
+        const data = userChoices[currentUser];
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], {type:"application/json"});
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `kink-bottle-user${currentUser}.json`;
+        a.click(); URL.revokeObjectURL(a.href);
+    });
+    document.getElementById("btnImport").addEventListener("click", ()=> document.getElementById("importModal").style.display = "flex");
+    document.getElementById("importModalClose").addEventListener("click", ()=> document.getElementById("importModal").style.display="none");
+    document.getElementById("btnUploadFile").addEventListener("click", ()=> document.getElementById("importFileInput").click());
+    document.getElementById("importFileInput").addEventListener("change", (e)=>{
+        const file = e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => { document.getElementById("importTextarea").value = ev.target.result; };
+        reader.readAsText(file);
+    });
+    document.getElementById("btnConfirmImport").addEventListener("click", ()=>{
+        const raw = document.getElementById("importTextarea").value.trim();
+        if(!raw) return;
+        let parsed;
+        try { parsed = JSON.parse(raw); } catch(e) { return; }
+        const target = document.querySelector("input[name=\"importTarget\"]:checked").value;
+        const targetChoices = userChoices[target];
+        for(const [key,val] of Object.entries(parsed)) {
+            if(kinkData.some(k=>k.id===key) && ["love","interest","curious","meh","no"].includes(val)) {
+                targetChoices[key] = val;
+            }
         }
-    }
-    function drawUserPolygon(user, color, fill, isLike) { /* ... */ }
-    // 省略具体画图实现，保留之前的雷达绘制代码
+        saveChoices(); refreshAll(); document.getElementById("importModal").style.display = "none";
+    });
+    document.getElementById("btnReset").addEventListener("click", ()=>{
+        if(confirm("重置当前视角的所有标记？")) { userChoices[currentUser] = {}; saveChoices(); refreshAll(); }
+    });
+    document.getElementById("btnGlossary").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
+    document.getElementById("glossaryModalClose").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display="none");
+    document.getElementById("floatingHelpBtn").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
+    document.getElementById("glossaryModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
 
-    // 其他事件绑定与初始化
-    // ...
-    loadChoices(); renderCards();
+    // 欢迎弹窗
+    if (!localStorage.getItem(WELCOME_KEY)) {
+        document.getElementById("welcomeModal").style.display = "flex";
+        localStorage.setItem(WELCOME_KEY, "1");
+    }
+    document.getElementById("welcomeModalOk").addEventListener("click", ()=> document.getElementById("welcomeModal").style.display="none");
+    document.getElementById("welcomeModalClose").addEventListener("click", ()=> document.getElementById("welcomeModal").style.display="none");
+
+    loadChoices(); refreshAll();
 })();
 </script>
 </body>

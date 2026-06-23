@@ -138,6 +138,10 @@
         .random-card-popup .random-close { padding:10px 24px; border-radius:20px; border:1.5px solid #e0d8cc; background:#fff; cursor:pointer; font-size:14px; }
         .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#3d3530; color:#f5ede4; padding:10px 22px; border-radius:22px; font-size:13px; z-index:200; animation:toastUp 2s ease forwards; pointer-events:none; }
         @keyframes toastUp { 0%{ opacity:0; transform:translateX(-50%) translateY(20px); } 15%{ opacity:1; transform:translateX(-50%) translateY(0); } 75%{ opacity:1; } 100%{ opacity:0; transform:translateX(-50%) translateY(-15px); } }
+        /* 术语表表格样式 */
+        .glossary-table { width:100%; border-collapse:collapse; font-size:13px; }
+        .glossary-table td { padding:8px 6px; border-bottom:1px solid #e8ddd2; vertical-align:top; }
+        .glossary-table td:first-child { font-weight:500; color:#5a3a35; width:25%; }
         @media (max-width:480px) {
             .app-container { padding:10px 10px 30px; }
             .header-title { font-size:19px; }
@@ -199,13 +203,39 @@
         <button class="action-btn" id="btnReset">🔄 重置</button>
         <button class="action-btn" id="btnExport">📤 导出</button>
         <button class="action-btn" id="btnImport">📥 导入</button>
+        <button class="action-btn" id="btnGlossary">📖 术语表</button>
     </div>
 </div>
 
+<!-- 术语表弹窗 -->
+<div class="modal-overlay" id="glossaryModal" style="display:none;">
+    <div class="modal">
+        <button class="modal-close" id="glossaryModalClose">✕</button>
+        <h3>📖 术语表</h3>
+        <table class="glossary-table">
+            <tr><td>RT</td><td>乳头</td></tr>
+            <tr><td>HD</td><td>高潮</td></tr>
+            <tr><td>P-Spot</td><td>前列腺（男性G点）</td></tr>
+            <tr><td>G点</td><td>阴道前壁敏感点</td></tr>
+            <tr><td>C-Spot</td><td>会阴部敏感点</td></tr>
+            <tr><td>PC肌</td><td>盆底肌，控制阴道/肛门收缩</td></tr>
+            <tr><td>BJ</td><td>口交</td></tr>
+            <tr><td>HJ</td><td>手交（手淫）</td></tr>
+            <tr><td>Pegging</td><td>女性佩戴假阳具进行肛交</td></tr>
+            <tr><td>HD控制</td><td>有意识地延迟或控制高潮</td></tr>
+            <tr><td>凯格尔运动</td><td>锻炼盆底肌的运动</td></tr>
+            <tr><td>潮吹</td><td>女性高潮时喷射液体</td></tr>
+            <tr><td>混合HD</td><td>同时刺激多个敏感点达到高潮</td></tr>
+        </table>
+    </div>
+</div>
+
+<!-- 匹配弹窗 -->
 <div class="modal-overlay" id="matchModal" style="display:none;">
     <div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><p class="modal-subtitle">共同欲望</p><div id="matchResults"></div></div>
 </div>
 
+<!-- 导入弹窗 -->
 <div class="modal-overlay" id="importModal" style="display:none;">
     <div class="modal">
         <button class="modal-close" id="importModalClose">✕</button><h3>📥 导入数据</h3><p class="modal-subtitle">粘贴 JSON 或选择文件</p>
@@ -217,6 +247,7 @@
     </div>
 </div>
 
+<!-- 随机卡片弹窗 -->
 <div class="modal-overlay" id="randomModal" style="display:none;"><div class="random-card-popup" id="randomCardContent"></div></div>
 <div id="toastContainer"></div>
 
@@ -432,6 +463,17 @@
         const item = kinkData.find(k=>k.id===id);
         if(item && level==="love") showToast(`💛 已将「${item.name}」标记为非常喜欢`);
     };
+
+    // 术语表弹窗控制
+    document.getElementById("btnGlossary").addEventListener("click", ()=>{
+        document.getElementById("glossaryModal").style.display = "flex";
+    });
+    document.getElementById("glossaryModalClose").addEventListener("click", ()=>{
+        document.getElementById("glossaryModal").style.display = "none";
+    });
+    document.getElementById("glossaryModal").addEventListener("click", function(e){
+        if(e.target === this) this.style.display = "none";
+    });
 
     document.getElementById("btnExport").addEventListener("click", ()=>{
         const data = userChoices[currentUser];

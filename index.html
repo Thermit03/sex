@@ -113,25 +113,11 @@
         .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; font-weight:500; }
         .action-btn.primary:hover { background:#fffaf8; border-color:#d4a8a0; }
 
-        /* 悬浮帮助按钮 */
         .floating-help-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: #fffdf9;
-            border: 1.5px solid #d4c0b0;
-            box-shadow: 0 4px 16px rgba(100, 70, 50, 0.2);
-            cursor: pointer;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 90;
-            transition: all var(--transition);
-            -webkit-tap-highlight-color: transparent;
+            position: fixed; bottom: 24px; right: 24px; width: 52px; height: 52px; border-radius: 50%;
+            background: #fffdf9; border: 1.5px solid #d4c0b0; box-shadow: 0 4px 16px rgba(100, 70, 50, 0.2);
+            cursor: pointer; font-size: 24px; display: flex; align-items: center; justify-content: center;
+            z-index: 90; transition: all var(--transition); -webkit-tap-highlight-color: transparent;
         }
         .floating-help-btn:hover { box-shadow: 0 6px 24px rgba(100, 70, 50, 0.3); transform: scale(1.05); }
         .floating-help-btn:active { transform: scale(0.95); background: #fdf6f0; }
@@ -230,17 +216,15 @@
     </div>
 </div>
 
-<!-- 悬浮帮助按钮 -->
 <button class="floating-help-btn" id="floatingHelpBtn" title="术语表">📖</button>
 
-<!-- 首次访问欢迎弹窗 -->
 <div class="modal-overlay" id="welcomeModal" style="display:none;">
     <div class="modal">
         <button class="modal-close" id="welcomeModalClose">✕</button>
         <h3>💌 欢迎来到性癖之瓶</h3>
         <p class="modal-subtitle">这是一份属于你们两人的私密探索问卷</p>
         <p style="font-size:14px; color:var(--text-light); line-height:1.8; margin-bottom:16px;">
-            ✨ 有 <strong>140个</strong> 性相关偏好，覆盖前戏、体位、角色、感官、身体探索等。<br>
+            ✨ 有 <strong>150个</strong> 性相关偏好，覆盖前戏、体位、角色、感官、身体探索等。<br>
             📖 部分条目使用了<strong>缩写术语</strong>（如RT、HD），<strong>点击右下角📖按钮</strong>或底部「术语表」随时查看解释。<br>
             💛 你和伴侣可以<strong>分别切换视角</strong>标记，完成后「查看匹配」发现共同兴趣。
         </p>
@@ -250,7 +234,6 @@
     </div>
 </div>
 
-<!-- 术语表弹窗 -->
 <div class="modal-overlay" id="glossaryModal" style="display:none;">
     <div class="modal">
         <button class="modal-close" id="glossaryModalClose">✕</button>
@@ -269,16 +252,15 @@
             <tr><td>凯格尔运动</td><td>锻炼盆底肌的运动</td></tr>
             <tr><td>潮吹</td><td>女性高潮时喷射液体</td></tr>
             <tr><td>混合HD</td><td>同时刺激多个敏感点达到高潮</td></tr>
+            <tr><td>肛塞</td><td>插入肛门的情趣用品，常用于刺激</td></tr>
         </table>
     </div>
 </div>
 
-<!-- 匹配弹窗 -->
 <div class="modal-overlay" id="matchModal" style="display:none;">
     <div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><p class="modal-subtitle">共同欲望</p><div id="matchResults"></div></div>
 </div>
 
-<!-- 导入弹窗 -->
 <div class="modal-overlay" id="importModal" style="display:none;">
     <div class="modal">
         <button class="modal-close" id="importModalClose">✕</button><h3>📥 导入数据</h3><p class="modal-subtitle">粘贴 JSON 或选择文件</p>
@@ -290,7 +272,6 @@
     </div>
 </div>
 
-<!-- 随机卡片弹窗 -->
 <div class="modal-overlay" id="randomModal" style="display:none;"><div class="random-card-popup" id="randomCardContent"></div></div>
 <div id="toastContainer"></div>
 
@@ -380,6 +361,14 @@
         { id:"t11", cat:"toys", name:"电动伸缩假阳具", desc:"模拟自动动作", tag:"niche", emoji:"🤖" },
         { id:"t12", cat:"toys", name:"情趣骰子/卡牌", desc:"随机决定下一步", tag:"", emoji:"🎲" },
         { id:"t13", cat:"toys", name:"人体工学体位垫", desc:"辅助抬高臀部支撑腰部", tag:"", emoji:"🛏️" },
+        { id:"t14", cat:"toys", name:"小型肛塞", desc:"适合初次尝试的柔软硅胶肛塞", tag:"niche", emoji:"🔹" },
+        { id:"t15", cat:"toys", name:"电动肛塞", desc:"带震动的肛塞，可刺激肛门与周围", tag:"niche", emoji:"⚡" },
+        { id:"t16", cat:"toys", name:"阴蒂吸吸乐", desc:"脉冲气流吮吸阴蒂，非接触式快感", tag:"", emoji:"🌀" },
+        { id:"t17", cat:"toys", name:"无线远程跳蛋", desc:"手机控制，适合远程调情", tag:"", emoji:"📱" },
+        { id:"t18", cat:"toys", name:"情侣震动环", desc:"套在阴茎根部，同时刺激双方", tag:"", emoji:"💍" },
+        { id:"t19", cat:"toys", name:"硅胶仿真局部倒模", desc:"仿真实体部分，用于单人探索", tag:"niche", emoji:"🍑" },
+        { id:"t20", cat:"toys", name:"手链式束缚带", desc:"柔软皮革或绒布手链，可连接固定", tag:"", emoji:"⛓️" },
+        { id:"t21", cat:"toys", name:"情趣眼罩/头枕", desc:"兼具蒙眼与舒适头部支撑", tag:"gentle", emoji:"😴" },
         { id:"e01", cat:"edge", name:"边缘高潮控制", desc:"反复接近HD后停止", tag:"", emoji:"🌊" },
         { id:"e02", cat:"edge", name:"延迟高潮", desc:"延长性爱享受过程", tag:"gentle", emoji:"⏳" },
         { id:"e03", cat:"edge", name:"指令式性爱", desc:"一方用语言引导动作", tag:"", emoji:"🗣️" },
@@ -412,6 +401,8 @@
         { id:"n19", cat:"niche", name:"制服/特定职业装", desc:"空姐护士等职业服装", tag:"niche", emoji:"👔" },
         { id:"n20", cat:"niche", name:"双人幻想讨论", desc:"讨论多人幻想不实际进行", tag:"", emoji:"💭" },
         { id:"n21", cat:"niche", name:"私密剃毛/造型", desc:"互相为对方修剪私处造型", tag:"niche", emoji:"✂️" },
+        { id:"n22", cat:"niche", name:"肛部外部抚摸与按摩", desc:"轻柔按摩肛门周围，放松并探索感受", tag:"niche", emoji:"🍑" },
+        { id:"n23", cat:"niche", name:"肛部手指轻度探索", desc:"使用润滑液后，手指轻轻进入，注意呼吸放松", tag:"niche", emoji:"☝️" },
         { id:"a01", cat:"aftercare", name:"事后长时拥抱", desc:"HD后紧拥至少10分钟不说话", tag:"gentle", emoji:"🤗" },
         { id:"a02", cat:"aftercare", name:"温柔反馈交流", desc:"分享刚才最喜欢的瞬间感受", tag:"gentle", emoji:"💬" },
         { id:"a03", cat:"aftercare", name:"互相清洁护理", desc:"温毛巾为对方擦拭身体", tag:"gentle", emoji:"🧻" },
@@ -507,36 +498,20 @@
         if(item && level==="love") showToast(`💛 已将「${item.name}」标记为非常喜欢`);
     };
 
-    // 首次访问欢迎弹窗
     function checkWelcome() {
         if (!localStorage.getItem(WELCOME_KEY)) {
             document.getElementById("welcomeModal").style.display = "flex";
             localStorage.setItem(WELCOME_KEY, "1");
         }
     }
-    document.getElementById("welcomeModalOk").addEventListener("click", ()=>{
-        document.getElementById("welcomeModal").style.display = "none";
-    });
-    document.getElementById("welcomeModalClose").addEventListener("click", ()=>{
-        document.getElementById("welcomeModal").style.display = "none";
-    });
-    document.getElementById("welcomeModal").addEventListener("click", function(e){
-        if(e.target === this) this.style.display = "none";
-    });
+    document.getElementById("welcomeModalOk").addEventListener("click", ()=> document.getElementById("welcomeModal").style.display = "none");
+    document.getElementById("welcomeModalClose").addEventListener("click", ()=> document.getElementById("welcomeModal").style.display = "none");
+    document.getElementById("welcomeModal").addEventListener("click", function(e){ if(e.target === this) this.style.display = "none"; });
 
-    // 悬浮按钮 & 术语表
-    document.getElementById("floatingHelpBtn").addEventListener("click", ()=>{
-        document.getElementById("glossaryModal").style.display = "flex";
-    });
-    document.getElementById("btnGlossary").addEventListener("click", ()=>{
-        document.getElementById("glossaryModal").style.display = "flex";
-    });
-    document.getElementById("glossaryModalClose").addEventListener("click", ()=>{
-        document.getElementById("glossaryModal").style.display = "none";
-    });
-    document.getElementById("glossaryModal").addEventListener("click", function(e){
-        if(e.target === this) this.style.display = "none";
-    });
+    document.getElementById("floatingHelpBtn").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
+    document.getElementById("btnGlossary").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
+    document.getElementById("glossaryModalClose").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "none");
+    document.getElementById("glossaryModal").addEventListener("click", function(e){ if(e.target === this) this.style.display = "none"; });
 
     document.getElementById("btnExport").addEventListener("click", ()=>{
         const data = userChoices[currentUser];

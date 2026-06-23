@@ -352,4 +352,198 @@
         { id:"b07", cat:"body", name:"P-Spot内部探索", desc:"手指或专用工具直接刺激", tag:"niche", emoji:"🔍" },
         { id:"b08", cat:"body", name:"P-Spot与BJ结合", desc:"BJ同时刺激前列腺", tag:"niche", emoji:"🎯" },
         { id:"b09", cat:"body", name:"G点探索与HD", desc:"专注寻找刺激G点以HD为目标", tag:"", emoji:"🎯" },
-        { id:"b10", cat:"body", name:"子宫颈敏感探索", desc:"深度进入感受宫颈周围", tag:"niche", em
+        { id:"b10", cat:"body", name:"子宫颈敏感探索", desc:"深度进入感受宫颈周围", tag:"niche", emoji:"🌐" },
+        { id:"b11", cat:"body", name:"混合HD探索", desc:"同时刺激阴蒂和G/P点", tag:"", emoji:"🌪️" },
+        { id:"b12", cat:"body", name:"盆底肌同步训练", desc:"一起做凯格尔运动", tag:"", emoji:"💪" },
+        { id:"b13", cat:"body", name:"阴道握紧游戏", desc:"女方用PC肌夹紧放松", tag:"", emoji:"✊" },
+        { id:"b14", cat:"body", name:"射精控制（男）", desc:"学习分辨HD和射精", tag:"", emoji:"💧" },
+        { id:"b15", cat:"body", name:"多次HD尝试（女）", desc:"探索一次session多次HD", tag:"", emoji:"🌊" },
+        { id:"b16", cat:"body", name:"精液观察/品尝", desc:"安全前提下观察品尝", tag:"niche", emoji:"🧪" },
+        { id:"b17", cat:"body", name:"潮吹探索", desc:"开放尝试不强求", tag:"niche", emoji:"💦" },
+        { id:"b18", cat:"body", name:"月经周期情欲变化", desc:"追踪利用周期欲望", tag:"niche", emoji:"📅" },
+        { id:"b19", cat:"body", name:"身体地图绘制", desc:"轮流为对方标注敏感度", tag:"", emoji:"🗺️" },
+        { id:"b20", cat:"body", name:"冷热敏感度测试", desc:"不同温度物体测试敏感反应", tag:"", emoji:"🌡️" }
+    ];
+
+    const STORAGE_KEY_A = "kink_bottle_userA", STORAGE_KEY_B = "kink_bottle_userB";
+    let currentUser = "A", currentCategory = "all";
+    let userChoices = { A:{}, B:{} };
+
+    function loadChoices() {
+        try {
+            const a=localStorage.getItem(STORAGE_KEY_A), b=localStorage.getItem(STORAGE_KEY_B);
+            if(a) userChoices.A=JSON.parse(a);
+            if(b) userChoices.B=JSON.parse(b);
+        } catch(e) { userChoices.A={}; userChoices.B={}; }
+    }
+    function saveChoices() {
+        localStorage.setItem(STORAGE_KEY_A, JSON.stringify(userChoices.A));
+        localStorage.setItem(STORAGE_KEY_B, JSON.stringify(userChoices.B));
+    }
+    function setChoice(id, level) {
+        if(userChoices[currentUser][id] === level) delete userChoices[currentUser][id];
+        else userChoices[currentUser][id] = level;
+        saveChoices(); updateMarkedCount(); renderCards();
+    }
+    function getChoiceLabel(l) { return {love:"非常喜欢",interest:"有兴趣",curious:"好奇",meh:"不太想",no:"拒绝"}[l]||""; }
+    function getFilteredData() { return currentCategory==="all" ? kinkData : kinkData.filter(i=>i.cat===currentCategory); }
+    function checkMutualMatch(id) {
+        const a=userChoices.A[id], b=userChoices.B[id];
+        return a&&b&&["love","interest"].includes(a)&&["love","interest"].includes(b);
+    }
+
+    function renderCards() {
+        const data = getFilteredData();
+        let html = "";
+        data.forEach((item,idx)=>{
+            const choice = userChoices[currentUser][item.id];
+            const tag = item.tag==="popular"?"热门":item.tag==="gentle"?"温柔":item.tag==="niche"?"小众":"";
+            const matched = checkMutualMatch(item.id);
+            html += `<div class="kink-card ${matched?"matched-highlight":""}" style="animation-delay:${idx*0.02}s">
+                <div class="card-header"><span class="card-title">${item.emoji||""} ${item.name}</span>${tag?`<span class="card-tag ${item.tag}">${tag}</span>`:""}</div>
+                <div class="card-desc">${item.desc}</div>
+                <div class="interest-selector">
+                    <button class="interest-btn level-love ${choice==="love"?"selected":""}" onclick="window.setKinkChoice('${item.id}','love')"><span class="interest-dot dot-love"></span>喜欢</button>
+                    <button class="interest-btn level-interest ${choice==="interest"?"selected":""}" onclick="window.setKinkChoice('${item.id}','interest')"><span class="interest-dot dot-interest"></span>兴趣</button>
+                    <button class="interest-btn level-curious ${choice==="curious"?"selected":""}" onclick="window.setKinkChoice('${item.id}','curious')"><span class="interest-dot dot-curious"></span>好奇</button>
+                    <button class="interest-btn level-meh ${choice==="meh"?"selected":""}" onclick="window.setKinkChoice('${item.id}','meh')"><span class="interest-dot dot-meh"></span>不想</button>
+                    <button class="interest-btn level-no ${choice==="no"?"selected":""}" onclick="window.setKinkChoice('${item.id}','no')"><span class="interest-dot dot-no"></span>拒绝</button>
+                </div>
+            </div>`;
+        });
+        document.getElementById("cardsList").innerHTML = html || '<div style="text-align:center;color:var(--text-muted);padding:20px;">📭 该分类暂无内容</div>';
+    }
+
+    function updateMarkedCount() {
+        document.getElementById("markedCount").textContent = Object.keys(userChoices[currentUser]).length;
+        const label = document.getElementById("currentUserLabel");
+        if(currentUser==="A") { label.textContent="💛 当前：我的视角"; label.style.color="#b87060"; }
+        else { label.textContent="💙 当前：伴侣的视角"; label.style.color="#5a7a9a"; }
+    }
+    function refreshAll() {
+        document.getElementById("btnUserA").classList.toggle("active", currentUser==="A");
+        document.getElementById("btnUserB").classList.toggle("active", currentUser==="B");
+        document.querySelectorAll(".cat-tab").forEach(t=>t.classList.toggle("active", t.dataset.cat===currentCategory));
+        updateMarkedCount(); renderCards();
+    }
+
+    window.setKinkChoice = (id, level) => {
+        setChoice(id, level);
+        const item = kinkData.find(k=>k.id===id);
+        if(item && level==="love") showToast(`💛 已将「${item.name}」标记为非常喜欢`);
+    };
+
+    document.getElementById("btnExport").addEventListener("click", ()=>{
+        const data = userChoices[currentUser];
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], {type:"application/json"});
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `kink-bottle-user${currentUser}.json`;
+        a.click(); URL.revokeObjectURL(a.href);
+        showToast("📤 数据已导出");
+    });
+
+    const importModal = document.getElementById("importModal");
+    document.getElementById("btnImport").addEventListener("click", ()=>{
+        document.getElementById("importTextarea").value = "";
+        document.getElementById("importFileInput").value = "";
+        importModal.style.display = "flex";
+    });
+    document.getElementById("importModalClose").addEventListener("click", ()=>importModal.style.display="none");
+    document.getElementById("btnCancelImport").addEventListener("click", ()=>importModal.style.display="none");
+    document.getElementById("btnUploadFile").addEventListener("click", ()=>document.getElementById("importFileInput").click());
+    document.getElementById("importFileInput").addEventListener("change", (e)=>{
+        const file = e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => { document.getElementById("importTextarea").value = ev.target.result; };
+        reader.readAsText(file);
+    });
+    document.getElementById("btnConfirmImport").addEventListener("click", ()=>{
+        const raw = document.getElementById("importTextarea").value.trim();
+        if(!raw) { showToast("请粘贴或选择文件"); return; }
+        let parsed;
+        try { parsed = JSON.parse(raw); } catch(e) { showToast("JSON格式错误"); return; }
+        if(typeof parsed !== "object" || Array.isArray(parsed)) { showToast("格式不正确"); return; }
+        const target = document.querySelector("input[name=\"importTarget\"]:checked").value;
+        const targetChoices = userChoices[target];
+        let count = 0;
+        for(const [key,val] of Object.entries(parsed)) {
+            if(!kinkData.some(k=>k.id===key)) continue;
+            if(["love","interest","curious","meh","no"].includes(val)) {
+                targetChoices[key] = val; count++;
+            }
+        }
+        if(count===0) { showToast("没有有效数据"); return; }
+        saveChoices(); importModal.style.display="none"; refreshAll();
+        showToast(`✅ 已导入 ${count} 条到「${target==="A"?"我":"伴侣"}」`);
+    });
+
+    document.getElementById("btnMatch").addEventListener("click", ()=>{
+        const bothLove=[], bothInterest=[], oneLove=[], mixed=[];
+        kinkData.forEach(item=>{
+            const a=userChoices.A[item.id], b=userChoices.B[item.id];
+            if(!a||!b) return;
+            if(a==="love"&&b==="love") bothLove.push(item);
+            else if((a==="interest"||a==="love")&&(b==="interest"||b==="love")) bothInterest.push(item);
+            else if((a==="love"&&b==="interest")||(a==="interest"&&b==="love")) oneLove.push(item);
+            else if(["love","interest"].includes(a)||["love","interest"].includes(b)) mixed.push({...item, a,b});
+        });
+        let html="";
+        if(bothLove.length) { html+="<h4 style=\"color:#6a8a4a;\">🌟 双方都非常喜欢</h4>"; bothLove.forEach(i=>html+=`<div class="match-item both-love"><span class="match-name">${i.emoji} ${i.name}</span><span class="match-badge perfect">完美</span><div>${i.desc}</div></div>`); }
+        if(bothInterest.length) { html+="<h4 style=\"color:#8a9a70;\">🌿 双方都感兴趣</h4>"; bothInterest.forEach(i=>html+=`<div class="match-item both-love"><span class="match-name">${i.emoji} ${i.name}</span><span class="match-badge perfect">可试</span><div>${i.desc}</div></div>`); }
+        if(oneLove.length) { html+="<h4 style=\"color:#b87850;\">🔥 一方喜欢一方兴趣</h4>"; oneLove.forEach(i=>html+=`<div class="match-item one-interested"><span class="match-name">${i.emoji} ${i.name}</span><span class="match-badge good">沟通</span><div>${i.desc}</div></div>`); }
+        if(mixed.length) { html+="<h4 style=\"color:#9a8a6a;\">💭 至少一方有兴趣</h4>"; mixed.forEach(i=>html+=`<div class="match-item one-interested"><span class="match-name">${i.emoji} ${i.name}</span><div>你：${getChoiceLabel(i.a)} | 伴侣：${getChoiceLabel(i.b)}</div></div>`); }
+        document.getElementById("matchResults").innerHTML = html || "<div style=\"text-align:center;color:var(--text-muted);\">🤷 还没有足够的标记数据</div>";
+        document.getElementById("matchModal").style.display="flex";
+    });
+    document.getElementById("matchModalClose").addEventListener("click", ()=>document.getElementById("matchModal").style.display="none");
+    document.getElementById("matchModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+
+    document.getElementById("btnRandom").addEventListener("click", ()=>{
+        const data = getFilteredData();
+        if(!data.length) return showToast("无数据");
+        showRandomCard(data[Math.floor(Math.random()*data.length)]);
+    });
+    document.getElementById("bottleTrigger").addEventListener("click", ()=>showRandomCard(kinkData[Math.floor(Math.random()*kinkData.length)]));
+    function showRandomCard(item) {
+        const c = userChoices[currentUser][item.id];
+        const label = c ? ` (已标记：${getChoiceLabel(c)})` : "";
+        document.getElementById("randomCardContent").innerHTML = `
+            <span class="random-emoji">${item.emoji||"🎭"}</span>
+            <div class="random-title">${item.name}</div>
+            <div class="random-desc">${item.desc}${label}</div>
+            <button class="random-close" onclick="document.getElementById('randomModal').style.display='none'">知道了 ✨</button>`;
+        document.getElementById("randomModal").style.display="flex";
+    }
+    document.getElementById("randomModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+
+    document.getElementById("btnReset").addEventListener("click", ()=>{
+        if(confirm(`重置「${currentUser==="A"?"我":"伴侣"}」的所有标记？`)) {
+            userChoices[currentUser] = {};
+            saveChoices(); refreshAll(); showToast("已重置");
+        }
+    });
+
+    document.getElementById("btnUserA").addEventListener("click", ()=>{ currentUser="A"; refreshAll(); });
+    document.getElementById("btnUserB").addEventListener("click", ()=>{ currentUser="B"; refreshAll(); });
+    document.getElementById("categoryTabs").addEventListener("click", e=>{
+        const tab = e.target.closest(".cat-tab");
+        if(!tab) return;
+        currentCategory = tab.dataset.cat;
+        refreshAll();
+        document.getElementById("cardsList").scrollIntoView({behavior:"smooth"});
+    });
+
+    function showToast(msg) {
+        const t = document.createElement("div"); t.className="toast"; t.textContent=msg;
+        document.getElementById("toastContainer").appendChild(t);
+        setTimeout(()=>t.remove(), 2100);
+    }
+
+    loadChoices(); refreshAll();
+})();
+</script>
+</body>
+</html>

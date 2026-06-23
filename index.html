@@ -223,680 +223,133 @@
 <script>
 (function() {
     const kinkData = [
-        // foreplay 17
-        { id:'f01', cat:'foreplay', name:'长时间舌吻', desc:'专注地深吻10分钟以上', tag:'popular', emoji:'💋' },
-        { id:'f02', cat:'foreplay', name:'全身精油按摩', desc:'用温热精油按摩全身，过渡到情欲抚摸', tag:'gentle', emoji:'🧴' },
-        { id:'f03', cat:'foreplay', name:'互相手淫', desc:'面对面或依偎用手帮对方达到HD', tag:'popular', emoji:'🤲' },
-        { id:'f04', cat:'foreplay', name:'口交（给予方）', desc:'为伴侣进行BJ，专注对方反应', tag:'popular', emoji:'👅' },
-        { id:'f05', cat:'foreplay', name:'口交（接受方）', desc:'享受伴侣的BJ', tag:'popular', emoji:'😌' },
-        { id:'f06', cat:'foreplay', name:'69式互舔', desc:'双方同时BJ', tag:'popular', emoji:'🔯' },
-        { id:'f07', cat:'foreplay', name:'乳交', desc:'用乳房夹住阴茎摩擦', tag:'', emoji:'🍈' },
-        { id:'f08', cat:'foreplay', name:'股间摩擦（素股）', desc:'阴茎在腿间或臀缝摩擦，不进入', tag:'', emoji:'🦵' },
-        { id:'f09', cat:'foreplay', name:'淋浴共浴', desc:'一起淋浴泡澡，水中抚摸', tag:'gentle', emoji:'🚿' },
-        { id:'f10', cat:'foreplay', name:'耳语情话与喘息', desc:'耳边轻声情色话语，配合温热呼吸', tag:'gentle', emoji:'🫦' },
-        { id:'f11', cat:'foreplay', name:'互相刮毛/护理私处', desc:'互相帮助打理私密毛发', tag:'niche', emoji:'✂️' },
-        { id:'f12', cat:'foreplay', name:'全身手指轻划', desc:'用指尖极轻划过全身，描绘身体线条', tag:'gentle', emoji:'🖐️' },
-        { id:'f13', cat:'foreplay', name:'同步呼吸拥抱', desc:'裸身紧贴，同步呼吸进入放松状态', tag:'gentle', emoji:'💨' },
-        { id:'f14', cat:'foreplay', name:'枕边秘密分享', desc:'相拥分享一个从未说过的性幻想', tag:'gentle', emoji:'🤫' },
-        { id:'f15', cat:'foreplay', name:'互相擦干身体', desc:'沐浴后温柔为对方擦干每一寸肌肤', tag:'gentle', emoji:'🛁' },
-        { id:'f16', cat:'foreplay', name:'掌心温度传递', desc:'双手相扣传递亲密和安全感', tag:'gentle', emoji:'🤝' },
-        { id:'f17', cat:'foreplay', name:'身体赞美仪式', desc:'轮流说出对方身体最喜欢的部位并亲吻', tag:'gentle', emoji:'🗣️' },
-        // position 15
-        { id:'p01', cat:'position', name:'传教士式', desc:'经典面对面体位', tag:'popular', emoji:'🤱' },
-        { id:'p02', cat:'position', name:'后入式', desc:'从背后进入', tag:'popular', emoji:'🐕' },
-        { id:'p03', cat:'position', name:'女上位（正对）', desc:'女性在上方面对面', tag:'popular', emoji:'👸' },
-        { id:'p04', cat:'position', name:'女上位（背对）', desc:'女性在上方背对伴侣', tag:'', emoji:'🪞' },
-        { id:'p05', cat:'position', name:'侧入式（勺子式）', desc:'侧躺从背后进入，温柔亲密', tag:'gentle', emoji:'🥄' },
-        { id:'p06', cat:'position', name:'站立式/靠墙式', desc:'站立或倚靠墙壁进入', tag:'', emoji:'🧱' },
-        { id:'p07', cat:'position', name:'坐式（椅子上）', desc:'一方坐椅子，另一方跨坐或跪姿', tag:'', emoji:'🪑' },
-        { id:'p08', cat:'position', name:'莲花式', desc:'面对面盘腿相拥缓慢律动', tag:'gentle', emoji:'🪷' },
-        { id:'p09', cat:'position', name:'桥式/抬臀式', desc:'仰卧抬高臀部增加角度', tag:'', emoji:'🌉' },
-        { id:'p10', cat:'position', name:'俯卧平趴式', desc:'一方平趴，另一方从上方进入', tag:'', emoji:'🛏️' },
-        { id:'p11', cat:'position', name:'侧入面对面', desc:'侧躺面对面，双腿交错进入', tag:'gentle', emoji:'💞' },
-        { id:'p12', cat:'position', name:'跪坐拥抱式', desc:'一方跪坐，另一方跨坐面对面', tag:'gentle', emoji:'🧘' },
-        { id:'p13', cat:'position', name:'桌面边沿式', desc:'一方坐桌边，高度灵活', tag:'', emoji:'🪑' },
-        { id:'p14', cat:'position', name:'斜靠沙发式', desc:'半躺半坐沙发转角', tag:'', emoji:'🛋️' },
-        { id:'p15', cat:'position', name:'情趣秋千辅助', desc:'悬挂秋千体验失重晃动', tag:'niche', emoji:'🎠' },
-        // roleplay 12
-        { id:'r01', cat:'roleplay', name:'医生与病人', desc:'模拟医疗检查', tag:'', emoji:'🩺' },
-        { id:'r02', cat:'roleplay', name:'老师与学生', desc:'课后辅导场景', tag:'', emoji:'📚' },
-        { id:'r03', cat:'roleplay', name:'陌生人邂逅', desc:'假装初次相遇', tag:'', emoji:'🍸' },
-        { id:'r04', cat:'roleplay', name:'按摩师与客人', desc:'从正规按摩滑向情欲', tag:'gentle', emoji:'💆' },
-        { id:'r05', cat:'roleplay', name:'上司与下属', desc:'办公室权力游戏', tag:'', emoji:'💼' },
-        { id:'r06', cat:'roleplay', name:'古代宫廷/武侠', desc:'古风角色扮演', tag:'niche', emoji:'🏮' },
-        { id:'r07', cat:'roleplay', name:'科幻/外星人', desc:'科幻想象场景', tag:'niche', emoji:'👽' },
-        { id:'r08', cat:'roleplay', name:'摄影师与模特', desc:'私房写真拍摄', tag:'', emoji:'📸' },
-        { id:'r09', cat:'roleplay', name:'调酒师与客人', desc:'吧台调情升温', tag:'', emoji:'🍹' },
-        { id:'r10', cat:'roleplay', name:'健身教练与学员', desc:'健身后拉伸延伸', tag:'', emoji:'🏋️' },
-        { id:'r11', cat:'roleplay', name:'旅店陌生人', desc:'异国酒店偶遇', tag:'', emoji:'🏩' },
-        { id:'r12', cat:'roleplay', name:'双人密室逃脱', desc:'关在房间寻找线索触碰', tag:'', emoji:'🔐' },
-        // sensory 14
-        { id:'s01', cat:'sensory', name:'蒙眼性爱', desc:'丝巾蒙眼放大触觉', tag:'gentle', emoji:'🕶️' },
-        { id:'s02', cat:'sensory', name:'冰块刺激', desc:'冰块轻滑敏感区', tag:'', emoji:'🧊' },
-        { id:'s03', cat:'sensory', name:'温水/温热感', desc:'温热毛巾刺激皮肤', tag:'gentle', emoji:'♨️' },
-        { id:'s04', cat:'sensory', name:'羽毛挑逗', desc:'羽毛轻扫全身', tag:'gentle', emoji:'🪶' },
-        { id:'s05', cat:'sensory', name:'丝巾束缚手腕', desc:'柔软丝巾轻绕', tag:'gentle', emoji:'🧣' },
-        { id:'s06', cat:'sensory', name:'音乐与性爱', desc:'配合音乐节奏', tag:'gentle', emoji:'🎵' },
-        { id:'s07', cat:'sensory', name:'食物与性', desc:'蜂蜜/奶油涂抹身体', tag:'', emoji:'🍯' },
-        { id:'s08', cat:'sensory', name:'低温蜡烛', desc:'情趣低温蜡油', tag:'niche', emoji:'🕯️' },
-        { id:'s09', cat:'sensory', name:'感官剥夺', desc:'耳塞+蒙眼，纯触觉', tag:'niche', emoji:'🔇' },
-        { id:'s10', cat:'sensory', name:'温油缓慢滴落', desc:'体温微温的按摩油滴落背部', tag:'gentle', emoji:'💧' },
-        { id:'s11', cat:'sensory', name:'指尖震动器', desc:'指套式小震动器抚摸', tag:'', emoji:'🪀' },
-        { id:'s12', cat:'sensory', name:'冷热交替毛巾', desc:'温毛巾和冰毛巾交替敷', tag:'', emoji:'♨️' },
-        { id:'s13', cat:'sensory', name:'细小喷雾', desc:'小喷雾瓶装温水轻喷敏感区', tag:'gentle', emoji:'💦' },
-        { id:'s14', cat:'sensory', name:'音叉震动', desc:'轻敲音叉接触锁骨脚踝', tag:'niche', emoji:'🎶' },
-        // location 12
-        { id:'l01', cat:'location', name:'户外私密自然', desc:'人迹罕至的自然中', tag:'', emoji:'🌿' },
-        { id:'l02', cat:'location', name:'车内性爱', desc:'停靠车内紧凑空间', tag:'', emoji:'🚗' },
-        { id:'l03', cat:'location', name:'阳台/窗边', desc:'有被看见的刺激', tag:'', emoji:'🪟' },
-        { id:'l04', cat:'location', name:'酒店房间', desc:'脱离日常放松', tag:'popular', emoji:'🏨' },
-        { id:'l05', cat:'location', name:'野外帐篷中', desc:'伴随大自然声音', tag:'', emoji:'⛺' },
-        { id:'l06', cat:'location', name:'镜子前', desc:'观看彼此表情身体', tag:'', emoji:'🪞' },
-        { id:'l07', cat:'location', name:'沙发/客厅', desc:'非卧室的家中其他地方', tag:'', emoji:'🛋️' },
-        { id:'l08', cat:'location', name:'楼梯台阶上', desc:'利用楼梯高度差', tag:'', emoji:'🪜' },
-        { id:'l09', cat:'location', name:'步入式衣柜', desc:'狭小私密紧贴', tag:'', emoji:'🚪' },
-        { id:'l10', cat:'location', name:'书桌下方', desc:'一方坐桌前，桌下隐秘', tag:'', emoji:'📚' },
-        { id:'l11', cat:'location', name:'夜间露台', desc:'星空夜风半户外', tag:'', emoji:'🌌' },
-        { id:'l12', cat:'location', name:'温泉/浴缸中', desc:'温热水中漂浮感', tag:'gentle', emoji:'♨️' },
-        // toys 13
-        { id:'t01', cat:'toys', name:'振动棒', desc:'刺激阴蒂等敏感区', tag:'popular', emoji:'🔮' },
-        { id:'t02', cat:'toys', name:'跳蛋/遥控玩具', desc:'小型震动，可远程', tag:'popular', emoji:'🥚' },
-        { id:'t03', cat:'toys', name:'情侣共用振动器', desc:'U型同时刺激双方', tag:'', emoji:'💑' },
-        { id:'t04', cat:'toys', name:'穿戴式假阳具', desc:'女性佩戴用于pegging', tag:'niche', emoji:'🎗️' },
-        { id:'t05', cat:'toys', name:'前列腺按摩器', desc:'体内刺激前列腺', tag:'niche', emoji:'🔘' },
-        { id:'t06', cat:'toys', name:'情趣润滑液', desc:'各种口味功能', tag:'', emoji:'💧' },
-        { id:'t07', cat:'toys', name:'柔软束缚带', desc:'轻微被控制感', tag:'', emoji:'🔗' },
-        { id:'t08', cat:'toys', name:'乳夹/乳头吸吮器', desc:'温和刺激RT', tag:'niche', emoji:'📎' },
-        { id:'t09', cat:'toys', name:'双头共享振动棒', desc:'两端同时使用', tag:'', emoji:'🔀' },
-        { id:'t10', cat:'toys', name:'吮吸式阴蒂刺激器', desc:'气流脉冲非接触', tag:'', emoji:'🌪️' },
-        { id:'t11', cat:'toys', name:'电动伸缩假阳具', desc:'模拟自动动作', tag:'niche', emoji:'🤖' },
-        { id:'t12', cat:'toys', name:'情趣骰子/卡牌', desc:'随机决定下一步', tag:'', emoji:'🎲' },
-        { id:'t13', cat:'toys', name:'人体工学体位垫', desc:'辅助抬高臀部支撑腰部', tag:'', emoji:'🛏️' },
-        // edge 11
-        { id:'e01', cat:'edge', name:'边缘高潮控制', desc:'反复接近HD后停止', tag:'', emoji:'🌊' },
-        { id:'e02', cat:'edge', name:'延迟高潮', desc:'延长性爱享受过程', tag:'gentle', emoji:'⏳' },
-        { id:'e03', cat:'edge', name:'指令式性爱', desc:'一方用语言引导动作', tag:'', emoji:'🗣️' },
-        { id:'e04', cat:'edge', name:'定时"服务"', desc:'设定时段专注取悦对方', tag:'', emoji:'⏰' },
-        { id:'e05', cat:'edge', name:'高潮后继续刺激', desc:'HD后继续轻柔刺激', tag:'niche', emoji:'⚡' },
-        { id:'e06', cat:'edge', name:'禁欲后爆发', desc:'短暂禁欲后尽情释放', tag:'', emoji:'💥' },
-        { id:'e07', cat:'edge', name:'倒数计时释放', desc:'从10倒数归零才可HD', tag:'', emoji:'🔟' },
-        { id:'e08', cat:'edge', name:'触碰禁区游戏', desc:'约定只能触碰安全区以外', tag:'', emoji:'🚫' },
-        { id:'e09', cat:'edge', name:'快感积分制', desc:'积累积分到约定值才释放', tag:'', emoji:'📊' },
-        { id:'e10', cat:'edge', name:'静止挑战', desc:'一方不动，另一方尽力挑逗', tag:'', emoji:'🧍' },
-        { id:'e11', cat:'edge', name:'呼吸节拍配合', desc:'用呼吸节奏控制抽送', tag:'gentle', emoji:'🫁' },
-        // niche 21
-        { id:'n01', cat:'niche', name:'第四爱/Pegging', desc:'女性使用假阳具对男性肛交', tag:'niche', emoji:'🌈' },
-        { id:'n02', cat:'niche', name:'女性主导的性爱', desc:'女性全程掌控节奏', tag:'niche', emoji:'👑' },
-        { id:'n03', cat:'niche', name:'前列腺刺激', desc:'内外按摩前列腺', tag:'niche', emoji:'🎯' },
-        { id:'n04', cat:'niche', name:'足交', desc:'用脚挑逗摩擦', tag:'niche', emoji:'🦶' },
-        { id:'n05', cat:'niche', name:'拍摄私密影像', desc:'同意下拍摄仅供两人', tag:'', emoji:'📷' },
-        { id:'n06', cat:'niche', name:'窥视/被窥视幻想', desc:'幻想被偷看或安排私密', tag:'niche', emoji:'👁️' },
-        { id:'n07', cat:'niche', name:'情趣内衣/角色服装', desc:'穿着情趣内衣进行', tag:'', emoji:'👗' },
-        { id:'n08', cat:'niche', name:'颜射', desc:'面部射精视觉刺激', tag:'niche', emoji:'💦' },
-        { id:'n09', cat:'niche', name:'深喉探索', desc:'BJ深度喉咙接触', tag:'niche', emoji:'🗼' },
-        { id:'n10', cat:'niche', name:'经期性爱', desc:'月经期间进行', tag:'niche', emoji:'🌹' },
-        { id:'n11', cat:'niche', name:'互相自慰观看', desc:'面对面各自自慰', tag:'', emoji:'👀' },
-        { id:'n12', cat:'niche', name:'催眠/引导式幻想', desc:'一方声音引导情色旅程', tag:'niche', emoji:'🌀' },
-        { id:'n13', cat:'niche', name:'温柔女性支配', desc:'女性主导但温柔鼓励', tag:'niche', emoji:'🤲' },
-        { id:'n14', cat:'niche', name:'腋下欣赏', desc:'欣赏伴侣腋下气味触感', tag:'niche', emoji:'🙋' },
-        { id:'n15', cat:'niche', name:'肚脐与腰窝刺激', desc:'关注常被忽略的凹陷处', tag:'niche', emoji:'🌀' },
-        { id:'n16', cat:'niche', name:'头发梳理与轻拉', desc:'梳理头发适度轻拉增加快感', tag:'niche', emoji:'💇' },
-        { id:'n17', cat:'niche', name:'坐脸/Queen座位', desc:'一方坐在另一方面部接受BJ', tag:'niche', emoji:'👸' },
-        { id:'n18', cat:'niche', name:'互换传统角色', desc:'交换平时主动/被动角色', tag:'', emoji:'🔄' },
-        { id:'n19', cat:'niche', name:'制服/特定职业装', desc:'空姐护士等职业服装', tag:'niche', emoji:'👔' },
-        { id:'n20', cat:'niche', name:'双人幻想讨论', desc:'讨论多人幻想不实际进行', tag:'', emoji:'💭' },
-        { id:'n21', cat:'niche', name:'私密剃毛/造型', desc:'互相为对方修剪私处造型', tag:'niche', emoji:'✂️' },
-        // aftercare 5
-        { id:'a01', cat:'aftercare', name:'事后长时拥抱', desc:'HD后紧拥至少10分钟不说话', tag:'gentle', emoji:'🤗' },
-        { id:'a02', cat:'aftercare', name:'温柔反馈交流', desc:'分享刚才最喜欢的瞬间感受', tag:'gentle', emoji:'💬' },
-        { id:'a03', cat:'aftercare', name:'互相清洁护理', desc:'温毛巾为对方擦拭身体', tag:'gentle', emoji:'🧻' },
-        { id:'a04', cat:'aftercare', name:'事后小食分享', desc:'一起喝水吃水果巧克力', tag:'gentle', emoji:'🍫' },
-        { id:'a05', cat:'aftercare', name:'事后日记记录', desc:'一起写下或画出刚才的感受', tag:'gentle', emoji:'📝' },
-        // body 20
-        { id:'b01', cat:'body', name:'RT敏感度开发（女）', desc:'探索女方RT与生殖器快感连接', tag:'', emoji:'🔘' },
-        { id:'b02', cat:'body', name:'RT敏感度探索（男）', desc:'探索男方RT的敏感潜力', tag:'', emoji:'🔘' },
-        { id:'b03', cat:'body', name:'RT-HD追求', desc:'尝试仅通过RT刺激达到HD', tag:'niche', emoji:'💥' },
-        { id:'b04', cat:'body', name:'同步RT刺激', desc:'双方同时进行RT刺激', tag:'', emoji:'🤝' },
-        { id:'b05', cat:'body', name:'C-Spot（会阴）按压', desc:'在性爱中按压会阴部', tag:'', emoji:'📍' },
-        { id:'b06', cat:'body', name:'P-Spot外部按摩', desc:'体外间接按摩前列腺', tag:'', emoji:'🤚' },
-        { id:'b07', cat:'body', name:'P-Spot内部探索', desc:'手指或专用工具直接刺激', tag:'niche', emoji:'🔍' },
-        { id:'b08', cat:'body', name:'P-Spot与BJ结合', desc:'BJ        body {
-            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            background-image:
-                radial-gradient(ellipse at 50% 0%, rgba(210,170,150,0.12) 0%, transparent 60%),
-                radial-gradient(ellipse at 85% 20%, rgba(200,160,140,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 15% 60%, rgba(190,150,130,0.06) 0%, transparent 50%);
-        }
-
-        .app-container { max-width: 680px; margin: 0 auto; padding: 16px 18px 40px; }
-
-        .header { text-align: center; padding: 20px 0 10px; position: relative; }
-        .bottle-wrapper { position: relative; display: inline-block; cursor: pointer; user-select: none; transition: transform var(--transition); }
-        .bottle-wrapper:hover { transform: translateY(-3px); }
-        .bottle-wrapper:active { transform: scale(0.96); }
-
-        .bottle-svg { width: 100px; height: 140px; filter: drop-shadow(0 8px 20px rgba(140,100,80,0.18)); transition: filter var(--transition); }
-        .bottle-wrapper:hover .bottle-svg { filter: drop-shadow(0 12px 28px rgba(140,100,80,0.28)); }
-
-        .sparkles { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); width: 36px; height: 55px; pointer-events: none; }
-        .sparkle { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #e8c8a0; animation: sparkleFloat 3s ease-in-out infinite; }
-        .sparkle:nth-child(1){ left:8px; top:10px; animation-delay:0s; width:2.5px; height:2.5px; }
-        .sparkle:nth-child(2){ left:20px; top:6px; animation-delay:0.7s; width:2px; height:2px; }
-        .sparkle:nth-child(3){ left:12px; top:22px; animation-delay:1.4s; width:3px; height:3px; background:#f0d4b0; }
-        .sparkle:nth-child(4){ left:22px; top:18px; animation-delay:2.1s; width:2px; height:2px; background:#eed8b8; }
-        .sparkle:nth-child(5){ left:15px; top:32px; animation-delay:0.5s; width:2.5px; height:2.5px; }
-        .sparkle:nth-child(6){ left:6px; top:16px; animation-delay:1.8s; width:1.5px; height:1.5px; background:#f5e0c0; }
-
-        @keyframes sparkleFloat {
-            0%,100%{ opacity:0.25; transform:translateY(0); }
-            30%{ opacity:0.9; transform:translateY(-8px); }
-            60%{ opacity:0.35; transform:translateY(-3px); }
-        }
-
-        .bottle-hint { display: block; font-size:12px; color:var(--text-muted); margin-top:4px; letter-spacing:0.5px; animation:hintPulse 3s ease-in-out infinite; }
-        @keyframes hintPulse { 0%,100%{ opacity:0.5; } 50%{ opacity:1; } }
-
-        .header-title { font-size:22px; font-weight:500; letter-spacing:1.5px; color:#4a3c3c; margin-top:6px; }
-        .header-subtitle { font-size:13px; color:var(--text-muted); letter-spacing:0.8px; margin-top:2px; font-weight:300; }
-
-        .user-switch { display:flex; justify-content:center; gap:8px; margin:18px 0 14px; background:var(--card-bg); border-radius:30px; padding:5px; box-shadow:var(--shadow-sm); border:1px solid var(--glass-border); }
-        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; letter-spacing:0.6px; font-weight:400; transition:all var(--transition); background:transparent; color:var(--text-light); white-space:nowrap; }
-        .user-switch-btn.active { background:#fff; color:#3d3030; font-weight:500; box-shadow:var(--shadow-sm); }
-        .user-switch-btn .icon { margin-right:4px; }
-        .user-badge { display:inline-block; font-size:10px; padding:2px 7px; border-radius:10px; margin-left:3px; font-weight:400; vertical-align:middle; }
-        .badge-me { background:#f5e0d8; color:#b87060; }
-        .badge-partner { background:#dde5f0; color:#5a7a9a; }
-
-        .category-tabs { display:flex; flex-wrap:wrap; gap:7px; margin:12px 0 16px; justify-content:center; }
-        .cat-tab { padding:8px 15px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:13px; letter-spacing:0.4px; color:var(--text-light); transition:all var(--transition); white-space:nowrap; }
-        .cat-tab:hover { border-color:#d5c8b8; background:#fffefb; }
-        .cat-tab.active { background:#fff; border-color:var(--accent-soft); color:#4a3030; font-weight:500; box-shadow:var(--shadow-sm); }
-
-        .stats-bar { display:flex; justify-content:space-between; align-items:center; padding:8px 14px; margin-bottom:10px; font-size:12px; color:var(--text-muted); letter-spacing:0.4px; }
-        .stats-count span { color:var(--accent); font-weight:600; }
-
-        .cards-list { display:flex; flex-direction:column; gap:10px; }
-        .kink-card { background:var(--card-bg); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm); border:1px solid transparent; transition:all var(--transition); animation:cardFadeIn 0.4s ease forwards; }
-        @keyframes cardFadeIn { from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
-        .kink-card:hover { box-shadow:var(--shadow-md); border-color:#e8ddd2; }
-        .kink-card.matched-highlight { border-color:#c9d8c0; background:#fafff7; box-shadow:0 2px 12px rgba(140,170,120,0.15); }
-        .kink-card .card-header { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
-        .kink-card .card-title { font-size:15px; font-weight:500; color:#3d3030; letter-spacing:0.3px; flex:1; }
-        .kink-card .card-desc { font-size:12.5px; color:var(--text-muted); margin-top:4px; line-height:1.5; }
-        .card-tag { display:inline-block; font-size:10px; padding:3px 8px; border-radius:10px; background:#f5efe8; color:#a09080; flex-shrink:0; }
-        .card-tag.popular { background:#fef5ee; color:#c89070; }
-        .card-tag.niche { background:#f3eff8; color:#8a7a9a; }
-        .card-tag.gentle { background:#f5f8f0; color:#8a9a70; }
-
-        .interest-selector { display:flex; gap:6px; margin-top:12px; flex-wrap:wrap; align-items:center; }
-        .interest-btn { padding:7px 13px; border-radius:18px; border:1.5px solid #e5ddd5; background:#fefdfa; cursor:pointer; font-size:12px; letter-spacing:0.3px; color:var(--text-light); transition:all var(--transition); white-space:nowrap; }
-        .interest-btn:hover { border-color:#d0c5b8; background:#fffefc; }
-        .interest-btn.selected { font-weight:500; transform:scale(1.03); }
-        .interest-btn.level-love.selected { background:#fdf0ed; border-color:#d4857b; color:#b8554a; }
-        .interest-btn.level-interest.selected { background:#fdf6f0; border-color:#d4a080; color:#b87850; }
-        .interest-btn.level-curious.selected { background:#fdfaf4; border-color:#c9b896; color:#9a8058; }
-        .interest-btn.level-meh.selected { background:#f9f8f6; border-color:#bfb5aa; color:#8a7d72; }
-        .interest-btn.level-no.selected { background:#f8f7f6; border-color:#d0cbc6; color:#9a9088; }
-        .interest-dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:4px; vertical-align:middle; }
-        .dot-love { background:#d4857b; } .dot-interest { background:#d4a080; } .dot-curious { background:#c9b896; } .dot-meh { background:#b5a9a0; } .dot-no { background:#c4bfbb; }
-
-        .bottom-actions { display:flex; gap:10px; margin-top:22px; justify-content:center; flex-wrap:wrap; }
-        .action-btn { padding:12px 22px; border-radius:28px; border:1.5px solid #e0d8cc; background:var(--card-bg); cursor:pointer; font-size:14px; letter-spacing:0.5px; color:var(--text); transition:all var(--transition); box-shadow:var(--shadow-sm); white-space:nowrap; }
-        .action-btn:hover { box-shadow:var(--shadow-md); border-color:#c8b8a5; }
-        .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; font-weight:500; }
-        .action-btn.primary:hover { background:#fffaf8; border-color:#d4a8a0; }
-        .action-btn .btn-emoji { margin-right:4px; }
-
-        /* 模态弹窗 */
-        .modal-overlay { position:fixed; inset:0; background:rgba(40,30,25,0.55); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; animation:fadeIn 0.3s ease; }
-        @keyframes fadeIn { from{ opacity:0; } to{ opacity:1; } }
-        .modal { background:#fffdf9; border-radius:var(--radius-lg); padding:28px 22px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; animation:modalSlideUp 0.35s ease; }
-        @keyframes modalSlideUp { from{ transform:translateY(40px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
-        .modal-close { position:absolute; top:14px; right:16px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; color:#8a7a6a; transition:all var(--transition); display:flex; align-items:center; justify-content:center; }
-        .modal-close:hover { background:#ebe3d8; color:#5a4030; }
-        .modal h3 { font-size:18px; font-weight:500; letter-spacing:0.8px; color:#3d3030; margin-bottom:8px; text-align:center; }
-        .modal .modal-subtitle { text-align:center; font-size:13px; color:var(--text-muted); margin-bottom:18px; }
-
-        .import-textarea { width:100%; height:120px; border:1.5px solid #e0d8cc; border-radius:var(--radius-sm); padding:12px; font-family:monospace; font-size:12px; resize:vertical; background:#fefdfa; }
-        .import-actions { display:flex; gap:8px; margin-top:12px; justify-content:flex-end; }
-        .import-radio-group { margin:8px 0; display:flex; gap:12px; }
-        .import-radio-group label { font-size:13px; cursor:pointer; }
-
-        .match-item { padding:12px 14px; border-radius:var(--radius-sm); margin-bottom:8px; border:1px solid #e8e0d5; background:#fffefb; }
-        .match-item.both-love { border-color:#c9d8c0; background:#f9fcf6; border-left:3px solid #9ab87a; }
-        .match-item.one-interested { border-color:#e8dcc8; background:#fefcf7; border-left:3px solid #d4b896; }
-        .match-badge { display:inline-block; font-size:10px; padding:3px 8px; border-radius:10px; margin-left:6px; }
-        .match-badge.perfect { background:#e8f0dc; color:#6a8a4a; }
-        .match-badge.good { background:#fdf0e4; color:#b87850; }
-
-        .random-card-popup { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.8); background:#fffdf9; border-radius:var(--radius-lg); padding:28px 22px; box-shadow:var(--shadow-lg); z-index:120; max-width:400px; width:90%; text-align:center; animation:popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; border:2px solid #f0e8d8; }
-        @keyframes popIn { to{ transform:translate(-50%,-50%) scale(1); opacity:1; } }
-        .random-card-popup .random-emoji { font-size:48px; display:block; margin-bottom:8px; }
-        .random-card-popup .random-title { font-size:18px; font-weight:500; }
-        .random-card-popup .random-desc { font-size:13px; color:var(--text-muted); margin:8px 0 16px; }
-        .random-card-popup .random-close { padding:10px 24px; border-radius:20px; border:1.5px solid #e0d8cc; background:#fff; cursor:pointer; font-size:14px; }
-
-        .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#3d3530; color:#f5ede4; padding:10px 22px; border-radius:22px; font-size:13px; z-index:200; animation:toastUp 2s ease forwards; pointer-events:none; }
-        @keyframes toastUp { 0%{ opacity:0; transform:translateX(-50%) translateY(20px); } 15%{ opacity:1; transform:translateX(-50%) translateY(0); } 75%{ opacity:1; } 100%{ opacity:0; transform:translateX(-50%) translateY(-15px); } }
-
-        @media (max-width:480px) {
-            .app-container { padding:10px 10px 30px; }
-            .header-title { font-size:19px; }
-            .bottle-svg { width:80px; height:115px; }
-            .sparkles { top:22px; width:28px; height:44px; }
-            .kink-card { padding:14px; }
-            .interest-btn { padding:6px 10px; font-size:11px; }
-        }
-    </style>
-</head>
-<body>
-<div class="app-container">
-    <!-- 头部 -->
-    <div class="header">
-        <div class="bottle-wrapper" id="bottleTrigger" title="点击瓶子随机抽取一个性癖好">
-            <svg class="bottle-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
-                        <stop offset="30%" stop-color="#fdfaf6" stop-opacity="0.55"/>
-                        <stop offset="70%" stop-color="#f5efe6" stop-opacity="0.4"/>
-                        <stop offset="100%" stop-color="#ede4d8" stop-opacity="0.35"/>
-                    </linearGradient>
-                </defs>
-                <path d="M28 55 C28 52 32 48 36 48 L40 48 L40 30 C40 22 44 16 50 14 C56 16 60 22 60 30 L60 48 L64 48 C68 48 72 52 72 55 L72 105 C72 118 62 128 50 128 C38 128 28 118 28 105 Z" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.35)" stroke-width="2"/>
-                <rect x="40" y="14" width="20" height="18" rx="3" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.3)" stroke-width="1.5"/>
-                <rect x="37" y="8" width="26" height="8" rx="4" fill="rgba(250,245,238,0.6)" stroke="rgba(180,160,145,0.3)" stroke-width="1.5"/>
-                <path d="M34 60 C34 56 36 54 38 52 L38 100 C36 102 34 106 34 110" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" stroke-linecap="round"/>
-                <ellipse cx="50" cy="9" rx="11" ry="5" fill="#e8d5c0" stroke="rgba(180,155,135,0.4)" stroke-width="1"/>
-            </svg>
-            <div class="sparkles">
-                <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
-                <div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
-            </div>
-            <span class="bottle-hint">🫧 点击瓶子随机探索</span>
-        </div>
-        <h1 class="header-title">性癖之瓶</h1>
-        <p class="header-subtitle">探索彼此 · 温柔靠近</p>
-    </div>
-
-    <!-- 用户切换 -->
-    <div class="user-switch">
-        <button class="user-switch-btn active" data-user="A" id="btnUserA"><span class="icon">💛</span> 我的选择<span class="user-badge badge-me">我</span></button>
-        <button class="user-switch-btn" data-user="B" id="btnUserB"><span class="icon">💙</span> 伴侣的选择<span class="user-badge badge-partner">TA</span></button>
-    </div>
-
-    <!-- 分类 -->
-    <div class="category-tabs" id="categoryTabs">
-        <button class="cat-tab active" data-cat="all">✨ 全部</button>
-        <button class="cat-tab" data-cat="foreplay">🌙 前戏与亲密</button>
-        <button class="cat-tab" data-cat="position">🔥 体位与姿势</button>
-        <button class="cat-tab" data-cat="roleplay">🎭 角色与场景</button>
-        <button class="cat-tab" data-cat="sensory">🎪 感官探索</button>
-        <button class="cat-tab" data-cat="location">📍 场所冒险</button>
-        <button class="cat-tab" data-cat="toys">🧸 情趣玩具</button>
-        <button class="cat-tab" data-cat="edge">💫 边缘与克制</button>
-        <button class="cat-tab" data-cat="niche">🌈 小众探索</button>
-    </div>
-
-    <div class="stats-bar">
-        <span class="stats-count">已标记：<span id="markedCount">0</span> 个偏好</span>
-        <span id="currentUserLabel" style="font-size:11px;color:#b87060;">💛 当前：我的视角</span>
-    </div>
-
-    <div class="cards-list" id="cardsList"></div>
-
-    <div class="bottom-actions">
-        <button class="action-btn" id="btnRandom"><span class="btn-emoji">🎲</span> 随机探索</button>
-        <button class="action-btn primary" id="btnMatch"><span class="btn-emoji">💞</span> 查看匹配结果</button>
-        <button class="action-btn" id="btnReset"><span class="btn-emoji">🔄</span> 重置当前视角</button>
-        <button class="action-btn" id="btnExport"><span class="btn-emoji">📤</span> 导出我的数据</button>
-        <button class="action-btn" id="btnImport"><span class="btn-emoji">📥</span> 导入伴侣数据</button>
-    </div>
-</div>
-
-<!-- 匹配弹窗 -->
-<div class="modal-overlay" id="matchModal" style="display:none;">
-    <div class="modal" id="matchModalContent">
-        <button class="modal-close" id="matchModalClose">✕</button>
-        <h3>💞 性趣匹配结果</h3>
-        <p class="modal-subtitle">发现你们共同的欲望</p>
-        <div id="matchResults"></div>
-    </div>
-</div>
-
-<!-- 导入弹窗 -->
-<div class="modal-overlay" id="importModal" style="display:none;">
-    <div class="modal">
-        <button class="modal-close" id="importModalClose">✕</button>
-        <h3>📥 导入伴侣数据</h3>
-        <p class="modal-subtitle">粘贴 JSON 内容或上传文件，合并到指定视角</p>
-        <textarea class="import-textarea" id="importTextarea" placeholder='粘贴类似 {"k01":"love","k02":"interest"} 的JSON数据'></textarea>
-        <input type="file" id="importFileInput" accept=".json,application/json" style="display:none;">
-        <div style="text-align:right; margin-top:4px;">
-            <button class="action-btn" id="btnUploadFile" style="padding:6px 14px; font-size:12px;">📁 选择文件</button>
-        </div>
-        <div class="import-radio-group">
-            <label><input type="radio" name="importTarget" value="A" checked> 导入为「我的数据」</label>
-            <label><input type="radio" name="importTarget" value="B"> 导入为「伴侣数据」</label>
-        </div>
-        <div class="import-actions">
-            <button class="action-btn" id="btnCancelImport">取消</button>
-            <button class="action-btn primary" id="btnConfirmImport">确认导入</button>
-        </div>
-    </div>
-</div>
-
-<div id="toastContainer"></div>
-
-<!-- 随机卡片弹窗 -->
-<div class="modal-overlay" id="randomModal" style="display:none;">
-    <div class="random-card-popup" id="randomCardContent"></div>
-</div>
-
-<script>
-    (function() {
-        // ============ 数据 ============
-        const kinkData = [
-            { id:'f01', cat:'foreplay', name:'长时间舌吻', desc:'专注地深吻10分钟以上，探索彼此的嘴唇与舌头', tag:'popular', emoji:'💋' },
-            { id:'f02', cat:'foreplay', name:'全身精油按摩', desc:'用温热精油为对方做全身按摩，逐渐过渡到情欲抚摸', tag:'gentle', emoji:'🧴' },
-            { id:'f03', cat:'foreplay', name:'互相手淫', desc:'面对面或依偎着，用手帮对方达到高潮', tag:'popular', emoji:'🤲' },
-            { id:'f04', cat:'foreplay', name:'口交（给予方）', desc:'为伴侣进行口交，专注于对方的愉悦反应', tag:'popular', emoji:'👅' },
-            { id:'f05', cat:'foreplay', name:'口交（接受方）', desc:'享受伴侣为自己口交，放松接受愉悦', tag:'popular', emoji:'😌' },
-            { id:'f06', cat:'foreplay', name:'69式互舔', desc:'双方同时为对方口交的姿势', tag:'popular', emoji:'🔯' },
-            { id:'f07', cat:'foreplay', name:'乳交', desc:'用乳房夹住阴茎进行摩擦刺激', tag:'', emoji:'🍈' },
-            { id:'f08', cat:'foreplay', name:'股间摩擦（素股）', desc:'阴茎在对方大腿间或臀缝间摩擦，模拟性交但不进入', tag:'', emoji:'🦵' },
-            { id:'f09', cat:'foreplay', name:'淋浴共浴', desc:'一起淋浴或泡澡，在水中互相抚摸亲吻', tag:'gentle', emoji:'🚿' },
-            { id:'f10', cat:'foreplay', name:'耳语情话与喘息', desc:'在耳边轻声说情色的话语，配合温热呼吸挑逗', tag:'gentle', emoji:'🫦' },
-            { id:'f11', cat:'foreplay', name:'互相刮毛/护理私处', desc:'情侣间互相帮助打理私密部位的毛发', tag:'niche', emoji:'✂️' },
-            { id:'p01', cat:'position', name:'传教士式', desc:'经典的面对面体位，深情对视', tag:'popular', emoji:'🤱' },
-            { id:'p02', cat:'position', name:'后入式', desc:'从背后进入，深度刺激', tag:'popular', emoji:'🐕' },
-            { id:'p03', cat:'position', name:'女上位（正对）', desc:'女性在上方面对面，掌控节奏', tag:'popular', emoji:'👸' },
-            { id:'p04', cat:'position', name:'女上位（背对）', desc:'女性在上方背对伴侣', tag:'', emoji:'🪞' },
-            { id:'p05', cat:'position', name:'侧入式（勺子式）', desc:'两人侧躺，温柔亲密', tag:'gentle', emoji:'🥄' },
-            { id:'p06', cat:'position', name:'站立式/靠墙式', desc:'一方站立，另一方从正面或背后进入', tag:'', emoji:'🧱' },
-            { id:'p07', cat:'position', name:'坐式（椅子上）', desc:'一方坐在椅子上，另一方跨坐或跪姿进入', tag:'', emoji:'🪑' },
-            { id:'p08', cat:'position', name:'莲花式', desc:'面对面盘腿相拥，缓慢律动', tag:'gentle', emoji:'🪷' },
-            { id:'p09', cat:'position', name:'桥式/抬臀式', desc:'仰卧抬高臀部增加角度', tag:'', emoji:'🌉' },
-            { id:'p10', cat:'position', name:'俯卧平趴式', desc:'一方平趴，另一方从上方进入', tag:'', emoji:'🛏️' },
-            { id:'r01', cat:'roleplay', name:'医生与病人', desc:'模拟医疗检查场景', tag:'', emoji:'🩺' },
-            { id:'r02', cat:'roleplay', name:'老师与学生', desc:'课后辅导场景', tag:'', emoji:'📚' },
-            { id:'r03', cat:'roleplay', name:'陌生人邂逅', desc:'假装初次相遇，重新体验心动', tag:'', emoji:'🍸' },
-            { id:'r04', cat:'roleplay', name:'按摩师与客人', desc:'从正规按摩滑向情欲探索', tag:'gentle', emoji:'💆' },
-            { id:'r05', cat:'roleplay', name:'上司与下属', desc:'办公室权力游戏', tag:'', emoji:'💼' },
-            { id:'r06', cat:'roleplay', name:'古代宫廷/武侠', desc:'古风角色扮演', tag:'niche', emoji:'🏮' },
-            { id:'r07', cat:'roleplay', name:'科幻/外星人', desc:'充满想象力的科幻场景', tag:'niche', emoji:'👽' },
-            { id:'s01', cat:'sensory', name:'蒙眼性爱', desc:'用丝绸眼罩蒙住眼睛，放大触觉', tag:'gentle', emoji:'🕶️' },
-            { id:'s02', cat:'sensory', name:'冰块刺激', desc:'用冰块轻轻滑过敏感区域', tag:'', emoji:'🧊' },
-            { id:'s03', cat:'sensory', name:'温水/温热感', desc:'用温热毛巾刺激皮肤', tag:'gentle', emoji:'♨️' },
-            { id:'s04', cat:'sensory', name:'羽毛挑逗', desc:'用柔软羽毛扫过全身', tag:'gentle', emoji:'🪶' },
-            { id:'s05', cat:'sensory', name:'丝巾束缚手腕', desc:'柔软丝巾轻绕手腕', tag:'gentle', emoji:'🧣' },
-            { id:'s06', cat:'sensory', name:'音乐与性爱', desc:'配合音乐节奏进行', tag:'gentle', emoji:'🎵' },
-            { id:'s07', cat:'sensory', name:'食物与性', desc:'将蜂蜜/奶油涂抹身体互相舔舐', tag:'', emoji:'🍯' },
-            { id:'s08', cat:'sensory', name:'低温蜡烛', desc:'情趣低温蜡烛，微热刺激', tag:'niche', emoji:'🕯️' },
-            { id:'s09', cat:'sensory', name:'感官剥夺', desc:'耳塞+蒙眼，完全依靠触觉', tag:'niche', emoji:'🔇' },
-            { id:'l01', cat:'location', name:'户外性爱（私密自然中）', desc:'人迹罕至的自然环境', tag:'', emoji:'🌿' },
-            { id:'l02', cat:'location', name:'车内性爱', desc:'停靠的车内，紧凑亲密', tag:'', emoji:'🚗' },
-            { id:'l03', cat:'location', name:'阳台/窗边', desc:'有被看见的微妙刺激', tag:'', emoji:'🪟' },
-            { id:'l04', cat:'location', name:'酒店房间', desc:'脱离日常的放松体验', tag:'popular', emoji:'🏨' },
-            { id:'l05', cat:'location', name:'野外帐篷中', desc:'伴随大自然声音', tag:'', emoji:'⛺' },
-            { id:'l06', cat:'location', name:'镜子前', desc:'观看彼此表情和身体', tag:'', emoji:'🪞' },
-            { id:'l07', cat:'location', name:'沙发/客厅', desc:'打破只在卧室的惯例', tag:'', emoji:'🛋️' },
-            { id:'t01', cat:'toys', name:'振动棒', desc:'刺激阴蒂或其他敏感区', tag:'popular', emoji:'🔮' },
-            { id:'t02', cat:'toys', name:'跳蛋/遥控玩具', desc:'小型震动，可远程互动', tag:'popular', emoji:'🥚' },
-            { id:'t03', cat:'toys', name:'情侣共用振动器', desc:'U型设计，同时刺激双方', tag:'', emoji:'💑' },
-            { id:'t04', cat:'toys', name:'穿戴式假阳具', desc:'女性佩戴，用于pegging', tag:'niche', emoji:'🎗️' },
-            { id:'t05', cat:'toys', name:'前列腺按摩器', desc:'刺激前列腺体验不同高潮', tag:'niche', emoji:'🔘' },
-            { id:'t06', cat:'toys', name:'情趣润滑液', desc:'各种口味和功能', tag:'', emoji:'💧' },
-            { id:'t07', cat:'toys', name:'柔软束缚带', desc:'轻微被控制感', tag:'', emoji:'🔗' },
-            { id:'t08', cat:'toys', name:'乳夹/乳头吸吮器', desc:'温和刺激乳头', tag:'niche', emoji:'📎' },
-            { id:'e01', cat:'edge', name:'边缘高潮控制', desc:'反复接近高潮后停止', tag:'', emoji:'🌊' },
-            { id:'e02', cat:'edge', name:'延迟高潮', desc:'延长性爱时间，享受过程', tag:'gentle', emoji:'⏳' },
-            { id:'e03', cat:'edge', name:'指令式性爱', desc:'一方用语言引导动作', tag:'', emoji:'🗣️' },
-            { id:'e04', cat:'edge', name:'定时"服务"', desc:'设定时间段专注取悦对方', tag:'', emoji:'⏰' },
-            { id:'e05', cat:'edge', name:'高潮后继续刺激', desc:'体验过度敏感的奇妙感觉', tag:'niche', emoji:'⚡' },
-            { id:'e06', cat:'edge', name:'禁欲后爆发', desc:'短暂禁欲后尽情释放', tag:'', emoji:'💥' },
-            { id:'n01', cat:'niche', name:'第四爱/Pegging', desc:'女性使用穿戴式假阳具对男性进行肛交', tag:'niche', emoji:'🌈' },
-            { id:'n02', cat:'niche', name:'女性主导的性爱', desc:'女性全程掌控节奏和互动', tag:'niche', emoji:'👑' },
-            { id:'n03', cat:'niche', name:'前列腺刺激', desc:'通过会阴或体内按摩刺激前列腺', tag:'niche', emoji:'🎯' },
-            { id:'n04', cat:'niche', name:'足部恋物/足交', desc:'用脚挑逗和摩擦性器官', tag:'niche', emoji:'🦶' },
-            { id:'n05', cat:'niche', name:'拍摄私密影像', desc:'双方同意下拍摄，仅供两人欣赏', tag:'', emoji:'📷' },
-            { id:'n06', cat:'niche', name:'窥视/被窥视幻想', desc:'幻想被伴侣偷看或安排私密时刻', tag:'niche', emoji:'👁️' },
-            { id:'n07', cat:'niche', name:'情趣内衣/角色服装', desc:'穿着情趣内衣进行', tag:'', emoji:'👗' },
-            { id:'n08', cat:'niche', name:'颜射', desc:'在伴侣面部射精的视觉刺激', tag:'niche', emoji:'💦' },
-            { id:'n09', cat:'niche', name:'深喉/口交深度探索', desc:'尝试更深喉咙接触，需要信任', tag:'niche', emoji:'🗼' },
-            { id:'n10', cat:'niche', name:'经期性爱', desc:'月经期间进行，需铺垫和舒适度', tag:'niche', emoji:'🌹' },
-            { id:'n11', cat:'niche', name:'互相自慰观看', desc:'面对面各自自慰，互相观看', tag:'', emoji:'👀' },
-            { id:'n12', cat:'niche', name:'催眠/引导式幻想', desc:'一方用声音引导情色幻想', tag:'niche', emoji:'🌀' }
-        ];
-
-        const STORAGE_KEY_A = 'kink_bottle_userA';
-        const STORAGE_KEY_B = 'kink_bottle_userB';
-        let currentUser = 'A';
-        let currentCategory = 'all';
-        let userChoices = { A: {}, B: {} };
-
-        function loadChoices() {
-            try {
-                const savedA = localStorage.getItem(STORAGE_KEY_A);
-                const savedB = localStorage.getItem(STORAGE_KEY_B);
-                if (savedA) userChoices.A = JSON.parse(savedA);
-                if (savedB) userChoices.B = JSON.parse(savedB);
-            } catch (e) { userChoices.A = {}; userChoices.B = {}; }
-        }
-        function saveChoices() {
-            try {
-                localStorage.setItem(STORAGE_KEY_A, JSON.stringify(userChoices.A));
-                localStorage.setItem(STORAGE_KEY_B, JSON.stringify(userChoices.B));
-            } catch (e) { showToast('存储空间不足'); }
-        }
-        function getChoice(itemId) { return userChoices[currentUser][itemId] || null; }
-        function setChoice(itemId, level) {
-            if (userChoices[currentUser][itemId] === level) {
-                delete userChoices[currentUser][itemId];
-            } else {
-                userChoices[currentUser][itemId] = level;
-            }
-            saveChoices();
-            updateMarkedCount();
-            renderCards();
-        }
-        function getChoiceLabel(level) {
-            const map = { 'love':'非常喜欢', 'interest':'有兴趣', 'curious':'好奇', 'meh':'不太想', 'no':'拒绝' };
-            return map[level] || '';
-        }
-        function getFilteredData() { return currentCategory==='all' ? kinkData : kinkData.filter(i=>i.cat===currentCategory); }
-        function checkMutualMatch(itemId) {
-            const a=userChoices.A[itemId], b=userChoices.B[itemId];
-            return a && b && ['love','interest'].includes(a) && ['love','interest'].includes(b);
-        }
-
-        function renderCards() {
-            const container = document.getElementById('cardsList');
-            const data = getFilteredData();
-            let html = '';
-            data.forEach((item, index) => {
-                const choice = getChoice(item.id);
-                const tagLabel = item.tag==='popular'?'热门':item.tag==='gentle'?'温柔':item.tag==='niche'?'小众':'';
-                const tagHtml = tagLabel ? `<span class="card-tag ${item.tag}">${tagLabel}</span>` : '';
-                const matched = checkMutualMatch(item.id);
-                html += `<div class="kink-card ${matched?'matched-highlight':''}" style="animation-delay:${index*0.03}s">
-                    <div class="card-header"><span class="card-title">${item.emoji||''} ${item.name}</span>${tagHtml}</div>
-                    <div class="card-desc">${item.desc}</div>
-                    <div class="interest-selector">
-                        <button class="interest-btn level-love ${choice==='love'?'selected':''}" onclick="window.setKinkChoice('${item.id}','love')"><span class="interest-dot dot-love"></span>非常喜欢</button>
-                        <button class="interest-btn level-interest ${choice==='interest'?'selected':''}" onclick="window.setKinkChoice('${item.id}','interest')"><span class="interest-dot dot-interest"></span>有兴趣</button>
-                        <button class="interest-btn level-curious ${choice==='curious'?'selected':''}" onclick="window.setKinkChoice('${item.id}','curious')"><span class="interest-dot dot-curious"></span>好奇</button>
-                        <button class="interest-btn level-meh ${choice==='meh'?'selected':''}" onclick="window.setKinkChoice('${item.id}','meh')"><span class="interest-dot dot-meh"></span>不太想</button>
-                        <button class="interest-btn level-no ${choice==='no'?'selected':''}" onclick="window.setKinkChoice('${item.id}','no')"><span class="interest-dot dot-no"></span>拒绝</button>
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html || '<div class="empty-state">📭 该分类暂无内容</div>';
-        }
-
-        function updateMarkedCount() {
-            document.getElementById('markedCount').textContent = Object.keys(userChoices[currentUser]).length;
-            const label = document.getElementById('currentUserLabel');
-            if (currentUser==='A') { label.textContent='💛 当前：我的视角'; label.style.color='#b87060'; }
-            else { label.textContent='💙 当前：伴侣的视角'; label.style.color='#5a7a9a'; }
-        }
-
-        function refreshAll() {
-            document.getElementById('btnUserA').classList.toggle('active', currentUser==='A');
-            document.getElementById('btnUserB').classList.toggle('active', currentUser==='B');
-            document.querySelectorAll('.cat-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.cat===currentCategory));
-            updateMarkedCount();
-            renderCards();
-        }
-
-        window.setKinkChoice = function(id, level) {
-            setChoice(id, level);
-            const item = kinkData.find(k=>k.id===id);
-            if (item && level==='love') showToast(`💛 已将「${item.name}」标记为非常喜欢`);
-        };
-
-        // 导出
-        document.getElementById('btnExport').addEventListener('click', () => {
-            const data = userChoices[currentUser];
-            const jsonStr = JSON.stringify(data, null, 2);
-            const blob = new Blob([jsonStr], {type:'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `kink-bottle-user${currentUser}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('📤 数据已导出下载');
-        });
-
-        // 导入UI
-        const importModal = document.getElementById('importModal');
-        const importTextarea = document.getElementById('importTextarea');
-        const importFileInput = document.getElementById('importFileInput');
-        document.getElementById('btnImport').addEventListener('click', () => {
-            importTextarea.value = '';
-            importFileInput.value = '';
-            importModal.style.display = 'flex';
-        });
-        document.getElementById('importModalClose').addEventListener('click', () => importModal.style.display='none');
-        document.getElementById('btnCancelImport').addEventListener('click', () => importModal.style.display='none');
-        document.getElementById('btnUploadFile').addEventListener('click', () => importFileInput.click());
-        importFileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (ev) => { importTextarea.value = ev.target.result; };
-            reader.readAsText(file);
-        });
-
-        document.getElementById('btnConfirmImport').addEventListener('click', () => {
-            const raw = importTextarea.value.trim();
-            if (!raw) { showToast('请粘贴或选择文件'); return; }
-            let parsed;
-            try { parsed = JSON.parse(raw); } catch (e) { showToast('JSON 格式错误'); return; }
-            if (typeof parsed !== 'object' || Array.isArray(parsed)) { showToast('数据格式不正确，应为对象'); return; }
-            const target = document.querySelector('input[name="importTarget"]:checked').value;
-            const targetChoices = userChoices[target];
-            let mergedCount = 0;
-            for (const [key, value] of Object.entries(parsed)) {
-                if (!kinkData.some(k=>k.id===key)) continue;
-                if (['love','interest','curious','meh','no'].includes(value)) {
-                    targetChoices[key] = value;
-                    mergedCount++;
-                }
-            }
-            if (mergedCount === 0) { showToast('没有有效的偏好数据可导入'); return; }
-            saveChoices();
-            importModal.style.display = 'none';
-            refreshAll();
-            showToast(`✅ 已导入 ${mergedCount} 条数据到「${target==='A'?'我的':'伴侣'}」视角`);
-        });
-
-        // 匹配
-        document.getElementById('btnMatch').addEventListener('click', showMatchModal);
-        document.getElementById('matchModalClose').addEventListener('click', ()=>document.getElementById('matchModal').style.display='none');
-        document.getElementById('matchModal').addEventListener('click', function(e){ if(e.target===this) this.style.display='none'; });
-
-        function showMatchModal() {
-            const results = document.getElementById('matchResults');
-            const bothLove=[], bothInterest=[], oneLove=[], mixed=[];
-            kinkData.forEach(item=>{
-                const a=userChoices.A[item.id], b=userChoices.B[item.id];
-                if(!a||!b) return;
-                if(a==='love'&&b==='love') bothLove.push(item);
-                else if((a==='interest'||a==='love')&&(b==='interest'||b==='love')) bothInterest.push(item);
-                else if((a==='love'&&b==='interest')||(a==='interest'&&b==='love')) oneLove.push(item);
-                else if(['love','interest'].includes(a)||['love','interest'].includes(b)) mixed.push({...item, a,b});
-            });
-            let html='';
-            if(bothLove.length) {
-                html+='<h4 style="color:#6a8a4a;">🌟 双方都非常喜欢</h4>';
-                bothLove.forEach(i=>html+=`<div class="match-item both-love"><span class="match-name">${i.emoji} ${i.name}</span><span class="match-badge perfect">完美匹配</span><div>${i.desc}</div></div>`);
-            }
-            if(bothInterest.length) {
-                html+='<h4 style="color:#8a9a70;">🌿 双方都感兴趣</h4>';
-                bothInterest.forEach(i=>html+=`<div class="match-item both-love"><span class="match-name">${i.emoji} ${i.name}</span><span class="match-badge perfect">可尝试</span><div>${i.desc}</div></div>`);
-            }
-            if(oneLove.length) {
-                html+='<h4 style="color:#b87850;">🔥 一方非常喜欢，另一方有兴趣</h4>';
-                oneLove.forEach(i=>html+=`<div class="match-item one-interested"><span class="match-name">${i.emoji} ${i.name}</span><span class="match-badge good">可沟通</span><div>${i.desc}</div></div>`);
-            }
-            if(mixed.length) {
-                html+='<h4 style="color:#9a8a6a;">💭 至少一方有兴趣</h4>';
-                mixed.forEach(i=>html+=`<div class="match-item one-interested"><span class="match-name">${i.emoji} ${i.name}</span><div>你：${getChoiceLabel(i.a)} | 伴侣：${getChoiceLabel(i.b)}</div></div>`);
-            }
-            results.innerHTML = html || '<div class="empty-state">🤷 还没有足够的标记数据</div>';
-            document.getElementById('matchModal').style.display='flex';
-        }
-
-        // 随机
-        document.getElementById('btnRandom').addEventListener('click', ()=>{
-            const data=getFilteredData();
-            if(!data.length) { showToast('无数据'); return; }
-            showRandomCard(data[Math.floor(Math.random()*data.length)]);
-        });
-        document.getElementById('bottleTrigger').addEventListener('click', ()=>showRandomCard(kinkData[Math.floor(Math.random()*kinkData.length)]));
-        function showRandomCard(item) {
-            const c=getChoice(item.id); const label=c?` (已标记：${getChoiceLabel(c)})`:'';
-            document.getElementById('randomCardContent').innerHTML=`
-                <span class="random-emoji">${item.emoji||'🎭'}</span>
-                <div class="random-title">${item.name}</div>
-                <div class="random-desc">${item.desc}${label}</div>
-                <button class="random-close" onclick="document.getElementById('randomModal').style.display='none'">知道了 ✨</button>`;
-            document.getElementById('randomModal').style.display='flex';
-        }
-        document.getElementById('randomModal').addEventListener('click', function(e){ if(e.target===this) this.style.display='none'; });
-
-        // 重置
-        document.getElementById('btnReset').addEventListener('click', ()=>{
-            if(confirm(`确定重置「${currentUser==='A'?'我的选择':'伴侣的选择'}」的所有标记吗？`)) {
-                userChoices[currentUser] = {};
-                saveChoices(); refreshAll(); showToast('已重置');
-            }
-        });
-
-        // 用户/分类切换
-        document.getElementById('btnUserA').addEventListener('click', ()=>{ currentUser='A'; refreshAll(); });
-        document.getElementById('btnUserB').addEventListener('click', ()=>{ currentUser='B'; refreshAll(); });
-        document.getElementById('categoryTabs').addEventListener('click', e=>{
-            const tab=e.target.closest('.cat-tab'); if(!tab) return;
-            currentCategory=tab.dataset.cat; refreshAll();
-            document.getElementById('cardsList').scrollIntoView({behavior:'smooth'});
-        });
-
-        function showToast(msg) {
-            const t=document.createElement('div'); t.className='toast'; t.textContent=msg;
-            document.getElementById('toastContainer').appendChild(t);
-            setTimeout(()=>t.remove(), 2100);
-        }
-
-        loadChoices(); refreshAll();
-    })();
-</script>
-</body>
-</html>
+        { id:"f01", cat:"foreplay", name:"长时间舌吻", desc:"专注地深吻10分钟以上", tag:"popular", emoji:"💋" },
+        { id:"f02", cat:"foreplay", name:"全身精油按摩", desc:"用温热精油按摩全身，过渡到情欲抚摸", tag:"gentle", emoji:"🧴" },
+        { id:"f03", cat:"foreplay", name:"互相手淫", desc:"面对面或依偎用手帮对方达到HD", tag:"popular", emoji:"🤲" },
+        { id:"f04", cat:"foreplay", name:"口交（给予方）", desc:"为伴侣进行BJ，专注对方反应", tag:"popular", emoji:"👅" },
+        { id:"f05", cat:"foreplay", name:"口交（接受方）", desc:"享受伴侣的BJ", tag:"popular", emoji:"😌" },
+        { id:"f06", cat:"foreplay", name:"69式互舔", desc:"双方同时BJ", tag:"popular", emoji:"🔯" },
+        { id:"f07", cat:"foreplay", name:"乳交", desc:"用乳房夹住阴茎摩擦", tag:"", emoji:"🍈" },
+        { id:"f08", cat:"foreplay", name:"股间摩擦（素股）", desc:"阴茎在腿间或臀缝摩擦，不进入", tag:"", emoji:"🦵" },
+        { id:"f09", cat:"foreplay", name:"淋浴共浴", desc:"一起淋浴泡澡，水中抚摸", tag:"gentle", emoji:"🚿" },
+        { id:"f10", cat:"foreplay", name:"耳语情话与喘息", desc:"耳边轻声情色话语，配合温热呼吸", tag:"gentle", emoji:"🫦" },
+        { id:"f11", cat:"foreplay", name:"互相刮毛/护理私处", desc:"互相帮助打理私密毛发", tag:"niche", emoji:"✂️" },
+        { id:"f12", cat:"foreplay", name:"全身手指轻划", desc:"用指尖极轻划过全身，描绘身体线条", tag:"gentle", emoji:"🖐️" },
+        { id:"f13", cat:"foreplay", name:"同步呼吸拥抱", desc:"裸身紧贴，同步呼吸进入放松状态", tag:"gentle", emoji:"💨" },
+        { id:"f14", cat:"foreplay", name:"枕边秘密分享", desc:"相拥分享一个从未说过的性幻想", tag:"gentle", emoji:"🤫" },
+        { id:"f15", cat:"foreplay", name:"互相擦干身体", desc:"沐浴后温柔为对方擦干每一寸肌肤", tag:"gentle", emoji:"🛁" },
+        { id:"f16", cat:"foreplay", name:"掌心温度传递", desc:"双手相扣传递亲密和安全感", tag:"gentle", emoji:"🤝" },
+        { id:"f17", cat:"foreplay", name:"身体赞美仪式", desc:"轮流说出对方身体最喜欢的部位并亲吻", tag:"gentle", emoji:"🗣️" },
+        { id:"p01", cat:"position", name:"传教士式", desc:"经典面对面体位", tag:"popular", emoji:"🤱" },
+        { id:"p02", cat:"position", name:"后入式", desc:"从背后进入", tag:"popular", emoji:"🐕" },
+        { id:"p03", cat:"position", name:"女上位（正对）", desc:"女性在上方面对面", tag:"popular", emoji:"👸" },
+        { id:"p04", cat:"position", name:"女上位（背对）", desc:"女性在上方背对伴侣", tag:"", emoji:"🪞" },
+        { id:"p05", cat:"position", name:"侧入式（勺子式）", desc:"侧躺从背后进入，温柔亲密", tag:"gentle", emoji:"🥄" },
+        { id:"p06", cat:"position", name:"站立式/靠墙式", desc:"站立或倚靠墙壁进入", tag:"", emoji:"🧱" },
+        { id:"p07", cat:"position", name:"坐式（椅子上）", desc:"一方坐椅子，另一方跨坐或跪姿", tag:"", emoji:"🪑" },
+        { id:"p08", cat:"position", name:"莲花式", desc:"面对面盘腿相拥缓慢律动", tag:"gentle", emoji:"🪷" },
+        { id:"p09", cat:"position", name:"桥式/抬臀式", desc:"仰卧抬高臀部增加角度", tag:"", emoji:"🌉" },
+        { id:"p10", cat:"position", name:"俯卧平趴式", desc:"一方平趴，另一方从上方进入", tag:"", emoji:"🛏️" },
+        { id:"p11", cat:"position", name:"侧入面对面", desc:"侧躺面对面，双腿交错进入", tag:"gentle", emoji:"💞" },
+        { id:"p12", cat:"position", name:"跪坐拥抱式", desc:"一方跪坐，另一方跨坐面对面", tag:"gentle", emoji:"🧘" },
+        { id:"p13", cat:"position", name:"桌面边沿式", desc:"一方坐桌边，高度灵活", tag:"", emoji:"🪑" },
+        { id:"p14", cat:"position", name:"斜靠沙发式", desc:"半躺半坐沙发转角", tag:"", emoji:"🛋️" },
+        { id:"p15", cat:"position", name:"情趣秋千辅助", desc:"悬挂秋千体验失重晃动", tag:"niche", emoji:"🎠" },
+        { id:"r01", cat:"roleplay", name:"医生与病人", desc:"模拟医疗检查", tag:"", emoji:"🩺" },
+        { id:"r02", cat:"roleplay", name:"老师与学生", desc:"课后辅导场景", tag:"", emoji:"📚" },
+        { id:"r03", cat:"roleplay", name:"陌生人邂逅", desc:"假装初次相遇", tag:"", emoji:"🍸" },
+        { id:"r04", cat:"roleplay", name:"按摩师与客人", desc:"从正规按摩滑向情欲", tag:"gentle", emoji:"💆" },
+        { id:"r05", cat:"roleplay", name:"上司与下属", desc:"办公室权力游戏", tag:"", emoji:"💼" },
+        { id:"r06", cat:"roleplay", name:"古代宫廷/武侠", desc:"古风角色扮演", tag:"niche", emoji:"🏮" },
+        { id:"r07", cat:"roleplay", name:"科幻/外星人", desc:"科幻想象场景", tag:"niche", emoji:"👽" },
+        { id:"r08", cat:"roleplay", name:"摄影师与模特", desc:"私房写真拍摄", tag:"", emoji:"📸" },
+        { id:"r09", cat:"roleplay", name:"调酒师与客人", desc:"吧台调情升温", tag:"", emoji:"🍹" },
+        { id:"r10", cat:"roleplay", name:"健身教练与学员", desc:"健身后拉伸延伸", tag:"", emoji:"🏋️" },
+        { id:"r11", cat:"roleplay", name:"旅店陌生人", desc:"异国酒店偶遇", tag:"", emoji:"🏩" },
+        { id:"r12", cat:"roleplay", name:"双人密室逃脱", desc:"关在房间寻找线索触碰", tag:"", emoji:"🔐" },
+        { id:"s01", cat:"sensory", name:"蒙眼性爱", desc:"丝巾蒙眼放大触觉", tag:"gentle", emoji:"🕶️" },
+        { id:"s02", cat:"sensory", name:"冰块刺激", desc:"冰块轻滑敏感区", tag:"", emoji:"🧊" },
+        { id:"s03", cat:"sensory", name:"温水/温热感", desc:"温热毛巾刺激皮肤", tag:"gentle", emoji:"♨️" },
+        { id:"s04", cat:"sensory", name:"羽毛挑逗", desc:"羽毛轻扫全身", tag:"gentle", emoji:"🪶" },
+        { id:"s05", cat:"sensory", name:"丝巾束缚手腕", desc:"柔软丝巾轻绕", tag:"gentle", emoji:"🧣" },
+        { id:"s06", cat:"sensory", name:"音乐与性爱", desc:"配合音乐节奏", tag:"gentle", emoji:"🎵" },
+        { id:"s07", cat:"sensory", name:"食物与性", desc:"蜂蜜/奶油涂抹身体", tag:"", emoji:"🍯" },
+        { id:"s08", cat:"sensory", name:"低温蜡烛", desc:"情趣低温蜡油", tag:"niche", emoji:"🕯️" },
+        { id:"s09", cat:"sensory", name:"感官剥夺", desc:"耳塞+蒙眼，纯触觉", tag:"niche", emoji:"🔇" },
+        { id:"s10", cat:"sensory", name:"温油缓慢滴落", desc:"体温微温的按摩油滴落背部", tag:"gentle", emoji:"💧" },
+        { id:"s11", cat:"sensory", name:"指尖震动器", desc:"指套式小震动器抚摸", tag:"", emoji:"🪀" },
+        { id:"s12", cat:"sensory", name:"冷热交替毛巾", desc:"温毛巾和冰毛巾交替敷", tag:"", emoji:"♨️" },
+        { id:"s13", cat:"sensory", name:"细小喷雾", desc:"小喷雾瓶装温水轻喷敏感区", tag:"gentle", emoji:"💦" },
+        { id:"s14", cat:"sensory", name:"音叉震动", desc:"轻敲音叉接触锁骨脚踝", tag:"niche", emoji:"🎶" },
+        { id:"l01", cat:"location", name:"户外私密自然", desc:"人迹罕至的自然中", tag:"", emoji:"🌿" },
+        { id:"l02", cat:"location", name:"车内性爱", desc:"停靠车内紧凑空间", tag:"", emoji:"🚗" },
+        { id:"l03", cat:"location", name:"阳台/窗边", desc:"有被看见的刺激", tag:"", emoji:"🪟" },
+        { id:"l04", cat:"location", name:"酒店房间", desc:"脱离日常放松", tag:"popular", emoji:"🏨" },
+        { id:"l05", cat:"location", name:"野外帐篷中", desc:"伴随大自然声音", tag:"", emoji:"⛺" },
+        { id:"l06", cat:"location", name:"镜子前", desc:"观看彼此表情身体", tag:"", emoji:"🪞" },
+        { id:"l07", cat:"location", name:"沙发/客厅", desc:"非卧室的家中其他地方", tag:"", emoji:"🛋️" },
+        { id:"l08", cat:"location", name:"楼梯台阶上", desc:"利用楼梯高度差", tag:"", emoji:"🪜" },
+        { id:"l09", cat:"location", name:"步入式衣柜", desc:"狭小私密紧贴", tag:"", emoji:"🚪" },
+        { id:"l10", cat:"location", name:"书桌下方", desc:"一方坐桌前，桌下隐秘", tag:"", emoji:"📚" },
+        { id:"l11", cat:"location", name:"夜间露台", desc:"星空夜风半户外", tag:"", emoji:"🌌" },
+        { id:"l12", cat:"location", name:"温泉/浴缸中", desc:"温热水中漂浮感", tag:"gentle", emoji:"♨️" },
+        { id:"t01", cat:"toys", name:"振动棒", desc:"刺激阴蒂等敏感区", tag:"popular", emoji:"🔮" },
+        { id:"t02", cat:"toys", name:"跳蛋/遥控玩具", desc:"小型震动，可远程", tag:"popular", emoji:"🥚" },
+        { id:"t03", cat:"toys", name:"情侣共用振动器", desc:"U型同时刺激双方", tag:"", emoji:"💑" },
+        { id:"t04", cat:"toys", name:"穿戴式假阳具", desc:"女性佩戴用于pegging", tag:"niche", emoji:"🎗️" },
+        { id:"t05", cat:"toys", name:"前列腺按摩器", desc:"体内刺激前列腺", tag:"niche", emoji:"🔘" },
+        { id:"t06", cat:"toys", name:"情趣润滑液", desc:"各种口味功能", tag:"", emoji:"💧" },
+        { id:"t07", cat:"toys", name:"柔软束缚带", desc:"轻微被控制感", tag:"", emoji:"🔗" },
+        { id:"t08", cat:"toys", name:"乳夹/乳头吸吮器", desc:"温和刺激RT", tag:"niche", emoji:"📎" },
+        { id:"t09", cat:"toys", name:"双头共享振动棒", desc:"两端同时使用", tag:"", emoji:"🔀" },
+        { id:"t10", cat:"toys", name:"吮吸式阴蒂刺激器", desc:"气流脉冲非接触", tag:"", emoji:"🌪️" },
+        { id:"t11", cat:"toys", name:"电动伸缩假阳具", desc:"模拟自动动作", tag:"niche", emoji:"🤖" },
+        { id:"t12", cat:"toys", name:"情趣骰子/卡牌", desc:"随机决定下一步", tag:"", emoji:"🎲" },
+        { id:"t13", cat:"toys", name:"人体工学体位垫", desc:"辅助抬高臀部支撑腰部", tag:"", emoji:"🛏️" },
+        { id:"e01", cat:"edge", name:"边缘高潮控制", desc:"反复接近HD后停止", tag:"", emoji:"🌊" },
+        { id:"e02", cat:"edge", name:"延迟高潮", desc:"延长性爱享受过程", tag:"gentle", emoji:"⏳" },
+        { id:"e03", cat:"edge", name:"指令式性爱", desc:"一方用语言引导动作", tag:"", emoji:"🗣️" },
+        { id:"e04", cat:"edge", name:"定时\"服务\"", desc:"设定时段专注取悦对方", tag:"", emoji:"⏰" },
+        { id:"e05", cat:"edge", name:"高潮后继续刺激", desc:"HD后继续轻柔刺激", tag:"niche", emoji:"⚡" },
+        { id:"e06", cat:"edge", name:"禁欲后爆发", desc:"短暂禁欲后尽情释放", tag:"", emoji:"💥" },
+        { id:"e07", cat:"edge", name:"倒数计时释放", desc:"从10倒数归零才可HD", tag:"", emoji:"🔟" },
+        { id:"e08", cat:"edge", name:"触碰禁区游戏", desc:"约定只能触碰安全区以外", tag:"", emoji:"🚫" },
+        { id:"e09", cat:"edge", name:"快感积分制", desc:"积累积分到约定值才释放", tag:"", emoji:"📊" },
+        { id:"e10", cat:"edge", name:"静止挑战", desc:"一方不动，另一方尽力挑逗", tag:"", emoji:"🧍" },
+        { id:"e11", cat:"edge", name:"呼吸节拍配合", desc:"用呼吸节奏控制抽送", tag:"gentle", emoji:"🫁" },
+        { id:"n01", cat:"niche", name:"第四爱/Pegging", desc:"女性使用假阳具对男性肛交", tag:"niche", emoji:"🌈" },
+        { id:"n02", cat:"niche", name:"女性主导的性爱", desc:"女性全程掌控节奏", tag:"niche", emoji:"👑" },
+        { id:"n03", cat:"niche", name:"前列腺刺激", desc:"内外按摩前列腺", tag:"niche", emoji:"🎯" },
+        { id:"n04", cat:"niche", name:"足交", desc:"用脚挑逗摩擦", tag:"niche", emoji:"🦶" },
+        { id:"n05", cat:"niche", name:"拍摄私密影像", desc:"同意下拍摄仅供两人", tag:"", emoji:"📷" },
+        { id:"n06", cat:"niche", name:"窥视/被窥视幻想", desc:"幻想被偷看或安排私密", tag:"niche", emoji:"👁️" },
+        { id:"n07", cat:"niche", name:"情趣内衣/角色服装", desc:"穿着情趣内衣进行", tag:"", emoji:"👗" },
+        { id:"n08", cat:"niche", name:"颜射", desc:"面部射精视觉刺激", tag:"niche", emoji:"💦" },
+        { id:"n09", cat:"niche", name:"深喉探索", desc:"BJ深度喉咙接触", tag:"niche", emoji:"🗼" },
+        { id:"n10", cat:"niche", name:"经期性爱", desc:"月经期间进行", tag:"niche", emoji:"🌹" },
+        { id:"n11", cat:"niche", name:"互相自慰观看", desc:"面对面各自自慰", tag:"", emoji:"👀" },
+        { id:"n12", cat:"niche", name:"催眠/引导式幻想", desc:"一方声音引导情色旅程", tag:"niche", emoji:"🌀" },
+        { id:"n13", cat:"niche", name:"温柔女性支配", desc:"女性主导但温柔鼓励", tag:"niche", emoji:"🤲" },
+        { id:"n14", cat:"niche", name:"腋下欣赏", desc:"欣赏伴侣腋下气味触感", tag:"niche", emoji:"🙋" },
+        { id:"n15", cat:"niche", name:"肚脐与腰窝刺激", desc:"关注常被忽略的凹陷处", tag:"niche", emoji:"🌀" },
+        { id:"n16", cat:"niche", name:"头发梳理与轻拉", desc:"梳理头发适度轻拉增加快感", tag:"niche", emoji:"💇" },
+        { id:"n17", cat:"niche", name:"坐脸/Queen座位", desc:"一方坐在另一方面部接受BJ", tag:"niche", emoji:"👸" },
+        { id:"n18", cat:"niche", name:"互换传统角色", desc:"交换平时主动/被动角色", tag:"", emoji:"🔄" },
+        { id:"n19", cat:"niche", name:"制服/特定职业装", desc:"空姐护士等职业服装", tag:"niche", emoji:"👔" },
+        { id:"n20", cat:"niche", name:"双人幻想讨论", desc:"讨论多人幻想不实际进行", tag:"", emoji:"💭" },
+        { id:"n21", cat:"niche", name:"私密剃毛/造型", desc:"互相为对方修剪私处造型", tag:"niche", emoji:"✂️" },
+        { id:"a01", cat:"aftercare", name:"事后长时拥抱", desc:"HD后紧拥至少10分钟不说话", tag:"gentle", emoji:"🤗" },
+        { id:"a02", cat:"aftercare", name:"温柔反馈交流", desc:"分享刚才最喜欢的瞬间感受", tag:"gentle", emoji:"💬" },
+        { id:"a03", cat:"aftercare", name:"互相清洁护理", desc:"温毛巾为对方擦拭身体", tag:"gentle", emoji:"🧻" },
+        { id:"a04", cat:"aftercare", name:"事后小食分享", desc:"一起喝水吃水果巧克力", tag:"gentle", emoji:"🍫" },
+        { id:"a05", cat:"aftercare", name:"事后日记记录", desc:"一起写下或画出刚才的感受", tag:"gentle", emoji:"📝" },
+        { id:"b01", cat:"body", name:"RT敏感度开发（女）", desc:"探索女方RT与生殖器快感连接", tag:"", emoji:"🔘" },
+        { id:"b02", cat:"body", name:"RT敏感度探索（男）", desc:"探索男方RT的敏感潜力", tag:"", emoji:"🔘" },
+        { id:"b03", cat:"body", name:"RT-HD追求", desc:"尝试仅通过RT刺激达到HD", tag:"niche", emoji:"💥" },
+        { id:"b04", cat:"body", name:"同步RT刺激", desc:"双方同时进行RT刺激", tag:"", emoji:"🤝" },
+        { id:"b05", cat:"body", name:"C-Spot（会阴）按压", desc:"在性爱中按压会阴部", tag:"", emoji:"📍" },
+        { id:"b06", cat:"body", name:"P-Spot外部按摩", desc:"体外间接按摩前列腺", tag:"", emoji:"🤚" },
+        { id:"b07", cat:"body", name:"P-Spot内部探索", desc:"手指或专用工具直接刺激", tag:"niche", emoji:"🔍" },
+        { id:"b08", cat:"body", name:"P-Spot与BJ结合", desc:"BJ同时刺激前列腺", tag:"niche", emoji:"🎯" },
+        { id:"b09", cat:"body", name:"G点探索与HD", desc:"专注寻找刺激G点以HD为目标", tag:"", emoji:"🎯" },
+        { id:"b10", cat:"body", name:"子宫颈敏感探索", desc:"深度进入感受宫颈周围", tag:"niche", em

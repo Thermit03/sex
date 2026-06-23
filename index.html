@@ -113,6 +113,29 @@
         .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; font-weight:500; }
         .action-btn.primary:hover { background:#fffaf8; border-color:#d4a8a0; }
 
+        /* 悬浮帮助按钮 */
+        .floating-help-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #fffdf9;
+            border: 1.5px solid #d4c0b0;
+            box-shadow: 0 4px 16px rgba(100, 70, 50, 0.2);
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 90;
+            transition: all var(--transition);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .floating-help-btn:hover { box-shadow: 0 6px 24px rgba(100, 70, 50, 0.3); transform: scale(1.05); }
+        .floating-help-btn:active { transform: scale(0.95); background: #fdf6f0; }
+
         .modal-overlay { position:fixed; inset:0; background:rgba(40,30,25,0.55); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; animation:fadeIn 0.3s ease; }
         @keyframes fadeIn { from{ opacity:0; } to{ opacity:1; } }
         .modal { background:#fffdf9; border-radius:var(--radius-lg); padding:28px 22px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; animation:modalSlideUp 0.35s ease; }
@@ -138,7 +161,6 @@
         .random-card-popup .random-close { padding:10px 24px; border-radius:20px; border:1.5px solid #e0d8cc; background:#fff; cursor:pointer; font-size:14px; }
         .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#3d3530; color:#f5ede4; padding:10px 22px; border-radius:22px; font-size:13px; z-index:200; animation:toastUp 2s ease forwards; pointer-events:none; }
         @keyframes toastUp { 0%{ opacity:0; transform:translateX(-50%) translateY(20px); } 15%{ opacity:1; transform:translateX(-50%) translateY(0); } 75%{ opacity:1; } 100%{ opacity:0; transform:translateX(-50%) translateY(-15px); } }
-        /* 术语表表格样式 */
         .glossary-table { width:100%; border-collapse:collapse; font-size:13px; }
         .glossary-table td { padding:8px 6px; border-bottom:1px solid #e8ddd2; vertical-align:top; }
         .glossary-table td:first-child { font-weight:500; color:#5a3a35; width:25%; }
@@ -149,6 +171,7 @@
             .sparkles { top:22px; width:28px; height:44px; }
             .kink-card { padding:14px; }
             .interest-btn { padding:6px 10px; font-size:11px; }
+            .floating-help-btn { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 22px; }
         }
     </style>
 </head>
@@ -204,6 +227,26 @@
         <button class="action-btn" id="btnExport">📤 导出</button>
         <button class="action-btn" id="btnImport">📥 导入</button>
         <button class="action-btn" id="btnGlossary">📖 术语表</button>
+    </div>
+</div>
+
+<!-- 悬浮帮助按钮 -->
+<button class="floating-help-btn" id="floatingHelpBtn" title="术语表">📖</button>
+
+<!-- 首次访问欢迎弹窗 -->
+<div class="modal-overlay" id="welcomeModal" style="display:none;">
+    <div class="modal">
+        <button class="modal-close" id="welcomeModalClose">✕</button>
+        <h3>💌 欢迎来到性癖之瓶</h3>
+        <p class="modal-subtitle">这是一份属于你们两人的私密探索问卷</p>
+        <p style="font-size:14px; color:var(--text-light); line-height:1.8; margin-bottom:16px;">
+            ✨ 有 <strong>140个</strong> 性相关偏好，覆盖前戏、体位、角色、感官、身体探索等。<br>
+            📖 部分条目使用了<strong>缩写术语</strong>（如RT、HD），<strong>点击右下角📖按钮</strong>或底部「术语表」随时查看解释。<br>
+            💛 你和伴侣可以<strong>分别切换视角</strong>标记，完成后「查看匹配」发现共同兴趣。
+        </p>
+        <div style="text-align:center;">
+            <button class="action-btn primary" id="welcomeModalOk">开始探索</button>
+        </div>
     </div>
 </div>
 
@@ -396,7 +439,7 @@
         { id:"b20", cat:"body", name:"冷热敏感度测试", desc:"不同温度物体测试敏感反应", tag:"", emoji:"🌡️" }
     ];
 
-    const STORAGE_KEY_A = "kink_bottle_userA", STORAGE_KEY_B = "kink_bottle_userB";
+    const STORAGE_KEY_A = "kink_bottle_userA", STORAGE_KEY_B = "kink_bottle_userB", WELCOME_KEY = "kink_bottle_welcomed";
     let currentUser = "A", currentCategory = "all";
     let userChoices = { A:{}, B:{} };
 
@@ -464,7 +507,27 @@
         if(item && level==="love") showToast(`💛 已将「${item.name}」标记为非常喜欢`);
     };
 
-    // 术语表弹窗控制
+    // 首次访问欢迎弹窗
+    function checkWelcome() {
+        if (!localStorage.getItem(WELCOME_KEY)) {
+            document.getElementById("welcomeModal").style.display = "flex";
+            localStorage.setItem(WELCOME_KEY, "1");
+        }
+    }
+    document.getElementById("welcomeModalOk").addEventListener("click", ()=>{
+        document.getElementById("welcomeModal").style.display = "none";
+    });
+    document.getElementById("welcomeModalClose").addEventListener("click", ()=>{
+        document.getElementById("welcomeModal").style.display = "none";
+    });
+    document.getElementById("welcomeModal").addEventListener("click", function(e){
+        if(e.target === this) this.style.display = "none";
+    });
+
+    // 悬浮按钮 & 术语表
+    document.getElementById("floatingHelpBtn").addEventListener("click", ()=>{
+        document.getElementById("glossaryModal").style.display = "flex";
+    });
     document.getElementById("btnGlossary").addEventListener("click", ()=>{
         document.getElementById("glossaryModal").style.display = "flex";
     });
@@ -584,7 +647,7 @@
         setTimeout(()=>t.remove(), 2100);
     }
 
-    loadChoices(); refreshAll();
+    loadChoices(); refreshAll(); checkWelcome();
 })();
 </script>
 </body>

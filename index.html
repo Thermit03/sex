@@ -13,50 +13,26 @@
             --text-muted: #9a8c8c;
             --accent: #c97d7d;
             --accent-soft: #e8c4c4;
-            --glass: rgba(255, 255, 255, 0.55);
-            --shadow-sm: 0 2px 8px rgba(60, 40, 30, 0.06);
-            --shadow-md: 0 4px 16px rgba(60, 40, 30, 0.1);
-            --shadow-lg: 0 8px 32px rgba(60, 40, 30, 0.14);
-            --radius-sm: 10px;
+            --shadow-sm: 0 2px 8px rgba(60,40,30,0.06);
+            --shadow-md: 0 4px 16px rgba(60,40,30,0.1);
+            --shadow-lg: 0 8px 32px rgba(60,40,30,0.14);
             --radius: 16px;
-            --radius-lg: 24px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: 0.3s ease;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            line-height: 1.6;
-            background-image:
-                radial-gradient(ellipse at 50% 0%, rgba(210,170,150,0.12) 0%, transparent 60%),
-                radial-gradient(ellipse at 85% 20%, rgba(200,160,140,0.08) 0%, transparent 50%);
-        }
-        .app-container { max-width: 680px; margin:0 auto; padding:16px 18px 40px; }
-        .header { text-align:center; padding:20px 0 10px; position:relative; }
-        .bottle-wrapper { position:relative; display:inline-block; cursor:pointer; user-select:none; transition:transform var(--transition); }
+        body { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; line-height:1.6; background-image:radial-gradient(ellipse at 50% 0%, rgba(210,170,150,0.12), transparent 60%); }
+        .app-container { max-width:680px; margin:0 auto; padding:16px 18px 40px; }
+        .header { text-align:center; padding:20px 0 10px; }
+        .bottle-wrapper { display:inline-block; cursor:pointer; transition:transform var(--transition); }
         .bottle-wrapper:hover { transform:translateY(-3px); }
         .bottle-svg { width:100px; height:140px; filter:drop-shadow(0 8px 20px rgba(140,100,80,0.18)); }
         .sparkles { position:absolute; top:28px; left:50%; transform:translateX(-50%); width:36px; height:55px; pointer-events:none; }
-        .sparkle { position:absolute; width:3px; height:3px; border-radius:50%; background:#e8c8a0; animation:sparkleFloat 3s ease-in-out infinite; }
-        .sparkle:nth-child(1){ left:8px; top:10px; animation-delay:0s; width:2.5px; height:2.5px; }
-        .sparkle:nth-child(2){ left:20px; top:6px; animation-delay:0.7s; width:2px; height:2px; }
-        .sparkle:nth-child(3){ left:12px; top:22px; animation-delay:1.4s; width:3px; height:3px; background:#f0d4b0; }
-        .sparkle:nth-child(4){ left:22px; top:18px; animation-delay:2.1s; width:2px; height:2px; background:#eed8b8; }
-        .sparkle:nth-child(5){ left:15px; top:32px; animation-delay:0.5s; width:2.5px; height:2.5px; }
-        .sparkle:nth-child(6){ left:6px; top:16px; animation-delay:1.8s; width:1.5px; height:1.5px; background:#f5e0c0; }
-        @keyframes sparkleFloat { 0%,100%{ opacity:0.25; transform:translateY(0); } 30%{ opacity:0.9; transform:translateY(-8px); } 60%{ opacity:0.35; transform:translateY(-3px); } }
+        .sparkle { position:absolute; width:3px; height:3px; border-radius:50%; background:#e8c8a0; animation:sparkleFloat 3s infinite; }
+        @keyframes sparkleFloat { 0%,100%{opacity:0.25;transform:translateY(0)} 30%{opacity:0.9;transform:translateY(-8px)} 60%{opacity:0.35;transform:translateY(-3px)} }
         .header-title { font-size:22px; font-weight:500; letter-spacing:1.5px; color:#4a3c3c; margin-top:6px; }
-        .header-subtitle { font-size:13px; color:var(--text-muted); letter-spacing:0.8px; margin-top:2px; font-weight:300; }
-
-        .user-switch { display:flex; justify-content:center; gap:8px; margin:18px 0 14px; background:var(--card-bg); border-radius:30px; padding:5px; box-shadow:var(--shadow-sm); border:1px solid var(--glass); }
-        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; letter-spacing:0.6px; background:transparent; color:var(--text-light); transition:all var(--transition); }
+        .user-switch { display:flex; justify-content:center; gap:8px; margin:18px 0 14px; background:var(--card-bg); border-radius:30px; padding:5px; box-shadow:var(--shadow-sm); }
+        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; background:transparent; color:var(--text-light); transition:all var(--transition); }
         .user-switch-btn.active { background:#fff; color:#3d3030; font-weight:500; box-shadow:var(--shadow-sm); }
-        .user-badge { display:inline-block; font-size:10px; padding:2px 7px; border-radius:10px; margin-left:3px; }
-        .badge-me { background:#f5e0d8; color:#b87060; }
-        .badge-partner { background:#dde5f0; color:#5a7a9a; }
-
         .category-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 8px; justify-content:center; }
         .cat-tab { padding:7px 12px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); transition:all var(--transition); }
         .cat-tab.active { background:#fff; border-color:var(--accent-soft); color:#4a3030; font-weight:500; }
@@ -66,8 +42,8 @@
         .stats-bar { text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:8px; }
 
         .cards-list { display:flex; flex-direction:column; gap:10px; }
-        .kink-card { background:var(--card-bg); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm); border:1px solid transparent; transition:all var(--transition); animation:cardFadeIn 0.4s ease; }
-        @keyframes cardFadeIn { from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
+        .kink-card { background:var(--card-bg); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm); border:1px solid transparent; animation:cardFadeIn 0.4s ease; }
+        @keyframes cardFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
         .kink-card.matched-highlight { border-color:#c9d8c0; background:#fafff7; }
         .card-title { font-size:15px; font-weight:500; display:flex; align-items:center; gap:6px; }
         .card-desc { font-size:12.5px; color:var(--text-muted); margin-top:4px; }
@@ -88,9 +64,9 @@
         .floating-help-btn { position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:#fffdf9; border:1.5px solid #d4c0b0; box-shadow:0 4px 16px rgba(100,70,50,0.2); cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; z-index:90; }
 
         .modal-overlay { position:fixed; inset:0; background:rgba(40,30,25,0.55); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; animation:fadeIn 0.3s; }
-        @keyframes fadeIn { from{ opacity:0; } to{ opacity:1; } }
-        .modal { background:#fffdf9; border-radius:var(--radius-lg); padding:28px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; }
-        .modal-close { position:absolute; top:14px; right:16px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; }
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        .modal { background:#fffdf9; border-radius:var(--radius); padding:28px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; }
+        .modal-close { position:absolute; top:14px; right:16px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; }
         .modal h3 { text-align:center; margin-bottom:12px; }
 
         .radar-user-toggle { display:flex; justify-content:center; gap:8px; margin-bottom:12px; }
@@ -109,7 +85,7 @@
         .match-badge.perfect { background:#e8f0dc; color:#6a8a4a; }
         .match-badge.avoid { background:#f5e0e0; color:#b85a5a; }
 
-        .random-card-popup { background:#fffdf9; border-radius:var(--radius-lg); padding:28px 22px; box-shadow:var(--shadow-lg); text-align:center; border:2px solid #f0e8d8; max-width:400px; width:90%; }
+        .random-card-popup { background:#fffdf9; border-radius:var(--radius); padding:28px 22px; box-shadow:var(--shadow-lg); text-align:center; border:2px solid #f0e8d8; max-width:400px; width:90%; }
         .random-mode-select { display:flex; gap:8px; justify-content:center; margin-top:12px; flex-direction:column; }
         .random-mode-select button { width:100%; }
 
@@ -117,37 +93,33 @@
         .glossary-table td { padding:8px 6px; border-bottom:1px solid #e8ddd2; }
         .glossary-table td:first-child { font-weight:500; color:#5a3a35; width:25%; }
 
+        .export-textarea { width:100%; height:200px; margin-top:10px; border:1px solid #e0d8cc; border-radius:10px; padding:10px; font-size:12px; background:#fefdfa; resize:vertical; }
         @media (max-width:480px) {
             .app-container { padding:10px 10px 30px; }
             .header-title { font-size:19px; }
             .bottle-svg { width:80px; height:115px; }
-            .sparkles { top:22px; width:28px; height:44px; }
-            .kink-card { padding:14px; }
-            .interest-btn { padding:6px 10px; font-size:11px; }
         }
     </style>
 </head>
 <body>
 <div class="app-container">
     <div class="header">
-        <div class="bottle-wrapper" id="bottleTrigger" title="点击瓶子随机抽取">
+        <div class="bottle-wrapper" id="bottleTrigger">
             <svg class="bottle-svg" viewBox="0 0 100 140">
-                <defs><linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.7"/><stop offset="30%" stop-color="#fdfaf6" stop-opacity="0.55"/><stop offset="70%" stop-color="#f5efe6" stop-opacity="0.4"/><stop offset="100%" stop-color="#ede4d8" stop-opacity="0.35"/></linearGradient></defs>
+                <defs><linearGradient id="glassGrad"><stop offset="0%" stop-color="#fff" stop-opacity="0.7"/><stop offset="30%" stop-color="#fdfaf6" stop-opacity="0.55"/><stop offset="100%" stop-color="#ede4d8" stop-opacity="0.35"/></linearGradient></defs>
                 <path d="M28 55 C28 52 32 48 36 48 L40 48 L40 30 C40 22 44 16 50 14 C56 16 60 22 60 30 L60 48 L64 48 C68 48 72 52 72 55 L72 105 C72 118 62 128 50 128 C38 128 28 118 28 105 Z" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.35)" stroke-width="2"/>
-                <rect x="40" y="14" width="20" height="18" rx="3" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.3)" stroke-width="1.5"/>
-                <rect x="37" y="8" width="26" height="8" rx="4" fill="rgba(250,245,238,0.6)" stroke="rgba(180,160,145,0.3)" stroke-width="1.5"/>
-                <path d="M34 60 C34 56 36 54 38 52 L38 100 C36 102 34 106 34 110" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" stroke-linecap="round"/>
-                <ellipse cx="50" cy="9" rx="11" ry="5" fill="#e8d5c0" stroke="rgba(180,155,135,0.4)" stroke-width="1"/>
+                <rect x="40" y="14" width="20" height="18" rx="3" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.3)"/>
+                <rect x="37" y="8" width="26" height="8" rx="4" fill="rgba(250,245,238,0.6)" stroke="rgba(180,160,145,0.3)"/>
+                <path d="M34 60 L38 100" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
+                <ellipse cx="50" cy="9" rx="11" ry="5" fill="#e8d5c0"/>
             </svg>
-            <div class="sparkles"><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div></div>
         </div>
         <h1 class="header-title">性癖之瓶</h1>
-        <p class="header-subtitle">探索彼此 · 温柔靠近</p>
     </div>
 
     <div class="user-switch">
-        <button class="user-switch-btn active" id="btnUserA">💛 我的选择<span class="user-badge badge-me">我</span></button>
-        <button class="user-switch-btn" id="btnUserB">💙 伴侣的选择<span class="user-badge badge-partner">TA</span></button>
+        <button class="user-switch-btn active" id="btnUserA">💛 我</button>
+        <button class="user-switch-btn" id="btnUserB">💙 伴侣</button>
     </div>
 
     <div class="category-tabs" id="categoryTabs">
@@ -172,19 +144,17 @@
         <button class="filter-tab" data-filter="none">❓ 未标记</button>
     </div>
 
-    <div class="stats-bar">
-        已标记 <span id="markedCount">0</span> 个偏好
-    </div>
-
+    <div class="stats-bar">已标记 <span id="markedCount">0</span> 个偏好</div>
     <div class="cards-list" id="cardsList"></div>
 
     <div class="bottom-actions">
         <button class="action-btn" id="btnRandom">🎲 随机</button>
         <button class="action-btn primary" id="btnMatch">💞 匹配</button>
         <button class="action-btn" id="btnRadar">💹 雷达</button>
-        <button class="action-btn" id="btnReset">🔄 重置</button>
-        <button class="action-btn" id="btnExport">📤 导出</button>
+        <button class="action-btn" id="btnExport">📤 导出JSON</button>
+        <button class="action-btn" id="btnExportText">📝 导出文本</button>
         <button class="action-btn" id="btnImport">📥 导入</button>
+        <button class="action-btn" id="btnReset">🔄 重置</button>
         <button class="action-btn" id="btnGlossary">📖 术语表</button>
     </div>
 </div>
@@ -193,11 +163,7 @@
 
 <!-- 匹配弹窗 -->
 <div class="modal-overlay" id="matchModal" style="display:none;">
-    <div class="modal">
-        <button class="modal-close" id="matchModalClose">✕</button>
-        <h3>💞 匹配结果</h3>
-        <div id="matchResults"></div>
-    </div>
+    <div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><div id="matchResults"></div></div>
 </div>
 
 <!-- 雷达弹窗 -->
@@ -211,11 +177,11 @@
             <button data-radar-user="compare">💞 对比</button>
         </div>
         <canvas id="radarCanvas" width="400" height="400"></canvas>
-        <div class="detail-list" id="radarDetail"><p style="text-align:center;color:var(--text-muted);">点击雷达图的分类轴查看明细</p></div>
+        <div class="detail-list" id="radarDetail"><p style="text-align:center;">点击雷达轴查看明细</p></div>
     </div>
 </div>
 
-<!-- 随机模式选择弹窗 -->
+<!-- 随机模式弹窗 -->
 <div class="modal-overlay" id="randomModeModal" style="display:none;">
     <div class="random-card-popup">
         <h3>🎲 选择随机模式</h3>
@@ -226,67 +192,31 @@
         <button class="action-btn" style="margin-top:12px;" id="randomCancel">取消</button>
     </div>
 </div>
+<div class="modal-overlay" id="randomResultModal" style="display:none;"><div class="random-card-popup" id="randomCardContent"></div></div>
 
-<!-- 随机结果弹窗 -->
-<div class="modal-overlay" id="randomResultModal" style="display:none;">
-    <div class="random-card-popup" id="randomCardContent"></div>
-</div>
-
-<!-- 欢迎弹窗 -->
-<div class="modal-overlay" id="welcomeModal" style="display:none;">
+<!-- 文本导出弹窗 -->
+<div class="modal-overlay" id="textExportModal" style="display:none;">
     <div class="modal">
-        <button class="modal-close" id="welcomeModalClose">✕</button>
-        <h3>💌 欢迎</h3>
-        <p style="text-align:center;">150 项探索 · 术语表查看 · 雷达图分析</p>
-        <button class="action-btn primary" id="welcomeModalOk" style="display:block; margin:12px auto 0;">开始探索</button>
-    </div>
-</div>
-
-<!-- 术语表弹窗 -->
-<div class="modal-overlay" id="glossaryModal" style="display:none;">
-    <div class="modal">
-        <button class="modal-close" id="glossaryModalClose">✕</button>
-        <h3>📖 术语表</h3>
-        <table class="glossary-table">
-            <tr><td>RT</td><td>乳头</td></tr>
-            <tr><td>HD</td><td>高潮</td></tr>
-            <tr><td>P-Spot</td><td>前列腺（男性G点）</td></tr>
-            <tr><td>G点</td><td>阴道前壁敏感点</td></tr>
-            <tr><td>C-Spot</td><td>会阴部敏感点</td></tr>
-            <tr><td>PC肌</td><td>盆底肌，控制阴道/肛门收缩</td></tr>
-            <tr><td>BJ</td><td>口交</td></tr>
-            <tr><td>HJ</td><td>手交（手淫）</td></tr>
-            <tr><td>Pegging</td><td>女性佩戴假阳具进行肛交</td></tr>
-            <tr><td>HD控制</td><td>有意识地延迟或控制高潮</td></tr>
-            <tr><td>凯格尔运动</td><td>锻炼盆底肌的运动</td></tr>
-            <tr><td>潮吹</td><td>女性高潮时喷射液体</td></tr>
-            <tr><td>混合HD</td><td>同时刺激多个敏感点达到高潮</td></tr>
-            <tr><td>肛塞</td><td>插入肛门的情趣用品，常用于刺激</td></tr>
-        </table>
-    </div>
-</div>
-
-<!-- 导入弹窗 -->
-<div class="modal-overlay" id="importModal" style="display:none;">
-    <div class="modal">
-        <button class="modal-close" id="importModalClose">✕</button>
-        <h3>📥 导入数据</h3>
-        <textarea id="importTextarea" style="width:100%; height:120px; border:1px solid #ddd; border-radius:10px; padding:10px;" placeholder='{"f01":"love"}'></textarea>
-        <input type="file" id="importFileInput" accept=".json" style="display:none;">
-        <button class="action-btn" id="btnUploadFile">📁 选择文件</button>
-        <div style="margin:10px 0;">
-            <label><input type="radio" name="importTarget" value="A" checked> 导入为「我」</label>
-            <label><input type="radio" name="importTarget" value="B"> 导入为「伴侣」</label>
+        <button class="modal-close" id="textExportModalClose">✕</button>
+        <h3>📝 导出文本结果</h3>
+        <div style="display:flex; gap:8px; justify-content:center; margin-bottom:12px;">
+            <button class="action-btn primary" data-export-mode="A">仅我的</button>
+            <button class="action-btn" data-export-mode="B">仅伴侣的</button>
+            <button class="action-btn" data-export-mode="both">双人合并</button>
         </div>
-        <button class="action-btn primary" id="btnConfirmImport">导入</button>
+        <textarea id="exportTextArea" class="export-textarea" readonly></textarea>
+        <button class="action-btn primary" id="copyExportText" style="margin-top:8px;">📋 复制到剪贴板</button>
     </div>
 </div>
 
+<!-- 其他弹窗 -->
+<div class="modal-overlay" id="welcomeModal" style="display:none;"><div class="modal"><button class="modal-close" id="welcomeModalClose">✕</button><h3>欢迎</h3><p style="text-align:center;">150项探索 · 术语表查看</p><button class="action-btn primary" id="welcomeModalOk">开始</button></div></div>
+<div class="modal-overlay" id="glossaryModal" style="display:none;"><div class="modal"><button class="modal-close" id="glossaryModalClose">✕</button><table class="glossary-table"><tr><td>RT</td><td>乳头</td></tr><tr><td>HD</td><td>高潮</td></tr><tr><td>P-Spot</td><td>前列腺</td></tr><tr><td>G点</td><td>阴道前壁敏感点</td></tr><tr><td>C-Spot</td><td>会阴部</td></tr><tr><td>PC肌</td><td>盆底肌</td></tr><tr><td>BJ</td><td>口交</td></tr><tr><td>Pegging</td><td>女性佩戴假阳具肛交</td></tr></table></div></div>
+<div class="modal-overlay" id="importModal" style="display:none;"><div class="modal"><button class="modal-close" id="importModalClose">✕</button><textarea id="importTextarea" style="width:100%; height:120px;"></textarea><input type="file" id="importFileInput" accept=".json"><button id="btnUploadFile">选择文件</button><label><input type="radio" name="importTarget" value="A" checked> 我</label><label><input type="radio" name="importTarget" value="B"> 伴侣</label><button id="btnConfirmImport">导入</button></div></div>
 <div id="toastContainer"></div>
 
 <script>
 (function() {
-    // 完整的 150 项数据
     const kinkData = [
         { id:"f01", cat:"foreplay", name:"长时间舌吻", desc:"专注地深吻10分钟以上", tag:"popular", emoji:"💋" },
         { id:"f02", cat:"foreplay", name:"全身精油按摩", desc:"用温热精油按摩全身，过渡到情欲抚摸", tag:"gentle", emoji:"🧴" },
@@ -460,7 +390,7 @@
         else userChoices[currentUser][id] = level;
         saveChoices(); updateMarkedCount(); renderCards();
     }
-    function getChoiceLabel(l) { return {love:"喜欢",interest:"兴趣",curious:"好奇",meh:"不想",no:"拒绝"}[l]||""; }
+    function getChoiceLabel(l) { return {love:"喜欢",interest:"兴趣",curious:"好奇",meh:"不想",no:"拒绝"}[l]||"未标记"; }
     function getFilteredData() {
         let data = kinkData;
         if (currentCategory !== "all") data = data.filter(i=>i.cat===currentCategory);
@@ -474,7 +404,7 @@
     function renderCards() {
         const data = getFilteredData();
         let html = "";
-        data.forEach((item,idx)=>{
+        data.forEach((item)=>{
             const choice = userChoices[currentUser][item.id];
             html += `<div class="kink-card">
                 <div class="card-title">${item.emoji||""} ${item.name}</div>
@@ -502,7 +432,7 @@
     }
     window.setKinkChoice = (id, level) => { setChoice(id, level); };
 
-    // 匹配结果（含避雷）
+    // 匹配结果
     function showMatchModal() {
         const bothLove=[], bothInterest=[], oneLove=[], bothAvoid=[];
         kinkData.forEach(item=>{
@@ -531,7 +461,6 @@
         const ctx = canvas.getContext("2d");
         ctx.clearRect(0,0,canvas.width,canvas.height);
         const center = { x:200, y:200 }, radius = 130;
-        // 网格
         ctx.strokeStyle = "#e0d8cc"; ctx.lineWidth = 0.5;
         for(let i=1;i<=5;i++) {
             ctx.beginPath();
@@ -543,7 +472,6 @@
             }
             ctx.closePath(); ctx.stroke();
         }
-        // 轴线
         ctx.strokeStyle = "#ccc";
         for(let j=0;j<categories.length;j++) {
             const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
@@ -551,7 +479,6 @@
             ctx.lineTo(center.x+radius*Math.cos(angle), center.y+radius*Math.sin(angle));
             ctx.stroke();
         }
-        // 标签
         ctx.fillStyle = "#4a3c3c"; ctx.font = "12px 'PingFang SC'";
         categories.forEach((cat,j)=>{
             const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
@@ -559,7 +486,6 @@
             const y = center.y + (radius+20)*Math.sin(angle);
             ctx.fillText(catNames[cat], x-12, y+4);
         });
-
         function getValues(user, type) {
             return categories.map(cat => {
                 const items = kinkData.filter(i=>i.cat===cat);
@@ -573,7 +499,6 @@
                 return items.length ? Math.round(count/items.length*100) : 0;
             });
         }
-
         function drawPolygon(values, color, fillColor) {
             ctx.beginPath();
             ctx.strokeStyle = color; ctx.fillStyle = fillColor; ctx.lineWidth = 2;
@@ -585,7 +510,6 @@
             }
             ctx.closePath(); ctx.fill(); ctx.stroke();
         }
-
         if (radarUser === "compare") {
             drawPolygon(getValues("A","like"), "#d4857b", "rgba(212,133,123,0.15)");
             drawPolygon(getValues("B","like"), "#5a7a9a", "rgba(90,122,154,0.15)");
@@ -650,6 +574,20 @@
         showRandomResult(data[data.length-1]);
     }
 
+    // 文本导出
+    function generateTextExport(mode) {
+        let header = "性癖之瓶问卷结果\n背景：本问卷包含150项性偏好，分为前戏、体位、角色、感官、场所、玩具、克制、小众、事后、身体十大类。\n以下为各项目的选择标记：喜欢/兴趣/好奇/不想/拒绝/未标记。\n\n";
+        let lines = [];
+        kinkData.forEach(item => {
+            const choiceA = userChoices.A[item.id] ? getChoiceLabel(userChoices.A[item.id]) : "未标记";
+            const choiceB = userChoices.B[item.id] ? getChoiceLabel(userChoices.B[item.id]) : "未标记";
+            if (mode === "A") lines.push(`${item.emoji||""} ${item.name}：${choiceA}`);
+            else if (mode === "B") lines.push(`${item.emoji||""} ${item.name}：${choiceB}`);
+            else lines.push(`${item.emoji||""} ${item.name}：我-${choiceA}，伴侣-${choiceB}`);
+        });
+        return header + lines.join("\n");
+    }
+
     // 事件绑定
     document.getElementById("btnUserA").addEventListener("click", ()=>{ currentUser="A"; refreshAll(); });
     document.getElementById("btnUserB").addEventListener("click", ()=>{ currentUser="B"; refreshAll(); });
@@ -672,9 +610,9 @@
     document.getElementById("btnRadar").addEventListener("click", ()=>{
         radarUser = currentUser;
         document.getElementById("radarModal").style.display = "flex";
-        updateRadarUserToggle();
+        document.querySelectorAll("#radarUserToggle button").forEach(b=> b.classList.toggle("active", b.dataset.radarUser===radarUser));
         drawRadar();
-        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;color:var(--text-muted);\">点击雷达轴查看明细</p>";
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;\">点击雷达轴查看明细</p>";
     });
     document.getElementById("radarModalClose").addEventListener("click", ()=>document.getElementById("radarModal").style.display="none");
     document.getElementById("radarModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
@@ -682,13 +620,10 @@
         const btn = e.target.closest("button");
         if(!btn) return;
         radarUser = btn.dataset.radarUser;
-        updateRadarUserToggle();
-        drawRadar();
-        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;color:var(--text-muted);\">点击雷达轴查看明细</p>";
-    });
-    function updateRadarUserToggle() {
         document.querySelectorAll("#radarUserToggle button").forEach(b=> b.classList.toggle("active", b.dataset.radarUser===radarUser));
-    }
+        drawRadar();
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;\">点击雷达轴查看明细</p>";
+    });
     document.getElementById("radarCanvas").addEventListener("click", function(e){
         const canvas = document.getElementById("radarCanvas");
         const rect = canvas.getBoundingClientRect();
@@ -709,6 +644,23 @@
     document.getElementById("randomCancel").addEventListener("click", ()=> document.getElementById("randomModeModal").style.display="none");
     document.getElementById("bottleTrigger").addEventListener("click", ()=> randomCard(true));
     document.getElementById("randomResultModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+
+    // 文本导出按钮
+    document.getElementById("btnExportText").addEventListener("click", ()=> document.getElementById("textExportModal").style.display = "flex");
+    document.getElementById("textExportModalClose").addEventListener("click", ()=> document.getElementById("textExportModal").style.display="none");
+    document.querySelectorAll("[data-export-mode]").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const mode = this.dataset.exportMode;
+            const text = generateTextExport(mode);
+            document.getElementById("exportTextArea").value = text;
+        });
+    });
+    document.getElementById("copyExportText").addEventListener("click", ()=>{
+        const textarea = document.getElementById("exportTextArea");
+        textarea.select();
+        document.execCommand("copy");
+        alert("已复制到剪贴板");
+    });
 
     document.getElementById("btnExport").addEventListener("click", ()=>{
         const data = userChoices[currentUser];
@@ -751,7 +703,6 @@
     document.getElementById("floatingHelpBtn").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
     document.getElementById("glossaryModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
 
-    // 欢迎弹窗
     if (!localStorage.getItem(WELCOME_KEY)) {
         document.getElementById("welcomeModal").style.display = "flex";
         localStorage.setItem(WELCOME_KEY, "1");

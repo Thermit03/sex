@@ -135,10 +135,20 @@
 
 <button class="floating-help-btn" id="floatingHelpBtn">📖</button>
 
-<!-- 弹窗部分将在第二部分继续 -->
+<!-- 弹窗结构开始 -->
+<div class="modal-overlay" id="welcomeModal" style="display:none;"><div class="modal"><button class="modal-close" id="welcomeModalClose">✕</button><h3>💌 欢迎</h3><p style="text-align:center;margin:12px 0;">180项探索 · 术语表查看 · 雷达图分析</p><button class="action-btn primary" id="welcomeModalOk">开始探索</button></div></div>
+<div class="modal-overlay" id="glossaryModal" style="display:none;"><div class="modal"><button class="modal-close" id="glossaryModalClose">✕</button><table class="glossary-table"><tr><td>RT</td><td>乳头</td></tr><tr><td>HD</td><td>高潮</td></tr><tr><td>P-Spot</td><td>前列腺</td></tr><tr><td>G点</td><td>阴道前壁敏感点</td></tr><tr><td>PC肌</td><td>盆底肌</td></tr><tr><td>BJ</td><td>口交</td></tr><tr><td>SP</td><td>打屁股</td></tr><tr><td>D/S</td><td>支配与服从</td></tr></table></div></div>
+<div class="modal-overlay" id="matchModal" style="display:none;"><div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><div id="matchResults"></div></div></div>
+<div class="modal-overlay" id="radarModal" style="display:none;"><div class="modal" style="max-width:550px;"><button class="modal-close" id="radarModalClose">✕</button><h3>💹 倾向雷达图</h3><div class="radar-user-toggle" id="radarUserToggle"><button class="active" data-radar-user="A">💛 我</button><button data-radar-user="B">💙 伴侣</button><button data-radar-user="compare">💞 对比</button></div><canvas id="radarCanvas" width="400" height="400"></canvas><div class="detail-list" id="radarDetail"></div></div></div>
+<div class="modal-overlay" id="randomModeModal" style="display:none;"><div class="random-card-popup"><h3>🎲 随机模式</h3><div class="random-mode-select"><button class="action-btn primary" id="randomPure">完全随机</button><button class="action-btn primary" id="randomWeighted">⚖️ 加权随机</button></div><button class="action-btn" id="randomCancel">取消</button></div></div>
+<div class="modal-overlay" id="randomResultModal" style="display:none;"><div class="random-card-popup" id="randomCardContent"></div></div>
+<div class="modal-overlay" id="textExportModal" style="display:none;"><div class="modal"><button class="modal-close" id="textExportModalClose">✕</button><h3>📝 导出文本</h3><div style="display:flex;gap:8px;justify-content:center;margin-bottom:10px;"><button class="action-btn" data-export-mode="A">仅我</button><button class="action-btn" data-export-mode="B">仅伴侣</button><button class="action-btn" data-export-mode="both">双人</button></div><textarea id="exportTextArea" class="export-textarea" readonly></textarea><button class="action-btn primary" id="copyExportText">📋 复制</button></div></div>
+<div class="modal-overlay" id="importModal" style="display:none;"><div class="modal"><button class="modal-close" id="importModalClose">✕</button><textarea id="importTextarea" style="width:100%;height:120px;border:1px solid #e0d8cc;border-radius:10px;padding:10px;font-size:12px;"></textarea><input type="file" id="importFileInput" accept=".json" style="display:none;"><button class="action-btn" id="btnUploadFile">📁 选择文件</button><div style="margin:8px 0;"><label><input type="radio" name="importTarget" value="A" checked> 导入为「我」</label><label><input type="radio" name="importTarget" value="B"> 导入为「伴侣」</label></div><button class="action-btn primary" id="btnConfirmImport">导入</button></div></div>
+<!-- 弹窗结构结束 -->
+
 <script>
 (function() {
-    // ⚠️ 数据数组从这里开始，第二部分将继续
+    // ========== 数据（180项）开始 ==========
     const kinkData = [
         { id:"f01", cat:"foreplay", name:"长时间舌吻", desc:"专注地深吻10分钟以上", tag:"popular", emoji:"💋" },
         { id:"f02", cat:"foreplay", name:"全身精油按摩", desc:"用温热精油按摩全身，过渡到情欲抚摸", tag:"gentle", emoji:"🧴" },
@@ -322,7 +332,7 @@
         { id:"m30", cat:"sm", name:"契约制定", desc:"写下临时的权力交换契约，增添仪式感", tag:"", emoji:"📜" }
     ];
 
-    // ========== 逻辑部分 ==========
+    // ========== 状态与初始化 ==========
     const STORAGE_KEY_A = "kink_bottle_userA", STORAGE_KEY_B = "kink_bottle_userB", WELCOME_KEY = "kink_bottle_welcomed";
     let currentUser = "A", currentCategory = "all", currentFilter = "all";
     let userChoices = { A:{}, B:{} };
@@ -385,14 +395,162 @@
     }
     window.setKinkChoice = (id, level) => { setChoice(id, level); };
 
-    // 初始化：强制设置默认过滤和分类
-    currentUser = "A";
-    currentCategory = "all";
-    currentFilter = "all";
-    loadChoices();
-    refreshAll();
+    // ========== 匹配结果 ==========
+    function showMatchModal() {
+        const bothLove=[], bothInterest=[], oneLove=[], bothAvoid=[];
+        kinkData.forEach(item=>{
+            const a=userChoices.A[item.id], b=userChoices.B[item.id];
+            if(!a||!b) return;
+            if(a==="love"&&b==="love") bothLove.push(item);
+            else if((a==="interest"||a==="love")&&(b==="interest"||b==="love")) bothInterest.push(item);
+            else if((a==="love"&&b==="interest")||(a==="interest"&&b==="love")) oneLove.push(item);
+            if((a==="meh"||a==="no")&&(b==="meh"||b==="no")) bothAvoid.push(item);
+        });
+        let html="";
+        if(bothLove.length) { html+="<h4>🌟 双方非常喜欢</h4>"; bothLove.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name} <span class="match-badge perfect">完美</span></div>`); }
+        if(bothInterest.length) { html+="<h4>🌿 双方感兴趣</h4>"; bothInterest.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name}</div>`); }
+        if(oneLove.length) { html+="<h4>🔥 一方喜欢一方兴趣</h4>"; oneLove.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name}</div>`); }
+        if(bothAvoid.length) { html+="<h4>🛑 双方都避雷</h4>"; bothAvoid.forEach(i=>html+=`<div class="match-item both-avoid">${i.emoji} ${i.name} <span class="match-badge avoid">避雷</span></div>`); }
+        document.getElementById("matchResults").innerHTML = html || "暂无足够标记";
+        document.getElementById("matchModal").style.display="flex";
+    }
 
-    // 事件监听（省略其他按钮绑定，此处仅保留基础切换功能）
+    // ========== 雷达图 ==========
+    const categories = ["foreplay","position","roleplay","sensory","location","toys","edge","niche","aftercare","body","sm"];
+    const catNames = { foreplay:"前戏", position:"体位", roleplay:"角色", sensory:"感官", location:"场所", toys:"玩具", edge:"克制", niche:"小众", aftercare:"事后", body:"身体", sm:"D/S" };
+    let radarUser = "A";
+    function drawRadar() {
+        const canvas = document.getElementById("radarCanvas");
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const center = { x:200, y:200 }, radius = 130;
+        ctx.strokeStyle = "#e0d8cc"; ctx.lineWidth = 0.5;
+        for(let i=1;i<=5;i++) {
+            ctx.beginPath();
+            const r = radius * i/5;
+            for(let j=0;j<categories.length;j++) {
+                const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+                const x = center.x + r*Math.cos(angle), y = center.y + r*Math.sin(angle);
+                j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+            }
+            ctx.closePath(); ctx.stroke();
+        }
+        ctx.strokeStyle = "#ccc";
+        for(let j=0;j<categories.length;j++) {
+            const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+            ctx.beginPath(); ctx.moveTo(center.x, center.y);
+            ctx.lineTo(center.x+radius*Math.cos(angle), center.y+radius*Math.sin(angle));
+            ctx.stroke();
+        }
+        ctx.fillStyle = "#4a3c3c"; ctx.font = "12px 'PingFang SC'";
+        categories.forEach((cat,j)=>{
+            const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+            const x = center.x + (radius+20)*Math.cos(angle);
+            const y = center.y + (radius+20)*Math.sin(angle);
+            ctx.fillText(catNames[cat], x-12, y+4);
+        });
+        function getValues(user, type) {
+            return categories.map(cat => {
+                const items = kinkData.filter(i=>i.cat===cat);
+                const choices = userChoices[user];
+                let count = 0;
+                items.forEach(item => {
+                    const val = choices[item.id];
+                    if(type==="like" && (val==="love"||val==="interest")) count++;
+                    if(type==="avoid" && (val==="meh"||val==="no")) count++;
+                });
+                return items.length ? Math.round(count/items.length*100) : 0;
+            });
+        }
+        function drawPolygon(values, color, fillColor) {
+            ctx.beginPath();
+            ctx.strokeStyle = color; ctx.fillStyle = fillColor; ctx.lineWidth = 2;
+            for(let j=0;j<categories.length;j++) {
+                const angle = (Math.PI*2/categories.length)*j - Math.PI/2;
+                const r = radius * (values[j]/100);
+                const x = center.x + r*Math.cos(angle), y = center.y + r*Math.sin(angle);
+                j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+            }
+            ctx.closePath(); ctx.fill(); ctx.stroke();
+        }
+        if (radarUser === "compare") {
+            drawPolygon(getValues("A","like"), "#d4857b", "rgba(212,133,123,0.15)");
+            drawPolygon(getValues("B","like"), "#5a7a9a", "rgba(90,122,154,0.15)");
+            drawPolygon(getValues("A","avoid"), "#c9b896", "rgba(201,184,150,0.1)");
+            drawPolygon(getValues("B","avoid"), "#7a8a9a", "rgba(122,138,154,0.1)");
+        } else {
+            drawPolygon(getValues(radarUser,"like"), "#d4857b", "rgba(212,133,123,0.15)");
+            drawPolygon(getValues(radarUser,"avoid"), "#9a8c8c", "rgba(150,130,130,0.1)");
+        }
+    }
+    function showRadarDetail(cat) {
+        const choices = userChoices[radarUser==="compare"? "A" : radarUser];
+        const items = kinkData.filter(i=>i.cat===cat);
+        let html = `<h4>${catNames[cat]} 明细</h4>`;
+        const likes = items.filter(i=> choices[i.id]==="love"||choices[i.id]==="interest");
+        const avoids = items.filter(i=> choices[i.id]==="meh"||choices[i.id]==="no");
+        if(likes.length) {
+            html += "<p style=\"color:#b8554a;\">❤️ 喜欢/兴趣：</p>";
+            likes.forEach(i=> html += `<div class="item">${i.emoji} ${i.name} <span class="tag-like">${getChoiceLabel(choices[i.id])}</span></div>`);
+        }
+        if(avoids.length) {
+            html += "<p style=\"color:#8a7d72;\">🛑 不想/拒绝：</p>";
+            avoids.forEach(i=> html += `<div class="item">${i.emoji} ${i.name} <span class="tag-avoid">${getChoiceLabel(choices[i.id])}</span></div>`);
+        }
+        if(!likes.length&&!avoids.length) html += "<p>暂无标记</p>";
+        document.getElementById("radarDetail").innerHTML = html;
+    }
+
+    // ========== 随机 ==========
+    function showRandomResult(item) {
+        const c = userChoices[currentUser][item.id];
+        const label = c ? ` (你已标记：${getChoiceLabel(c)})` : "";
+        document.getElementById("randomCardContent").innerHTML = `
+            <div style="font-size:48px;">${item.emoji||"🎭"}</div>
+            <h3>${item.name}</h3>
+            <p style="color:var(--text-muted);">${item.desc}${label}</p>
+            <button class="action-btn" onclick="document.getElementById('randomResultModal').style.display='none'">知道了</button>`;
+        document.getElementById("randomResultModal").style.display = "flex";
+    }
+    function randomCard(weighted = false) {
+        const data = getFilteredData();
+        if (!data.length) return;
+        if (!weighted) {
+            showRandomResult(data[Math.floor(Math.random()*data.length)]);
+            return;
+        }
+        const scores = data.map(item => {
+            const a = userChoices.A[item.id] || "", b = userChoices.B[item.id] || "";
+            if (a==="love" && b==="love") return 10;
+            if ((a==="love" && b==="interest") || (a==="interest" && b==="love")) return 7;
+            if (a==="love" || b==="love") return 5;
+            if (a==="interest" || b==="interest") return 3;
+            return 1;
+        });
+        const total = scores.reduce((s,v)=>s+v, 0);
+        let rand = Math.random() * total;
+        for (let i=0; i<data.length; i++) {
+            rand -= scores[i];
+            if (rand <= 0) { showRandomResult(data[i]); return; }
+        }
+        showRandomResult(data[data.length-1]);
+    }
+
+    // ========== 文本导出 ==========
+    function generateTextExport(mode) {
+        let header = "性癖之瓶问卷结果\n背景：180项性偏好，分为前戏/体位/角色/感官/场所/玩具/克制/小众/事后/身体/D/S十一类。\n标记：喜欢/兴趣/好奇/不想/拒绝/未标记。\n\n";
+        let lines = [];
+        kinkData.forEach(item => {
+            const choiceA = userChoices.A[item.id] ? getChoiceLabel(userChoices.A[item.id]) : "未标记";
+            const choiceB = userChoices.B[item.id] ? getChoiceLabel(userChoices.B[item.id]) : "未标记";
+            if (mode === "A") lines.push(`${item.emoji||""} ${item.name}：${choiceA}`);
+            else if (mode === "B") lines.push(`${item.emoji||""} ${item.name}：${choiceB}`);
+            else lines.push(`${item.emoji||""} ${item.name}：我-${choiceA}，伴侣-${choiceB}`);
+        });
+        return header + lines.join("\n");
+    }
+
+    // ========== 事件绑定 ==========
     document.getElementById("btnUserA").addEventListener("click", ()=>{ currentUser="A"; refreshAll(); });
     document.getElementById("btnUserB").addEventListener("click", ()=>{ currentUser="B"; refreshAll(); });
     document.getElementById("categoryTabs").addEventListener("click", e=>{
@@ -407,7 +565,118 @@
         currentFilter = tab.dataset.filter;
         refreshAll();
     });
+    document.getElementById("btnMatch").addEventListener("click", showMatchModal);
+    document.getElementById("matchModalClose").addEventListener("click", ()=>document.getElementById("matchModal").style.display="none");
+    document.getElementById("matchModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+
+    document.getElementById("btnRadar").addEventListener("click", ()=>{
+        radarUser = currentUser;
+        document.getElementById("radarModal").style.display = "flex";
+        document.querySelectorAll("#radarUserToggle button").forEach(b=> b.classList.toggle("active", b.dataset.radarUser===radarUser));
+        drawRadar();
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;\">点击雷达轴查看明细</p>";
+    });
+    document.getElementById("radarModalClose").addEventListener("click", ()=>document.getElementById("radarModal").style.display="none");
+    document.getElementById("radarModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+    document.getElementById("radarUserToggle").addEventListener("click", e=>{
+        const btn = e.target.closest("button");
+        if(!btn) return;
+        radarUser = btn.dataset.radarUser;
+        document.querySelectorAll("#radarUserToggle button").forEach(b=> b.classList.toggle("active", b.dataset.radarUser===radarUser));
+        drawRadar();
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;\">点击雷达轴查看明细</p>";
+    });
+    document.getElementById("radarCanvas").addEventListener("click", function(e){
+        const canvas = document.getElementById("radarCanvas");
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width/rect.width, scaleY = canvas.height/rect.height;
+        const mx = (e.clientX - rect.left)*scaleX, my = (e.clientY - rect.top)*scaleY;
+        const center = { x:200, y:200 }, radius = 130;
+        const dist = Math.hypot(mx-center.x, my-center.y);
+        if(dist > radius+30 || dist < 10) return;
+        let angle = Math.atan2(my-center.y, mx-center.x) + Math.PI/2;
+        if(angle < 0) angle += Math.PI*2;
+        const index = Math.round(angle / (Math.PI*2/categories.length)) % categories.length;
+        showRadarDetail(categories[index]);
+    });
+
+    document.getElementById("btnRandom").addEventListener("click", ()=> document.getElementById("randomModeModal").style.display = "flex");
+    document.getElementById("randomPure").addEventListener("click", ()=>{ document.getElementById("randomModeModal").style.display = "none"; randomCard(false); });
+    document.getElementById("randomWeighted").addEventListener("click", ()=>{ document.getElementById("randomModeModal").style.display = "none"; randomCard(true); });
+    document.getElementById("randomCancel").addEventListener("click", ()=> document.getElementById("randomModeModal").style.display="none");
+    document.getElementById("bottleTrigger").addEventListener("click", ()=> randomCard(true));
+    document.getElementById("randomResultModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+
+    document.getElementById("btnExportText").addEventListener("click", ()=> document.getElementById("textExportModal").style.display = "flex");
+    document.getElementById("textExportModalClose").addEventListener("click", ()=> document.getElementById("textExportModal").style.display="none");
+    document.querySelectorAll("[data-export-mode]").forEach(btn => {
+        btn.addEventListener("click", function() {
+            document.getElementById("exportTextArea").value = generateTextExport(this.dataset.exportMode);
+        });
+    });
+    document.getElementById("copyExportText").addEventListener("click", ()=>{
+        const textarea = document.getElementById("exportTextArea");
+        textarea.select();
+        document.execCommand("copy");
+        alert("已复制到剪贴板");
+    });
+
+    document.getElementById("btnExport").addEventListener("click", ()=>{
+        const data = userChoices[currentUser];
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], {type:"application/json"});
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `kink-bottle-user${currentUser}.json`;
+        a.click(); URL.revokeObjectURL(a.href);
+    });
+    document.getElementById("btnImport").addEventListener("click", ()=> document.getElementById("importModal").style.display = "flex");
+    document.getElementById("importModalClose").addEventListener("click", ()=> document.getElementById("importModal").style.display="none");
+    document.getElementById("btnUploadFile").addEventListener("click", ()=> document.getElementById("importFileInput").click());
+    document.getElementById("importFileInput").addEventListener("change", (e)=>{
+        const file = e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => { document.getElementById("importTextarea").value = ev.target.result; };
+        reader.readAsText(file);
+    });
+    document.getElementById("btnConfirmImport").addEventListener("click", ()=>{
+        const raw = document.getElementById("importTextarea").value.trim();
+        if(!raw) return;
+        let parsed;
+        try { parsed = JSON.parse(raw); } catch(e) { return; }
+        const target = document.querySelector("input[name=\"importTarget\"]:checked").value;
+        const targetChoices = userChoices[target];
+        for(const [key,val] of Object.entries(parsed)) {
+            if(kinkData.some(k=>k.id===key) && ["love","interest","curious","meh","no"].includes(val)) {
+                targetChoices[key] = val;
+            }
+        }
+        saveChoices(); refreshAll(); document.getElementById("importModal").style.display = "none";
+    });
+    document.getElementById("btnReset").addEventListener("click", ()=>{
+        if(confirm("重置当前视角的所有标记？")) { userChoices[currentUser] = {}; saveChoices(); refreshAll(); }
+    });
+    document.getElementById("btnGlossary").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
+    document.getElementById("glossaryModalClose").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display="none");
+    document.getElementById("floatingHelpBtn").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
+    document.getElementById("glossaryModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
+
+    // 欢迎弹窗
+    if (!localStorage.getItem(WELCOME_KEY)) {
+        document.getElementById("welcomeModal").style.display = "flex";
+        localStorage.setItem(WELCOME_KEY, "1");
+    }
+    document.getElementById("welcomeModalOk").addEventListener("click", ()=> document.getElementById("welcomeModal").style.display="none");
+    document.getElementById("welcomeModalClose").addEventListener("click", ()=> document.getElementById("welcomeModal").style.display="none");
+
+    // 最终初始化
+    currentUser = "A"; currentCategory = "all"; currentFilter = "all";
+    loadChoices(); refreshAll();
 })();
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>

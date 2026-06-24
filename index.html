@@ -24,76 +24,52 @@
         .app-container { max-width:680px; margin:0 auto; padding:16px 18px 40px; }
         .header { text-align:center; padding:20px 0 10px; }
         .bottle-wrapper { display:inline-block; cursor:pointer; transition:transform var(--transition); }
-        .bottle-wrapper:hover { transform:translateY(-3px); }
         .bottle-svg { width:100px; height:140px; filter:drop-shadow(0 8px 20px rgba(140,100,80,0.18)); }
         .sparkles { position:absolute; top:28px; left:50%; transform:translateX(-50%); width:36px; height:55px; pointer-events:none; }
         .sparkle { position:absolute; width:3px; height:3px; border-radius:50%; background:#e8c8a0; animation:sparkleFloat 3s infinite; }
         @keyframes sparkleFloat { 0%,100%{opacity:0.25;transform:translateY(0)} 30%{opacity:0.9;transform:translateY(-8px)} 60%{opacity:0.35;transform:translateY(-3px)} }
         .header-title { font-size:22px; font-weight:500; letter-spacing:1.5px; color:#4a3c3c; margin-top:6px; }
         .user-switch { display:flex; justify-content:center; gap:8px; margin:18px 0 14px; background:var(--card-bg); border-radius:30px; padding:5px; box-shadow:var(--shadow-sm); }
-        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; background:transparent; color:var(--text-light); transition:all var(--transition); }
-        .user-switch-btn.active { background:#fff; color:#3d3030; font-weight:500; box-shadow:var(--shadow-sm); }
+        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; background:transparent; color:var(--text-light); }
+        .user-switch-btn.active { background:#fff; color:#3d3030; font-weight:500; }
         .category-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 8px; justify-content:center; }
-        .cat-tab { padding:7px 12px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); transition:all var(--transition); }
+        .cat-tab { padding:7px 12px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); }
         .cat-tab.active { background:#fff; border-color:var(--accent-soft); color:#4a3030; font-weight:500; }
         .filter-tabs { display:flex; gap:6px; justify-content:center; margin-bottom:12px; }
         .filter-tab { padding:6px 14px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); }
         .filter-tab.active { background:#f5e6e6; border-color:#d4857b; color:#b8554a; }
-        .stats-bar { text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:8px; }
-
         .cards-list { display:flex; flex-direction:column; gap:10px; }
         .kink-card { background:var(--card-bg); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm); border:1px solid transparent; animation:cardFadeIn 0.4s ease; }
         @keyframes cardFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-        .kink-card.matched-highlight { border-color:#c9d8c0; background:#fafff7; }
         .card-title { font-size:15px; font-weight:500; display:flex; align-items:center; gap:6px; }
         .card-desc { font-size:12.5px; color:var(--text-muted); margin-top:4px; }
         .interest-selector { display:flex; gap:6px; margin-top:12px; flex-wrap:wrap; }
-        .interest-btn { padding:7px 13px; border-radius:18px; border:1.5px solid #e5ddd5; background:#fefdfa; cursor:pointer; font-size:12px; color:var(--text-light); transition:all var(--transition); }
+        .interest-btn { padding:7px 13px; border-radius:18px; border:1.5px solid #e5ddd5; background:#fefdfa; cursor:pointer; font-size:12px; color:var(--text-light); }
         .interest-btn.selected { font-weight:500; }
         .interest-btn.level-love.selected { background:#fdf0ed; border-color:#d4857b; color:#b8554a; }
         .interest-btn.level-interest.selected { background:#fdf6f0; border-color:#d4a080; color:#b87850; }
         .interest-btn.level-curious.selected { background:#fdfaf4; border-color:#c9b896; color:#9a8058; }
         .interest-btn.level-meh.selected { background:#f9f8f6; border-color:#bfb5aa; color:#8a7d72; }
         .interest-btn.level-no.selected { background:#f8f7f6; border-color:#d0cbc6; color:#9a9088; }
-
         .bottom-actions { display:flex; gap:8px; margin-top:22px; justify-content:center; flex-wrap:wrap; }
-        .action-btn { padding:10px 18px; border-radius:28px; border:1.5px solid #e0d8cc; background:var(--card-bg); cursor:pointer; font-size:13px; color:var(--text); transition:all var(--transition); box-shadow:var(--shadow-sm); }
-        .action-btn:hover { box-shadow:var(--shadow-md); border-color:#c8b8a5; }
-        .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; font-weight:500; }
-
-        .floating-help-btn { position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:#fffdf9; border:1.5px solid #d4c0b0; box-shadow:0 4px 16px rgba(100,70,50,0.2); cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; z-index:90; }
-
-        .modal-overlay { position:fixed; inset:0; background:rgba(40,30,25,0.55); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; animation:fadeIn 0.3s; }
-        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        .action-btn { padding:10px 18px; border-radius:28px; border:1.5px solid #e0d8cc; background:var(--card-bg); cursor:pointer; font-size:13px; color:var(--text); box-shadow:var(--shadow-sm); }
+        .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; }
+        .modal-overlay { position:fixed; inset:0; background:rgba(40,30,25,0.55); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; }
         .modal { background:#fffdf9; border-radius:var(--radius); padding:28px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; }
-        .modal-close { position:absolute; top:14px; right:16px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; }
-        .modal h3 { text-align:center; margin-bottom:12px; }
-
+        .modal-close { position:absolute; top:14px; right:16px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; }
         .radar-user-toggle { display:flex; justify-content:center; gap:8px; margin-bottom:12px; }
         .radar-user-toggle button { padding:6px 16px; border-radius:20px; border:1px solid #d4c0b0; background:#fff; cursor:pointer; }
-        .radar-user-toggle button.active { background:#f5e8e0; color:#b85a5a; font-weight:500; }
+        .radar-user-toggle button.active { background:#f5e8e0; color:#b85a5a; }
         canvas { display:block; margin:0 auto; max-width:100%; }
         .detail-list { max-height:200px; overflow-y:auto; margin-top:12px; font-size:13px; }
-        .detail-list .item { padding:6px 0; border-bottom:1px solid #f0e8e0; }
-        .tag-like { background:#fdf0ed; color:#b8554a; padding:2px 8px; border-radius:10px; margin-left:6px; font-size:10px; }
-        .tag-avoid { background:#f0f0f0; color:#8a7d72; padding:2px 8px; border-radius:10px; margin-left:6px; font-size:10px; }
-
         .match-item { padding:12px 14px; border-radius:10px; margin-bottom:8px; background:#fffefb; border:1px solid #e8e0d5; }
         .match-item.both-love { border-color:#c9d8c0; background:#f9fcf6; }
         .match-item.both-avoid { border-color:#e0c8c8; background:#fdf6f6; }
-        .match-badge { display:inline-block; font-size:10px; padding:3px 8px; border-radius:10px; margin-left:6px; }
-        .match-badge.perfect { background:#e8f0dc; color:#6a8a4a; }
-        .match-badge.avoid { background:#f5e0e0; color:#b85a5a; }
-
-        .random-card-popup { background:#fffdf9; border-radius:var(--radius); padding:28px 22px; box-shadow:var(--shadow-lg); text-align:center; border:2px solid #f0e8d8; max-width:400px; width:90%; }
-        .random-mode-select { display:flex; gap:8px; justify-content:center; margin-top:12px; flex-direction:column; }
-        .random-mode-select button { width:100%; }
-
+        .floating-help-btn { position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:#fffdf9; border:1.5px solid #d4c0b0; box-shadow:0 4px 16px rgba(100,70,50,0.2); cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; z-index:90; }
+        .export-textarea { width:100%; height:200px; margin-top:10px; border:1px solid #e0d8cc; border-radius:10px; padding:10px; font-size:12px; background:#fefdfa; resize:vertical; }
         .glossary-table { width:100%; border-collapse:collapse; font-size:13px; }
         .glossary-table td { padding:8px 6px; border-bottom:1px solid #e8ddd2; }
         .glossary-table td:first-child { font-weight:500; color:#5a3a35; width:25%; }
-
-        .export-textarea { width:100%; height:200px; margin-top:10px; border:1px solid #e0d8cc; border-radius:10px; padding:10px; font-size:12px; background:#fefdfa; resize:vertical; }
         @media (max-width:480px) {
             .app-container { padding:10px 10px 30px; }
             .header-title { font-size:19px; }
@@ -134,6 +110,7 @@
         <button class="cat-tab" data-cat="niche">🌈 小众</button>
         <button class="cat-tab" data-cat="aftercare">🫂 事后</button>
         <button class="cat-tab" data-cat="body">🫀 身体</button>
+        <button class="cat-tab" data-cat="sm">⛓️ 支配与服从</button>
     </div>
 
     <div class="filter-tabs" id="filterTabs">
@@ -161,58 +138,14 @@
 
 <button class="floating-help-btn" id="floatingHelpBtn">📖</button>
 
-<!-- 匹配弹窗 -->
-<div class="modal-overlay" id="matchModal" style="display:none;">
-    <div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><div id="matchResults"></div></div>
-</div>
-
-<!-- 雷达弹窗 -->
-<div class="modal-overlay" id="radarModal" style="display:none;">
-    <div class="modal" style="max-width:550px;">
-        <button class="modal-close" id="radarModalClose">✕</button>
-        <h3>💹 倾向雷达图</h3>
-        <div class="radar-user-toggle" id="radarUserToggle">
-            <button class="active" data-radar-user="A">💛 我</button>
-            <button data-radar-user="B">💙 伴侣</button>
-            <button data-radar-user="compare">💞 对比</button>
-        </div>
-        <canvas id="radarCanvas" width="400" height="400"></canvas>
-        <div class="detail-list" id="radarDetail"><p style="text-align:center;">点击雷达轴查看明细</p></div>
-    </div>
-</div>
-
-<!-- 随机模式弹窗 -->
-<div class="modal-overlay" id="randomModeModal" style="display:none;">
-    <div class="random-card-popup">
-        <h3>🎲 选择随机模式</h3>
-        <div class="random-mode-select">
-            <button class="action-btn primary" id="randomPure">完全随机</button>
-            <button class="action-btn primary" id="randomWeighted">⚖️ 加权随机（双人偏好）</button>
-        </div>
-        <button class="action-btn" style="margin-top:12px;" id="randomCancel">取消</button>
-    </div>
-</div>
+<!-- 弹窗 -->
+<div class="modal-overlay" id="matchModal" style="display:none;"><div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><div id="matchResults"></div></div></div>
+<div class="modal-overlay" id="radarModal" style="display:none;"><div class="modal"><button class="modal-close" id="radarModalClose">✕</button><h3>💹 倾向雷达图</h3><div class="radar-user-toggle" id="radarUserToggle"><button class="active" data-radar-user="A">💛 我</button><button data-radar-user="B">💙 伴侣</button><button data-radar-user="compare">💞 对比</button></div><canvas id="radarCanvas" width="400" height="400"></canvas><div class="detail-list" id="radarDetail"></div></div></div>
+<div class="modal-overlay" id="randomModeModal" style="display:none;"><div class="random-card-popup"><h3>🎲 随机模式</h3><div class="random-mode-select"><button class="action-btn primary" id="randomPure">完全随机</button><button class="action-btn primary" id="randomWeighted">⚖️ 加权随机</button></div><button class="action-btn" id="randomCancel">取消</button></div></div>
 <div class="modal-overlay" id="randomResultModal" style="display:none;"><div class="random-card-popup" id="randomCardContent"></div></div>
-
-<!-- 文本导出弹窗 -->
-<div class="modal-overlay" id="textExportModal" style="display:none;">
-    <div class="modal">
-        <button class="modal-close" id="textExportModalClose">✕</button>
-        <h3>📝 导出文本结果</h3>
-        <div style="display:flex; gap:8px; justify-content:center; margin-bottom:12px;">
-            <button class="action-btn primary" data-export-mode="A">仅我的</button>
-            <button class="action-btn" data-export-mode="B">仅伴侣的</button>
-            <button class="action-btn" data-export-mode="both">双人合并</button>
-        </div>
-        <textarea id="exportTextArea" class="export-textarea" readonly></textarea>
-        <button class="action-btn primary" id="copyExportText" style="margin-top:8px;">📋 复制到剪贴板</button>
-    </div>
-</div>
-
-<!-- 其他弹窗 -->
-<div class="modal-overlay" id="welcomeModal" style="display:none;"><div class="modal"><button class="modal-close" id="welcomeModalClose">✕</button><h3>欢迎</h3><p style="text-align:center;">150项探索 · 术语表查看</p><button class="action-btn primary" id="welcomeModalOk">开始</button></div></div>
-<div class="modal-overlay" id="glossaryModal" style="display:none;"><div class="modal"><button class="modal-close" id="glossaryModalClose">✕</button><table class="glossary-table"><tr><td>RT</td><td>乳头</td></tr><tr><td>HD</td><td>高潮</td></tr><tr><td>P-Spot</td><td>前列腺</td></tr><tr><td>G点</td><td>阴道前壁敏感点</td></tr><tr><td>C-Spot</td><td>会阴部</td></tr><tr><td>PC肌</td><td>盆底肌</td></tr><tr><td>BJ</td><td>口交</td></tr><tr><td>Pegging</td><td>女性佩戴假阳具肛交</td></tr></table></div></div>
-<div class="modal-overlay" id="importModal" style="display:none;"><div class="modal"><button class="modal-close" id="importModalClose">✕</button><textarea id="importTextarea" style="width:100%; height:120px;"></textarea><input type="file" id="importFileInput" accept=".json"><button id="btnUploadFile">选择文件</button><label><input type="radio" name="importTarget" value="A" checked> 我</label><label><input type="radio" name="importTarget" value="B"> 伴侣</label><button id="btnConfirmImport">导入</button></div></div>
+<div class="modal-overlay" id="textExportModal" style="display:none;"><div class="modal"><button class="modal-close" id="textExportModalClose">✕</button><h3>📝 导出文本</h3><div style="display:flex;gap:8px;justify-content:center;"><button class="action-btn" data-export-mode="A">仅我</button><button class="action-btn" data-export-mode="B">仅伴侣</button><button class="action-btn" data-export-mode="both">双人</button></div><textarea id="exportTextArea" class="export-textarea" readonly></textarea><button class="action-btn primary" id="copyExportText">📋 复制</button></div></div>
+<div class="modal-overlay" id="importModal" style="display:none;"><div class="modal"><button class="modal-close" id="importModalClose">✕</button><textarea id="importTextarea" style="width:100%;height:120px;"></textarea><input type="file" id="importFileInput" accept=".json"><button id="btnUploadFile">选择文件</button><label><input type="radio" name="importTarget" value="A" checked> 我</label><label><input type="radio" name="importTarget" value="B"> 伴侣</label><button id="btnConfirmImport">导入</button></div></div>
+<div class="modal-overlay" id="glossaryModal" style="display:none;"><div class="modal"><button class="modal-close" id="glossaryModalClose">✕</button><table class="glossary-table"><tr><td>RT</td><td>乳头</td></tr><tr><td>HD</td><td>高潮</td></tr><tr><td>P-Spot</td><td>前列腺</td></tr><tr><td>G点</td><td>阴道前壁敏感点</td></tr><tr><td>PC肌</td><td>盆底肌</td></tr><tr><td>BJ</td><td>口交</td></tr><tr><td>SP</td><td>打屁股</td></tr><tr><td>D/S</td><td>支配与服从</td></tr></table></div></div>
 <div id="toastContainer"></div>
 
 <script>
@@ -342,7 +275,7 @@
         { id:"n20", cat:"niche", name:"双人幻想讨论", desc:"讨论多人幻想不实际进行", tag:"", emoji:"💭" },
         { id:"n21", cat:"niche", name:"私密剃毛/造型", desc:"互相为对方修剪私处造型", tag:"niche", emoji:"✂️" },
         { id:"n22", cat:"niche", name:"肛部外部抚摸与按摩", desc:"轻柔按摩肛门周围，放松并探索感受", tag:"niche", emoji:"🍑" },
-        { id:"n23", cat:"niche", name:"肛部手指轻度探索", desc:"使用润滑液后，手指轻轻进入，注意呼吸放松", tag:"niche", emoji:"☝️" },
+        { id:"n23", cat:"niche", name:"肛部手指轻度探索", desc:"使用润滑液后，手指轻轻进入，注意呼吸放松", tag:"niche", emoji:"☝️" }
         { id:"a01", cat:"aftercare", name:"事后长时拥抱", desc:"HD后紧拥至少10分钟不说话", tag:"gentle", emoji:"🤗" },
         { id:"a02", cat:"aftercare", name:"温柔反馈交流", desc:"分享刚才最喜欢的瞬间感受", tag:"gentle", emoji:"💬" },
         { id:"a03", cat:"aftercare", name:"互相清洁护理", desc:"温毛巾为对方擦拭身体", tag:"gentle", emoji:"🧻" },
@@ -367,7 +300,37 @@
         { id:"b17", cat:"body", name:"潮吹探索", desc:"开放尝试不强求", tag:"niche", emoji:"💦" },
         { id:"b18", cat:"body", name:"月经周期情欲变化", desc:"追踪利用周期欲望", tag:"niche", emoji:"📅" },
         { id:"b19", cat:"body", name:"身体地图绘制", desc:"轮流为对方标注敏感度", tag:"", emoji:"🗺️" },
-        { id:"b20", cat:"body", name:"冷热敏感度测试", desc:"不同温度物体测试敏感反应", tag:"", emoji:"🌡️" }
+        { id:"b20", cat:"body", name:"冷热敏感度测试", desc:"不同温度物体测试敏感反应", tag:"", emoji:"🌡️" },
+        { id:"m01", cat:"sm", name:"轻度束缚（手腕）", desc:"使用柔软手铐或丝巾轻轻束缚手腕", tag:"", emoji:"⛓️" },
+        { id:"m02", cat:"sm", name:"蒙眼+束缚组合", desc:"同时蒙眼和束缚，增强感官体验", tag:"", emoji:"🕶️" },
+        { id:"m03", cat:"sm", name:"服从指令", desc:"一方给出简单命令，另一方执行（如跪下、保持不动）", tag:"", emoji:"🗣️" },
+        { id:"m04", cat:"sm", name:"跪姿服务", desc:"接受方跪着为对方进行BJ或按摩", tag:"niche", emoji:"🧎" },
+        { id:"m05", cat:"sm", name:"称呼支配", desc:"使用主人/女王/乖狗等称呼", tag:"niche", emoji:"👑" },
+        { id:"m06", cat:"sm", name:"轻度SP", desc:"用手或柔软拍板轻拍臀部", tag:"", emoji:"👋" },
+        { id:"m07", cat:"sm", name:"低温蜡滴（D/S场景）", desc:"在支配情境下使用低温蜡烛", tag:"niche", emoji:"🕯️" },
+        { id:"m08", cat:"sm", name:"感官剥夺与服从", desc:"蒙眼耳塞后接受指令，完全被动", tag:"niche", emoji:"🔇" },
+        { id:"m09", cat:"sm", name:"定时取悦任务", desc:"规定时间内专注于取悦支配方", tag:"", emoji:"⏳" },
+        { id:"m10", cat:"sm", name:"项圈佩戴", desc:"佩戴轻质项圈或牵引绳，心理上的归属感", tag:"niche", emoji:"🐕" },
+        { id:"m11", cat:"sm", name:"脚部崇拜", desc:"亲吻、按摩或舔舐对方的脚", tag:"niche", emoji:"🦶" },
+        { id:"m12", cat:"sm", name:"强制HD控制", desc:"支配方控制接受方的HD节奏与时机", tag:"", emoji:"🚫" },
+        { id:"m13", cat:"sm", name:"轻度言语羞辱", desc:"双方同意的轻度羞辱性称呼", tag:"niche", emoji:"💬" },
+        { id:"m14", cat:"sm", name:"宠物扮演", desc:"一方扮演猫/狗，用叫声和行为互动", tag:"niche", emoji:"🐱" },
+        { id:"m15", cat:"sm", name:"束缚后挑逗", desc:"束缚状态下被缓慢抚摸或使用玩具", tag:"", emoji:"🪶" },
+        { id:"m16", cat:"sm", name:"书写身体", desc:"在身上用可擦笔写下词语或符号", tag:"niche", emoji:"🖊️" },
+        { id:"m17", cat:"sm", name:"乳夹/衣夹使用", desc:"在支配游戏中使用乳夹或衣夹增加刺激", tag:"niche", emoji:"📎" },
+        { id:"m18", cat:"sm", name:"口塞佩戴", desc:"使用轻柔的口塞限制说话", tag:"niche", emoji:"🔇" },
+        { id:"m19", cat:"sm", name:"公共场合遥控玩具", desc:"佩戴遥控跳蛋外出，由对方控制", tag:"niche", emoji:"📱" },
+        { id:"m20", cat:"sm", name:"家务服务", desc:"裸体围裙为对方做家务或服务", tag:"", emoji:"🧹" },
+        { id:"m21", cat:"sm", name:"罚站/罚跪", desc:"设定一个姿势保持不动作为惩罚", tag:"", emoji:"🧍" },
+        { id:"m22", cat:"sm", name:"服从训练", desc:"重复一个动作或指令直到对方满意", tag:"", emoji:"🔄" },
+        { id:"m23", cat:"sm", name:"主人喂食", desc:"一方跪着接受对方喂食或饮水", tag:"niche", emoji:"🍇" },
+        { id:"m24", cat:"sm", name:"睡眠控制", desc:"约定就寝时间或睡眠姿势的支配", tag:"", emoji:"🌙" },
+        { id:"m25", cat:"sm", name:"黄金淋浴（观想）", desc:"仅作为幻想讨论，不实际进行", tag:"niche", emoji:"💦" },
+        { id:"m26", cat:"sm", name:"贞操控制", desc:"佩戴贞操带，钥匙由对方掌握", tag:"niche", emoji:"🔐" },
+        { id:"m27", cat:"sm", name:"针刺/微痛探索", desc:"使用消毒的细小针尖轻轻刺激皮肤表面", tag:"niche", emoji:"📌" },
+        { id:"m28", cat:"sm", name:"强制着装", desc:"规定对方某段时间内的穿着（如只穿内衣）", tag:"", emoji:"👙" },
+        { id:"m29", cat:"sm", name:"镜前羞辱/赞美", desc:"在镜子前让对方注视自己并接受评价", tag:"", emoji:"🪞" },
+        { id:"m30", cat:"sm", name:"契约制定", desc:"写下临时的权力交换契约，增添仪式感", tag:"", emoji:"📜" }
     ];
 
     const STORAGE_KEY_A = "kink_bottle_userA", STORAGE_KEY_B = "kink_bottle_userB", WELCOME_KEY = "kink_bottle_welcomed";
@@ -432,7 +395,6 @@
     }
     window.setKinkChoice = (id, level) => { setChoice(id, level); };
 
-    // 匹配结果
     function showMatchModal() {
         const bothLove=[], bothInterest=[], oneLove=[], bothAvoid=[];
         kinkData.forEach(item=>{
@@ -452,9 +414,8 @@
         document.getElementById("matchModal").style.display="flex";
     }
 
-    // 雷达图
-    const categories = ["foreplay","position","roleplay","sensory","location","toys","edge","niche","aftercare","body"];
-    const catNames = { foreplay:"前戏", position:"体位", roleplay:"角色", sensory:"感官", location:"场所", toys:"玩具", edge:"克制", niche:"小众", aftercare:"事后", body:"身体" };
+    const categories = ["foreplay","position","roleplay","sensory","location","toys","edge","niche","aftercare","body","sm"];
+    const catNames = { foreplay:"前戏", position:"体位", roleplay:"角色", sensory:"感官", location:"场所", toys:"玩具", edge:"克制", niche:"小众", aftercare:"事后", body:"身体", sm:"D/S" };
     let radarUser = "A";
     function drawRadar() {
         const canvas = document.getElementById("radarCanvas");
@@ -520,7 +481,6 @@
             drawPolygon(getValues(radarUser,"avoid"), "#9a8c8c", "rgba(150,130,130,0.1)");
         }
     }
-
     function showRadarDetail(cat) {
         const choices = userChoices[radarUser==="compare"? "A" : radarUser];
         const items = kinkData.filter(i=>i.cat===cat);
@@ -539,7 +499,6 @@
         document.getElementById("radarDetail").innerHTML = html;
     }
 
-    // 随机
     function showRandomResult(item) {
         const c = userChoices[currentUser][item.id];
         const label = c ? ` (你已标记：${getChoiceLabel(c)})` : "";
@@ -574,9 +533,8 @@
         showRandomResult(data[data.length-1]);
     }
 
-    // 文本导出
     function generateTextExport(mode) {
-        let header = "性癖之瓶问卷结果\n背景：本问卷包含150项性偏好，分为前戏、体位、角色、感官、场所、玩具、克制、小众、事后、身体十大类。\n以下为各项目的选择标记：喜欢/兴趣/好奇/不想/拒绝/未标记。\n\n";
+        let header = "性癖之瓶问卷结果\n背景：本问卷包含180项性偏好，分为前戏、体位、角色、感官、场所、玩具、克制、小众、事后、身体、D/S十一大类。\n以下为各项目的选择标记：喜欢/兴趣/好奇/不想/拒绝/未标记。\n\n";
         let lines = [];
         kinkData.forEach(item => {
             const choiceA = userChoices.A[item.id] ? getChoiceLabel(userChoices.A[item.id]) : "未标记";
@@ -588,7 +546,6 @@
         return header + lines.join("\n");
     }
 
-    // 事件绑定
     document.getElementById("btnUserA").addEventListener("click", ()=>{ currentUser="A"; refreshAll(); });
     document.getElementById("btnUserB").addEventListener("click", ()=>{ currentUser="B"; refreshAll(); });
     document.getElementById("categoryTabs").addEventListener("click", e=>{
@@ -645,14 +602,11 @@
     document.getElementById("bottleTrigger").addEventListener("click", ()=> randomCard(true));
     document.getElementById("randomResultModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
 
-    // 文本导出按钮
     document.getElementById("btnExportText").addEventListener("click", ()=> document.getElementById("textExportModal").style.display = "flex");
     document.getElementById("textExportModalClose").addEventListener("click", ()=> document.getElementById("textExportModal").style.display="none");
     document.querySelectorAll("[data-export-mode]").forEach(btn => {
         btn.addEventListener("click", function() {
-            const mode = this.dataset.exportMode;
-            const text = generateTextExport(mode);
-            document.getElementById("exportTextArea").value = text;
+            document.getElementById("exportTextArea").value = generateTextExport(this.dataset.exportMode);
         });
     });
     document.getElementById("copyExportText").addEventListener("click", ()=>{

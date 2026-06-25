@@ -3,74 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>性癖之瓶 - 情侣探索</title>
+    <title>性癖之瓶 · 情侣探索</title>
     <style>
         :root {
-            --bg: #faf7f2;
-            --card-bg: #fffdf9;
-            --text: #3d3535;
-            --text-light: #6b5e5e;
-            --text-muted: #9a8c8c;
-            --accent: #c97d7d;
-            --accent-soft: #e8c4c4;
-            --shadow-sm: 0 2px 8px rgba(60,40,30,0.06);
-            --shadow-md: 0 4px 16px rgba(60,40,30,0.1);
-            --shadow-lg: 0 8px 32px rgba(60,40,30,0.14);
-            --radius: 16px;
-            --transition: 0.3s ease;
+            --bg: #f9f6f0;
+            --card-bg: #ffffff;
+            --text: #2c2416;
+            --text-secondary: #5b4a3a;
+            --text-muted: #8c7a6b;
+            --accent: #b76e79;
+            --accent-soft: #e2c4cb;
+            --accent-light: #f9f0f2;
+            --green: #7a9a6e;
+            --green-light: #e6f0e3;
+            --green-border: #b8cfb0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.03);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; line-height:1.6; background-image:radial-gradient(ellipse at 50% 0%, rgba(210,170,150,0.12), transparent 60%); }
-        .app-container { max-width:680px; margin:0 auto; padding:16px 18px 40px; }
-        .header { text-align:center; padding:20px 0 10px; }
-        .bottle-wrapper { display:inline-block; cursor:pointer; transition:transform var(--transition); }
-        .bottle-svg { width:100px; height:140px; filter:drop-shadow(0 8px 20px rgba(140,100,80,0.18)); }
-        .header-title { font-size:22px; font-weight:500; letter-spacing:1.5px; color:#4a3c3c; margin-top:6px; }
-        .user-switch { display:flex; justify-content:center; gap:8px; margin:18px 0 14px; background:var(--card-bg); border-radius:30px; padding:5px; box-shadow:var(--shadow-sm); }
-        .user-switch-btn { flex:1; max-width:140px; padding:10px 18px; border:none; border-radius:26px; cursor:pointer; font-size:14px; background:transparent; color:var(--text-light); }
-        .user-switch-btn.active { background:#fff; color:#3d3030; font-weight:500; }
-        .category-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 8px; justify-content:center; }
-        .cat-tab { padding:7px 12px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); }
-        .cat-tab.active { background:#fff; border-color:var(--accent-soft); color:#4a3030; font-weight:500; }
-        .filter-tabs { display:flex; gap:6px; justify-content:center; margin-bottom:12px; }
-        .filter-tab { padding:6px 14px; border-radius:20px; border:1px solid #e5ddd5; background:var(--card-bg); cursor:pointer; font-size:12px; color:var(--text-light); }
-        .filter-tab.active { background:#f5e6e6; border-color:#d4857b; color:#b8554a; }
+        body {
+            font-family: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(ellipse at 50% 0%, rgba(180,140,120,0.08) 0%, transparent 70%);
+        }
+
+        .app-container { max-width: 720px; margin:0 auto; padding:20px 20px 40px; }
+
+        /* 头部 */
+        .header { text-align: center; margin-bottom: 12px; }
+        .bottle-wrapper { display:inline-block; cursor:pointer; transition: transform 0.3s; position:relative; }
+        .bottle-wrapper:hover { transform: translateY(-4px); }
+        .bottle-svg { width:88px; height:124px; filter: drop-shadow(0 6px 16px rgba(120,90,70,0.18)); }
+        .sparkles { position:absolute; top:24px; left:50%; transform:translateX(-50%); width:32px; height:48px; pointer-events:none; }
+        .sparkle { position:absolute; width:3px; height:3px; border-radius:50%; background:#d4b896; animation: sparkleFloat 3s infinite; }
+        .sparkle:nth-child(1){ left:6px; top:8px; animation-delay:0s; width:2.5px; height:2.5px; }
+        .sparkle:nth-child(2){ left:18px; top:5px; animation-delay:0.7s; width:2px; height:2px; }
+        .sparkle:nth-child(3){ left:10px; top:20px; animation-delay:1.4s; width:3px; height:3px; background:#eddcc8; }
+        .sparkle:nth-child(4){ left:20px; top:16px; animation-delay:2.1s; width:2px; height:2px; background:#f0e0cc; }
+        .sparkle:nth-child(5){ left:14px; top:28px; animation-delay:0.5s; width:2.5px; height:2.5px; }
+        .sparkle:nth-child(6){ left:5px; top:14px; animation-delay:1.8s; width:1.5px; height:1.5px; background:#f5e8d4; }
+        @keyframes sparkleFloat { 0%,100%{opacity:0.3; transform:translateY(0)} 30%{opacity:0.9; transform:translateY(-6px)} 60%{opacity:0.4; transform:translateY(-2px)} }
+
+        .header-title { font-size:26px; font-weight:500; letter-spacing:1.2px; color:#3a2e24; margin-top:8px; }
+        .header-subtitle { font-size:13px; color: var(--text-muted); margin-top:4px; font-weight:300; }
+
+        /* 用户切换 */
+        .user-switch { display:flex; justify-content:center; gap:8px; margin:20px 0 16px; background:#fff; border-radius:36px; padding:4px; box-shadow: var(--shadow); }
+        .user-switch-btn { flex:1; max-width:150px; padding:10px 20px; border:none; border-radius:32px; cursor:pointer; font-size:14px; font-weight:450; background:transparent; color:var(--text-secondary); transition: all var(--transition); letter-spacing:0.4px; }
+        .user-switch-btn.active { background:#fff; color:#3a2e24; font-weight:550; box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.03); }
+
+        /* 分类 */
+        .category-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 12px; justify-content:center; }
+        .cat-tab { padding:8px 15px; border-radius:20px; border:1px solid #e3dbd0; background:#fdfbf8; cursor:pointer; font-size:12.5px; color:var(--text-secondary); transition: all var(--transition); font-weight:450; }
+        .cat-tab:hover { border-color:#ccbbaa; background:#fffaf5; }
+        .cat-tab.active { background:#fff; border-color: var(--accent-soft); color:#4a2e30; font-weight:550; box-shadow: 0 2px 8px rgba(183,110,121,0.12); }
+
+        /* 过滤 */
+        .filter-tabs { display:flex; gap:6px; justify-content:center; margin-bottom:14px; }
+        .filter-tab { padding:6px 14px; border-radius:20px; border:1px solid #e3dbd0; background:#fdfbf8; cursor:pointer; font-size:12px; color:var(--text-secondary); transition: all var(--transition); }
+        .filter-tab.active { background:#f9ecee; border-color:#d4a0a8; color:#a14d56; font-weight:500; }
+
+        /* 统计条 */
+        .stats-bar { text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:12px; }
+
+        /* 卡片列表 */
         .cards-list { display:flex; flex-direction:column; gap:10px; }
-        .kink-card { background:var(--card-bg); border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow-sm); border:1px solid transparent; animation:cardFadeIn 0.4s ease; }
-        @keyframes cardFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-        .card-title { font-size:15px; font-weight:500; display:flex; align-items:center; gap:6px; }
-        .card-desc { font-size:12.5px; color:var(--text-muted); margin-top:4px; }
-        .interest-selector { display:flex; gap:6px; margin-top:12px; flex-wrap:wrap; }
-        .interest-btn { padding:7px 13px; border-radius:18px; border:1.5px solid #e5ddd5; background:#fefdfa; cursor:pointer; font-size:12px; color:var(--text-light); }
-        .interest-btn.selected { font-weight:500; }
-        .interest-btn.level-love.selected { background:#fdf0ed; border-color:#d4857b; color:#b8554a; }
+        .kink-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            border: 1.5px solid transparent;
+            transition: all var(--transition);
+            position: relative;
+            animation: cardFadeIn 0.35s ease;
+        }
+        @keyframes cardFadeIn { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+        .kink-card:hover { box-shadow: var(--shadow-hover); border-color: #e0d5c8; transform: translateY(-1px); }
+
+        /* 匹配高亮（双方都喜欢/兴趣） */
+        .kink-card.matched-highlight {
+            border-color: var(--green-border);
+            background: linear-gradient(135deg, #fafff7 0%, #f5faf2 100%);
+            box-shadow: 0 2px 16px rgba(122,154,110,0.18);
+        }
+        .kink-card.matched-highlight::before {
+            content: "💞";
+            position: absolute;
+            top: -8px;
+            right: 12px;
+            font-size: 16px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 2px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .card-title { font-size:16px; font-weight:550; display:flex; align-items:center; gap:8px; color:#2c2416; }
+        .card-desc { font-size:13px; color:var(--text-secondary); margin-top:6px; line-height:1.5; }
+
+        /* 标签 */
+        .card-tag { display:inline-block; font-size:10px; padding:2px 9px; border-radius:12px; background:#f3ede6; color:#8c7a6b; margin-left:6px; font-weight:450; }
+        .card-tag.popular { background:#fef3ec; color:#c97d60; }
+        .card-tag.gentle { background:#eef4e7; color:#7a9a6e; }
+        .card-tag.niche { background:#f0ecf6; color:#8a7aa8; }
+
+        /* 兴趣选择 */
+        .interest-selector { display:flex; gap:6px; margin-top:14px; flex-wrap:wrap; }
+        .interest-btn {
+            padding:7px 15px; border-radius:20px; border:1.5px solid #e3dbd0; background:#fcfaf7;
+            cursor:pointer; font-size:12px; color:var(--text-secondary); transition: all var(--transition);
+            font-weight:450; letter-spacing:0.2px;
+        }
+        .interest-btn:hover { border-color:#ccbbaa; background:#fffbf5; }
+        .interest-btn.selected { font-weight:550; transform: scale(1.02); }
+        .interest-btn.level-love.selected { background:#fdf0ed; border-color:#d4857b; color:#b8554a; box-shadow:0 2px 8px rgba(212,133,123,0.2); }
         .interest-btn.level-interest.selected { background:#fdf6f0; border-color:#d4a080; color:#b87850; }
         .interest-btn.level-curious.selected { background:#fdfaf4; border-color:#c9b896; color:#9a8058; }
         .interest-btn.level-meh.selected { background:#f9f8f6; border-color:#bfb5aa; color:#8a7d72; }
         .interest-btn.level-no.selected { background:#f8f7f6; border-color:#d0cbc6; color:#9a9088; }
-        .bottom-actions { display:flex; gap:8px; margin-top:22px; justify-content:center; flex-wrap:wrap; }
-        .action-btn { padding:10px 18px; border-radius:28px; border:1.5px solid #e0d8cc; background:var(--card-bg); cursor:pointer; font-size:13px; color:var(--text); box-shadow:var(--shadow-sm); }
+
+        /* 底部 */
+        .bottom-actions { display:flex; gap:10px; margin-top:28px; justify-content:center; flex-wrap:wrap; }
+        .action-btn {
+            padding:11px 22px; border-radius:28px; border:1.5px solid #e3dbd0; background:#fff;
+            cursor:pointer; font-size:13.5px; font-weight:500; color:var(--text);
+            transition: all var(--transition); box-shadow: var(--shadow);
+            letter-spacing:0.4px;
+        }
+        .action-btn:hover { background:#fefaf6; border-color:#ccbbaa; box-shadow: var(--shadow-hover); }
         .action-btn.primary { background:#fff; border-color:var(--accent-soft); color:#5a3a35; }
-        .modal-overlay { position:fixed; inset:0; background:rgba(40,30,25,0.55); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; }
-        .modal { background:#fffdf9; border-radius:var(--radius); padding:28px 22px; max-width:500px; width:100%; max-height:80vh; overflow-y:auto; box-shadow:var(--shadow-lg); position:relative; }
-        .modal-close { position:absolute; top:14px; right:16px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; }
-        .radar-user-toggle { display:flex; justify-content:center; gap:8px; margin-bottom:12px; }
-        .radar-user-toggle button { padding:6px 16px; border-radius:20px; border:1px solid #d4c0b0; background:#fff; cursor:pointer; }
-        .radar-user-toggle button.active { background:#f5e8e0; color:#b85a5a; }
-        canvas { display:block; margin:0 auto; max-width:100%; }
-        .detail-list { max-height:200px; overflow-y:auto; margin-top:12px; font-size:13px; }
-        .match-item { padding:12px 14px; border-radius:10px; margin-bottom:8px; background:#fffefb; border:1px solid #e8e0d5; }
-        .match-item.both-love { border-color:#c9d8c0; background:#f9fcf6; }
-        .match-item.both-avoid { border-color:#e0c8c8; background:#fdf6f6; }
-        .floating-help-btn { position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:#fffdf9; border:1.5px solid #d4c0b0; box-shadow:0 4px 16px rgba(100,70,50,0.2); cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; z-index:90; }
-        .export-textarea { width:100%; height:200px; margin-top:10px; border:1px solid #e0d8cc; border-radius:10px; padding:10px; font-size:12px; background:#fefdfa; resize:vertical; }
+        .action-btn.primary:hover { background:#fffaf8; border-color:#d4a8a0; }
+
+        /* 悬浮按钮 */
+        .floating-help-btn {
+            position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; border-radius: 50%;
+            background: #fffdf9; border: 1.5px solid #d4c0b0; box-shadow: 0 6px 20px rgba(100,70,50,0.15);
+            cursor: pointer; font-size: 26px; display: flex; align-items: center; justify-content: center;
+            z-index: 90; transition: all var(--transition);
+        }
+        .floating-help-btn:hover { box-shadow: 0 8px 28px rgba(100,70,50,0.22); transform: scale(1.06); }
+
+        /* 弹窗 */
+        .modal-overlay { position:fixed; inset:0; background:rgba(30,20,15,0.5); backdrop-filter: blur(4px); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; animation: fadeIn 0.25s; }
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        .modal { background:#fffdf9; border-radius:var(--radius); padding:30px 24px; max-width:520px; width:100%; max-height:85vh; overflow-y:auto; box-shadow: 0 20px 50px rgba(0,0,0,0.12); position:relative; }
+        .modal-close { position:absolute; top:14px; right:18px; width:36px; height:36px; border-radius:50%; border:none; background:#f5f0ea; cursor:pointer; font-size:18px; color:#8c7a6b; transition: all var(--transition); display:flex; align-items:center; justify-content:center; }
+        .modal-close:hover { background:#ebe3d8; color:#5a4030; }
+        .modal h3 { font-size:20px; font-weight:500; color:#3a2e24; margin-bottom:16px; text-align:center; }
+
+        /* 雷达图 */
+        .radar-user-toggle { display:flex; justify-content:center; gap:8px; margin-bottom:16px; }
+        .radar-user-toggle button { padding:6px 18px; border-radius:20px; border:1px solid #d4c0b0; background:#fff; cursor:pointer; font-size:13px; color:var(--text-secondary); }
+        .radar-user-toggle button.active { background:#f5e8e0; color:#b85a5a; font-weight:550; }
+        canvas { display:block; margin:0 auto; max-width:100%; border-radius:12px; }
+        .detail-list { max-height:180px; overflow-y:auto; margin-top:14px; font-size:13px; padding:0 4px; }
+        .detail-list .item { padding:6px 0; border-bottom:1px solid #f0e8e0; display:flex; align-items:center; gap:6px; }
+        .tag-like { background:#fdf0ed; color:#b8554a; padding:2px 10px; border-radius:12px; font-size:10px; font-weight:500; }
+        .tag-avoid { background:#f0f0f0; color:#8a7d72; padding:2px 10px; border-radius:12px; font-size:10px; }
+
+        /* 匹配结果 */
+        .match-item { padding:14px 16px; border-radius:var(--radius-sm); margin-bottom:10px; background:#fffefb; border:1px solid #e8e0d5; transition: all var(--transition); }
+        .match-item.both-love { border-color: var(--green-border); background: linear-gradient(135deg, #f6faf2, #edf4e7); }
+        .match-item.both-avoid { border-color:#e8d0d0; background:#fdf7f7; }
+        .match-badge { display:inline-block; font-size:10px; padding:3px 10px; border-radius:12px; margin-left:8px; font-weight:500; }
+        .match-badge.perfect { background:#e8f0dc; color:#6a8a4a; }
+        .match-badge.avoid { background:#f5e0e0; color:#b85a5a; }
+
+        /* 随机卡片 */
+        .random-card-popup { background:#fffdf9; border-radius:var(--radius); padding:32px 24px; box-shadow: var(--shadow-hover); text-align:center; border:2px solid #f0e8d8; max-width:420px; width:90%; }
+        .random-mode-select { display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+
+        .export-textarea { width:100%; height:180px; margin-top:12px; border:1.5px solid #e3dbd0; border-radius:var(--radius-sm); padding:12px; font-size:12px; background:#fcfaf7; resize:vertical; }
+
         .glossary-table { width:100%; border-collapse:collapse; font-size:13px; }
         .glossary-table td { padding:8px 6px; border-bottom:1px solid #e8ddd2; }
-        .glossary-table td:first-child { font-weight:500; color:#5a3a35; width:25%; }
+        .glossary-table td:first-child { font-weight:550; color:#5a3a35; width:25%; }
+
         @media (max-width:480px) {
-            .app-container { padding:10px 10px 30px; }
-            .header-title { font-size:19px; }
-            .bottle-svg { width:80px; height:115px; }
+            .app-container { padding:10px 12px 30px; }
+            .header-title { font-size:20px; }
+            .bottle-svg { width:72px; height:100px; }
+            .sparkles { top:18px; width:26px; height:38px; }
+            .kink-card { padding:15px; }
+            .interest-btn { padding:6px 12px; font-size:11px; }
+            .action-btn { padding:9px 16px; font-size:12px; }
         }
     </style>
 </head>
@@ -79,20 +204,22 @@
     <div class="header">
         <div class="bottle-wrapper" id="bottleTrigger">
             <svg class="bottle-svg" viewBox="0 0 100 140">
-                <defs><linearGradient id="glassGrad"><stop offset="0%" stop-color="#fff" stop-opacity="0.7"/><stop offset="30%" stop-color="#fdfaf6" stop-opacity="0.55"/><stop offset="100%" stop-color="#ede4d8" stop-opacity="0.35"/></linearGradient></defs>
-                <path d="M28 55 C28 52 32 48 36 48 L40 48 L40 30 C40 22 44 16 50 14 C56 16 60 22 60 30 L60 48 L64 48 C68 48 72 52 72 55 L72 105 C72 118 62 128 50 128 C38 128 28 118 28 105 Z" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.35)" stroke-width="2"/>
-                <rect x="40" y="14" width="20" height="18" rx="3" fill="url(#glassGrad)" stroke="rgba(180,160,145,0.3)"/>
-                <rect x="37" y="8" width="26" height="8" rx="4" fill="rgba(250,245,238,0.6)" stroke="rgba(180,160,145,0.3)"/>
-                <path d="M34 60 L38 100" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
-                <ellipse cx="50" cy="9" rx="11" ry="5" fill="#e8d5c0"/>
+                <defs><linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/><stop offset="30%" stop-color="#fdfaf6" stop-opacity="0.6"/><stop offset="100%" stop-color="#ede4d8" stop-opacity="0.4"/></linearGradient></defs>
+                <path d="M28 55 C28 52 32 48 36 48 L40 48 L40 30 C40 22 44 16 50 14 C56 16 60 22 60 30 L60 48 L64 48 C68 48 72 52 72 55 L72 105 C72 118 62 128 50 128 C38 128 28 118 28 105 Z" fill="url(#glassGrad)" stroke="rgba(160,140,125,0.3)" stroke-width="1.8"/>
+                <rect x="40" y="14" width="20" height="18" rx="3" fill="url(#glassGrad)" stroke="rgba(160,140,125,0.25)"/>
+                <rect x="37" y="8" width="26" height="8" rx="4" fill="rgba(250,245,238,0.6)" stroke="rgba(160,140,125,0.3)"/>
+                <path d="M34 60 C34 56 36 54 38 52 L38 100 C36 102 34 106 34 110" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="5" stroke-linecap="round"/>
+                <ellipse cx="50" cy="9" rx="11" ry="5" fill="#e8d5c0" stroke="rgba(160,140,125,0.4)" stroke-width="1"/>
             </svg>
+            <div class="sparkles"><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div></div>
         </div>
         <h1 class="header-title">性癖之瓶</h1>
+        <p class="header-subtitle">探索彼此 · 温柔靠近</p>
     </div>
 
     <div class="user-switch">
-        <button class="user-switch-btn active" id="btnUserA">💛 我</button>
-        <button class="user-switch-btn" id="btnUserB">💙 伴侣</button>
+        <button class="user-switch-btn active" id="btnUserA">💛 我的选择</button>
+        <button class="user-switch-btn" id="btnUserB">💙 伴侣的选择</button>
     </div>
 
     <div class="category-tabs" id="categoryTabs">
@@ -107,7 +234,7 @@
         <button class="cat-tab" data-cat="niche">🌈 小众</button>
         <button class="cat-tab" data-cat="aftercare">🫂 事后</button>
         <button class="cat-tab" data-cat="body">🫀 身体</button>
-        <button class="cat-tab" data-cat="sm">⛓️ 支配与服从</button>
+        <button class="cat-tab" data-cat="sm">⛓️ D/S</button>
     </div>
 
     <div class="filter-tabs" id="filterTabs">
@@ -118,7 +245,7 @@
         <button class="filter-tab" data-filter="none">❓ 未标记</button>
     </div>
 
-    <div class="stats-bar" style="text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:8px;">已标记 <span id="markedCount">0</span> 个偏好</div>
+    <div class="stats-bar">已标记 <span id="markedCount">0</span> 个偏好</div>
     <div class="cards-list" id="cardsList"></div>
 
     <div class="bottom-actions">
@@ -133,22 +260,23 @@
     </div>
 </div>
 
-<button class="floating-help-btn" id="floatingHelpBtn">📖</button>
+<button class="floating-help-btn" id="floatingHelpBtn" title="术语表">📖</button>
 
-<!-- 弹窗结构开始 -->
-<div class="modal-overlay" id="welcomeModal" style="display:none;"><div class="modal"><button class="modal-close" id="welcomeModalClose">✕</button><h3>💌 欢迎</h3><p style="text-align:center;margin:12px 0;">180项探索 · 术语表查看 · 雷达图分析</p><button class="action-btn primary" id="welcomeModalOk">开始探索</button></div></div>
+<!-- 弹窗结构 -->
+<div class="modal-overlay" id="welcomeModal" style="display:none;"><div class="modal"><button class="modal-close" id="welcomeModalClose">✕</button><h3>💌 欢迎来到性癖之瓶</h3><p style="text-align:center; margin-bottom:12px;">180项偏好探索 · 双人匹配 · 雷达分析</p><button class="action-btn primary" id="welcomeModalOk" style="display:block; margin:0 auto;">开始探索</button></div></div>
 <div class="modal-overlay" id="glossaryModal" style="display:none;"><div class="modal"><button class="modal-close" id="glossaryModalClose">✕</button><table class="glossary-table"><tr><td>RT</td><td>乳头</td></tr><tr><td>HD</td><td>高潮</td></tr><tr><td>P-Spot</td><td>前列腺</td></tr><tr><td>G点</td><td>阴道前壁敏感点</td></tr><tr><td>PC肌</td><td>盆底肌</td></tr><tr><td>BJ</td><td>口交</td></tr><tr><td>SP</td><td>打屁股</td></tr><tr><td>D/S</td><td>支配与服从</td></tr></table></div></div>
 <div class="modal-overlay" id="matchModal" style="display:none;"><div class="modal"><button class="modal-close" id="matchModalClose">✕</button><h3>💞 匹配结果</h3><div id="matchResults"></div></div></div>
-<div class="modal-overlay" id="radarModal" style="display:none;"><div class="modal" style="max-width:550px;"><button class="modal-close" id="radarModalClose">✕</button><h3>💹 倾向雷达图</h3><div class="radar-user-toggle" id="radarUserToggle"><button class="active" data-radar-user="A">💛 我</button><button data-radar-user="B">💙 伴侣</button><button data-radar-user="compare">💞 对比</button></div><canvas id="radarCanvas" width="400" height="400"></canvas><div class="detail-list" id="radarDetail"></div></div></div>
-<div class="modal-overlay" id="randomModeModal" style="display:none;"><div class="random-card-popup"><h3>🎲 随机模式</h3><div class="random-mode-select"><button class="action-btn primary" id="randomPure">完全随机</button><button class="action-btn primary" id="randomWeighted">⚖️ 加权随机</button></div><button class="action-btn" id="randomCancel">取消</button></div></div>
+<div class="modal-overlay" id="radarModal" style="display:none;"><div class="modal" style="max-width:560px;"><button class="modal-close" id="radarModalClose">✕</button><h3>💹 倾向雷达图</h3><div class="radar-user-toggle" id="radarUserToggle"><button class="active" data-radar-user="A">💛 我</button><button data-radar-user="B">💙 伴侣</button><button data-radar-user="compare">💞 对比</button></div><canvas id="radarCanvas" width="400" height="400"></canvas><div class="detail-list" id="radarDetail"><p style="text-align:center; color:var(--text-muted);">点击雷达轴查看明细</p></div></div></div>
+<div class="modal-overlay" id="randomModeModal" style="display:none;"><div class="random-card-popup"><h3>🎲 随机探索</h3><div class="random-mode-select"><button class="action-btn primary" id="randomPure">完全随机</button><button class="action-btn primary" id="randomWeighted">⚖️ 加权随机（双人偏好）</button></div><button class="action-btn" id="randomCancel" style="margin-top:10px;">取消</button></div></div>
 <div class="modal-overlay" id="randomResultModal" style="display:none;"><div class="random-card-popup" id="randomCardContent"></div></div>
-<div class="modal-overlay" id="textExportModal" style="display:none;"><div class="modal"><button class="modal-close" id="textExportModalClose">✕</button><h3>📝 导出文本</h3><div style="display:flex;gap:8px;justify-content:center;margin-bottom:10px;"><button class="action-btn" data-export-mode="A">仅我</button><button class="action-btn" data-export-mode="B">仅伴侣</button><button class="action-btn" data-export-mode="both">双人</button></div><textarea id="exportTextArea" class="export-textarea" readonly></textarea><button class="action-btn primary" id="copyExportText">📋 复制</button></div></div>
-<div class="modal-overlay" id="importModal" style="display:none;"><div class="modal"><button class="modal-close" id="importModalClose">✕</button><textarea id="importTextarea" style="width:100%;height:120px;border:1px solid #e0d8cc;border-radius:10px;padding:10px;font-size:12px;"></textarea><input type="file" id="importFileInput" accept=".json" style="display:none;"><button class="action-btn" id="btnUploadFile">📁 选择文件</button><div style="margin:8px 0;"><label><input type="radio" name="importTarget" value="A" checked> 导入为「我」</label><label><input type="radio" name="importTarget" value="B"> 导入为「伴侣」</label></div><button class="action-btn primary" id="btnConfirmImport">导入</button></div></div>
-<!-- 弹窗结构结束 -->
+<div class="modal-overlay" id="textExportModal" style="display:none;"><div class="modal"><button class="modal-close" id="textExportModalClose">✕</button><h3>📝 导出文本</h3><div style="display:flex; gap:6px; justify-content:center; margin-bottom:12px;"><button class="action-btn" data-export-mode="A">仅我</button><button class="action-btn" data-export-mode="B">仅伴侣</button><button class="action-btn" data-export-mode="both">双人</button></div><textarea id="exportTextArea" class="export-textarea" readonly></textarea><button class="action-btn primary" id="copyExportText" style="margin-top:8px;">📋 复制到剪贴板</button></div></div>
+<div class="modal-overlay" id="importModal" style="display:none;"><div class="modal"><button class="modal-close" id="importModalClose">✕</button><h3>📥 导入数据</h3><textarea id="importTextarea" style="width:100%; height:120px; border:1px solid #e0d8cc; border-radius:12px; padding:10px; font-size:12px;" placeholder='{"f01":"love"}'></textarea><input type="file" id="importFileInput" accept=".json" style="display:none;"><button class="action-btn" id="btnUploadFile">📁 选择文件</button><div style="margin:10px 0;"><label><input type="radio" name="importTarget" value="A" checked> 导入为「我」</label><label style="margin-left:12px;"><input type="radio" name="importTarget" value="B"> 导入为「伴侣」</label></div><button class="action-btn primary" id="btnConfirmImport">导入</button></div></div>
+
+<div id="toastContainer"></div>
 
 <script>
 (function() {
-    // ========== 数据（180项）开始 ==========
+    // ========== 数据（180项） ==========
     const kinkData = [
         { id:"f01", cat:"foreplay", name:"长时间舌吻", desc:"专注地深吻10分钟以上", tag:"popular", emoji:"💋" },
         { id:"f02", cat:"foreplay", name:"全身精油按摩", desc:"用温热精油按摩全身，过渡到情欲抚摸", tag:"gentle", emoji:"🧴" },
@@ -364,13 +492,23 @@
         else if (currentFilter === "none") data = data.filter(i=> !choices[i.id]);
         return data;
     }
+
+    // 检查双方是否都喜欢/感兴趣 (用于高亮匹配)
+    function checkMutualMatch(itemId) {
+        const a = userChoices.A[itemId], b = userChoices.B[itemId];
+        if (!a || !b) return false;
+        return (a==="love"||a==="interest") && (b==="love"||b==="interest");
+    }
+
     function renderCards() {
         const data = getFilteredData();
         let html = "";
         data.forEach((item)=>{
             const choice = userChoices[currentUser][item.id];
-            html += `<div class="kink-card">
-                <div class="card-title">${item.emoji||""} ${item.name}</div>
+            const isMatched = checkMutualMatch(item.id);
+            const tagLabel = item.tag==="popular"?"热门":item.tag==="gentle"?"温柔":item.tag==="niche"?"小众":"";
+            html += `<div class="kink-card ${isMatched?"matched-highlight":""}">
+                <div class="card-title">${item.emoji||""} ${item.name}${tagLabel?`<span class="card-tag ${item.tag}">${tagLabel}</span>`:""}</div>
                 <div class="card-desc">${item.desc}</div>
                 <div class="interest-selector">
                     <button class="interest-btn level-love ${choice==="love"?"selected":""}" onclick="window.setKinkChoice('${item.id}','love')">喜欢</button>
@@ -381,7 +519,7 @@
                 </div>
             </div>`;
         });
-        document.getElementById("cardsList").innerHTML = html || '<div style="text-align:center;padding:20px;color:var(--text-muted);">📭 没有找到匹配项目</div>';
+        document.getElementById("cardsList").innerHTML = html || '<div style="text-align:center;padding:32px;color:var(--text-muted);">📭 没有找到匹配项目</div>';
     }
     function updateMarkedCount() {
         document.getElementById("markedCount").textContent = Object.keys(userChoices[currentUser]).length;
@@ -395,6 +533,25 @@
     }
     window.setKinkChoice = (id, level) => { setChoice(id, level); };
 
+    // ========== Toast ==========
+    function showToast(msg) {
+        const t = document.createElement("div");
+        t.className = "toast";
+        t.textContent = msg;
+        t.style.position = "fixed";
+        t.style.bottom = "20px";
+        t.style.left = "50%";
+        t.style.transform = "translateX(-50%)";
+        t.style.background = "#2c2416";
+        t.style.color = "#f5ede4";
+        t.style.padding = "10px 20px";
+        t.style.borderRadius = "24px";
+        t.style.fontSize = "13px";
+        t.style.zIndex = "200";
+        document.getElementById("toastContainer").appendChild(t);
+        setTimeout(()=>t.remove(), 2000);
+    }
+
     // ========== 匹配结果 ==========
     function showMatchModal() {
         const bothLove=[], bothInterest=[], oneLove=[], bothAvoid=[];
@@ -407,11 +564,11 @@
             if((a==="meh"||a==="no")&&(b==="meh"||b==="no")) bothAvoid.push(item);
         });
         let html="";
-        if(bothLove.length) { html+="<h4>🌟 双方非常喜欢</h4>"; bothLove.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name} <span class="match-badge perfect">完美</span></div>`); }
-        if(bothInterest.length) { html+="<h4>🌿 双方感兴趣</h4>"; bothInterest.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name}</div>`); }
-        if(oneLove.length) { html+="<h4>🔥 一方喜欢一方兴趣</h4>"; oneLove.forEach(i=>html+=`<div class="match-item both-love">${i.emoji} ${i.name}</div>`); }
-        if(bothAvoid.length) { html+="<h4>🛑 双方都避雷</h4>"; bothAvoid.forEach(i=>html+=`<div class="match-item both-avoid">${i.emoji} ${i.name} <span class="match-badge avoid">避雷</span></div>`); }
-        document.getElementById("matchResults").innerHTML = html || "暂无足够标记";
+        if(bothLove.length) { html+="<h4 style=\"color:#6a8a4a; margin-top:8px;\">🌟 双方都非常喜欢</h4>"; bothLove.forEach(i=>html+=`<div class="match-item both-love"><span>${i.emoji} ${i.name}</span><span class="match-badge perfect">完美</span><div style="font-size:12px; color:#6b5e5e;">${i.desc}</div></div>`); }
+        if(bothInterest.length) { html+="<h4 style=\"color:#8a9a70; margin-top:8px;\">🌿 双方都感兴趣</h4>"; bothInterest.forEach(i=>html+=`<div class="match-item both-love"><span>${i.emoji} ${i.name}</span><span class="match-badge perfect">可试</span><div style="font-size:12px; color:#6b5e5e;">${i.desc}</div></div>`); }
+        if(oneLove.length) { html+="<h4 style=\"color:#b87850; margin-top:8px;\">🔥 一方喜欢一方兴趣</h4>"; oneLove.forEach(i=>html+=`<div class="match-item both-love"><span>${i.emoji} ${i.name}</span><span class="match-badge perfect">沟通</span><div style="font-size:12px; color:#6b5e5e;">${i.desc}</div></div>`); }
+        if(bothAvoid.length) { html+="<h4 style=\"color:#b85a5a; margin-top:8px;\">🛑 双方都避雷</h4>"; bothAvoid.forEach(i=>html+=`<div class="match-item both-avoid"><span>${i.emoji} ${i.name}</span><span class="match-badge avoid">避雷</span><div style="font-size:12px; color:#6b5e5e;">${i.desc}</div></div>`); }
+        document.getElementById("matchResults").innerHTML = html || '<div style="text-align:center;padding:20px;color:var(--text-muted);">还没有足够的标记数据</div>';
         document.getElementById("matchModal").style.display="flex";
     }
 
@@ -486,7 +643,7 @@
     function showRadarDetail(cat) {
         const choices = userChoices[radarUser==="compare"? "A" : radarUser];
         const items = kinkData.filter(i=>i.cat===cat);
-        let html = `<h4>${catNames[cat]} 明细</h4>`;
+        let html = `<h4 style="margin-bottom:6px;">${catNames[cat]} 明细</h4>`;
         const likes = items.filter(i=> choices[i.id]==="love"||choices[i.id]==="interest");
         const avoids = items.filter(i=> choices[i.id]==="meh"||choices[i.id]==="no");
         if(likes.length) {
@@ -507,14 +664,14 @@
         const label = c ? ` (你已标记：${getChoiceLabel(c)})` : "";
         document.getElementById("randomCardContent").innerHTML = `
             <div style="font-size:48px;">${item.emoji||"🎭"}</div>
-            <h3>${item.name}</h3>
-            <p style="color:var(--text-muted);">${item.desc}${label}</p>
-            <button class="action-btn" onclick="document.getElementById('randomResultModal').style.display='none'">知道了</button>`;
+            <h3 style="margin:8px 0;">${item.name}</h3>
+            <p style="color:var(--text-secondary);">${item.desc}${label}</p>
+            <button class="action-btn" style="margin-top:12px;" onclick="document.getElementById('randomResultModal').style.display='none'">知道了</button>`;
         document.getElementById("randomResultModal").style.display = "flex";
     }
     function randomCard(weighted = false) {
         const data = getFilteredData();
-        if (!data.length) return;
+        if (!data.length) return showToast("当前筛选结果为空");
         if (!weighted) {
             showRandomResult(data[Math.floor(Math.random()*data.length)]);
             return;
@@ -574,7 +731,7 @@
         document.getElementById("radarModal").style.display = "flex";
         document.querySelectorAll("#radarUserToggle button").forEach(b=> b.classList.toggle("active", b.dataset.radarUser===radarUser));
         drawRadar();
-        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;\">点击雷达轴查看明细</p>";
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center; color:var(--text-muted);\">点击雷达轴查看明细</p>";
     });
     document.getElementById("radarModalClose").addEventListener("click", ()=>document.getElementById("radarModal").style.display="none");
     document.getElementById("radarModal").addEventListener("click", function(e){ if(e.target===this) this.style.display="none"; });
@@ -584,7 +741,7 @@
         radarUser = btn.dataset.radarUser;
         document.querySelectorAll("#radarUserToggle button").forEach(b=> b.classList.toggle("active", b.dataset.radarUser===radarUser));
         drawRadar();
-        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center;\">点击雷达轴查看明细</p>";
+        document.getElementById("radarDetail").innerHTML = "<p style=\"text-align:center; color:var(--text-muted);\">点击雷达轴查看明细</p>";
     });
     document.getElementById("radarCanvas").addEventListener("click", function(e){
         const canvas = document.getElementById("radarCanvas");
@@ -618,7 +775,7 @@
         const textarea = document.getElementById("exportTextArea");
         textarea.select();
         document.execCommand("copy");
-        alert("已复制到剪贴板");
+        showToast("已复制到剪贴板");
     });
 
     document.getElementById("btnExport").addEventListener("click", ()=>{
@@ -629,6 +786,7 @@
         a.href = URL.createObjectURL(blob);
         a.download = `kink-bottle-user${currentUser}.json`;
         a.click(); URL.revokeObjectURL(a.href);
+        showToast("导出成功");
     });
     document.getElementById("btnImport").addEventListener("click", ()=> document.getElementById("importModal").style.display = "flex");
     document.getElementById("importModalClose").addEventListener("click", ()=> document.getElementById("importModal").style.display="none");
@@ -642,20 +800,24 @@
     });
     document.getElementById("btnConfirmImport").addEventListener("click", ()=>{
         const raw = document.getElementById("importTextarea").value.trim();
-        if(!raw) return;
+        if(!raw) { showToast("请粘贴JSON内容"); return; }
         let parsed;
-        try { parsed = JSON.parse(raw); } catch(e) { return; }
+        try { parsed = JSON.parse(raw); } catch(e) { showToast("JSON格式错误"); return; }
         const target = document.querySelector("input[name=\"importTarget\"]:checked").value;
         const targetChoices = userChoices[target];
+        let count = 0;
         for(const [key,val] of Object.entries(parsed)) {
             if(kinkData.some(k=>k.id===key) && ["love","interest","curious","meh","no"].includes(val)) {
                 targetChoices[key] = val;
+                count++;
             }
         }
+        if(count===0) { showToast("没有有效数据"); return; }
         saveChoices(); refreshAll(); document.getElementById("importModal").style.display = "none";
+        showToast(`成功导入 ${count} 项`);
     });
     document.getElementById("btnReset").addEventListener("click", ()=>{
-        if(confirm("重置当前视角的所有标记？")) { userChoices[currentUser] = {}; saveChoices(); refreshAll(); }
+        if(confirm("重置当前视角的所有标记？")) { userChoices[currentUser] = {}; saveChoices(); refreshAll(); showToast("已重置"); }
     });
     document.getElementById("btnGlossary").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display = "flex");
     document.getElementById("glossaryModalClose").addEventListener("click", ()=> document.getElementById("glossaryModal").style.display="none");
@@ -674,9 +836,6 @@
     currentUser = "A"; currentCategory = "all"; currentFilter = "all";
     loadChoices(); refreshAll();
 })();
-</script>
-</body>
-</html>
 </script>
 </body>
 </html>
